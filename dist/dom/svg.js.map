@@ -1,0 +1,1 @@
+{"version":3,"file":"svg.js","names":[],"sources":["../../src/dom/svg.ts"],"sourcesContent":["import { TaroElement } from './element'\n\n// for Vue3\nexport class SVGElement extends TaroElement {}\n"],"mappings":";;;AAGA,IAAa,aAAb,cAAgC,YAAY,CAAE"}

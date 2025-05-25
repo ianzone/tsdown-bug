@@ -1,0 +1,32 @@
+{
+  "name": "tsdown-bug",
+  "type": "module",
+  "version": "1.0.0",
+  "browser": "dist/index.js",
+  "main:h5": "dist/runtime.esm.js",
+  "main": "dist/runtime.esm.js",
+  "module": "dist/runtime.esm.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prod": "tsdown --tsconfig tsconfig.build.json",
+    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^18.19.103",
+    "@types/react": "^18.2.79",
+    "@vue/runtime-core": "^3.4.23",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "rollup": "^4.37.0",
+    "rollup-plugin-node-externals": "^7.1.1",
+    "rollup-plugin-ts": "^3.4.5",
+    "tsdown": "^0.12.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@tarojs/shared": "^4.1.1",
+    "tslib": "^2.8.1"
+  }
+}

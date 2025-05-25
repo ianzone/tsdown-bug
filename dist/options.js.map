@@ -1,0 +1,1 @@
+{"version":3,"file":"options.js","names":["options: Options"],"sources":["../src/options.ts"],"sourcesContent":["import type { Options } from './interface'\n\nexport const options: Options = {\n  prerender: true,\n  debug: false\n}\n"],"mappings":";AAEA,MAAaA,UAAmB;CAC9B,WAAW;CACX,OAAO;AACR"}
