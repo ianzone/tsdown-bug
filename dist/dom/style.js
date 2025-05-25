@@ -15,10 +15,12 @@ function recordCss(obj) {
 }
 function enqueueUpdate(obj) {
 	const element = obj._element;
-	if (element._root) element.enqueueUpdate({
-		path: `${element._path}.${Shortcuts.Style}`,
-		value: obj.cssText
-	});
+	if (element._root) {
+		element.enqueueUpdate({
+			path: `${element._path}.${Shortcuts.Style}`,
+			value: obj.cssText
+		});
+	}
 }
 function setStyle(newVal, styleKey) {
 	process.env.NODE_ENV !== "production" && warn(isString(newVal) && newVal.length > PROPERTY_THRESHOLD, `Style 属性 ${styleKey} 的值数据量过大，可能会影响渲染性能，考虑使用 CSS 类或其它方案替代。`);
@@ -83,7 +85,9 @@ var Style = class {
 			const val = this[key];
 			if (isNull(val) || isUndefined(val)) return;
 			let styleName = isCssVariable(key) ? key : toDashed(key);
-			if (styleName.indexOf("webkit") === 0 || styleName.indexOf("Webkit") === 0) styleName = `-${styleName}`;
+			if (styleName.indexOf("webkit") === 0 || styleName.indexOf("Webkit") === 0) {
+				styleName = `-${styleName}`;
+			}
 			texts.push(`${styleName}: ${val};`);
 		});
 		return texts.join(" ");
@@ -102,39 +106,54 @@ var Style = class {
 		const rules = str.split(";");
 		for (let i = 0; i < rules.length; i++) {
 			const rule = rules[i].trim();
-			if (rule === "") continue;
+			if (rule === "") {
+				continue;
+			}
 			const [propName, ...valList] = rule.split(":");
 			const val = valList.join(":");
-			if (isUndefined(val)) continue;
+			if (isUndefined(val)) {
+				continue;
+			}
 			this.setProperty(propName.trim(), val.trim());
 		}
 		this._pending = false;
 		enqueueUpdate(this);
 	}
 	setProperty(propertyName, value) {
-		if (propertyName[0] === "-") this.setCssVariables(propertyName);
-		else propertyName = toCamelCase(propertyName);
-		if (isNull(value) || isUndefined(value)) this.removeProperty(propertyName);
-		else this[propertyName] = value;
+		if (propertyName[0] === "-") {
+			this.setCssVariables(propertyName);
+		} else {
+			propertyName = toCamelCase(propertyName);
+		}
+		if (isNull(value) || isUndefined(value)) {
+			this.removeProperty(propertyName);
+		} else {
+			this[propertyName] = value;
+		}
 	}
 	removeProperty(propertyName) {
 		propertyName = toCamelCase(propertyName);
-		if (!this._usedStyleProp.has(propertyName)) return "";
+		if (!this._usedStyleProp.has(propertyName)) {
+			return "";
+		}
 		const value = this[propertyName];
-		this[propertyName] = void 0;
+		this[propertyName] = undefined;
 		return value;
 	}
 	getPropertyValue(propertyName) {
 		propertyName = toCamelCase(propertyName);
 		const value = this[propertyName];
-		if (!value) return "";
+		if (!value) {
+			return "";
+		}
 		return value;
 	}
 };
 initStyle(Style, styleProperties);
 hooks.tap("injectNewStyleProperties", (newStyleProperties) => {
-	if (isArray(newStyleProperties)) initStyle(Style, newStyleProperties);
-	else {
+	if (isArray(newStyleProperties)) {
+		initStyle(Style, newStyleProperties);
+	} else {
 		if (typeof newStyleProperties !== "string") return;
 		initStyle(Style, [newStyleProperties]);
 	}

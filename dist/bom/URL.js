@@ -64,7 +64,9 @@ var TaroURL = class {
 			val = val.trim();
 			const HEAD_REG = /^(\/|\.\/|\.\.\/)/;
 			let temp = val;
-			while (HEAD_REG.test(temp)) temp = temp.replace(HEAD_REG, "");
+			while (HEAD_REG.test(temp)) {
+				temp = temp.replace(HEAD_REG, "");
+			}
 			if (temp) this.#pathname = "/" + temp;
 			else this.#pathname = "/";
 		}
@@ -178,11 +180,21 @@ function parseUrlBase(url, base) {
 		parsedBase = parseUrl(base);
 	}
 	url = String(url).trim();
-	if (VALID_URL.test(url)) fullUrl = url;
-	else if (parsedBase) if (url) if (url.startsWith("//")) fullUrl = parsedBase.protocol + url;
-	else fullUrl = parsedBase.origin + (url.startsWith("/") ? url : `/${url}`);
-	else fullUrl = parsedBase.href;
-	else throw new TypeError(`Failed to construct 'URL': Invalid URL`);
+	if (VALID_URL.test(url)) {
+		fullUrl = url;
+	} else if (parsedBase) {
+		if (url) {
+			if (url.startsWith("//")) {
+				fullUrl = parsedBase.protocol + url;
+			} else {
+				fullUrl = parsedBase.origin + (url.startsWith("/") ? url : `/${url}`);
+			}
+		} else {
+			fullUrl = parsedBase.href;
+		}
+	} else {
+		throw new TypeError(`Failed to construct 'URL': Invalid URL`);
+	}
 	return parseUrl(fullUrl);
 }
 

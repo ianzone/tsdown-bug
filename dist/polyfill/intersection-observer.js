@@ -4,10 +4,14 @@ import { isFunction, isNumber } from "@tarojs/shared";
 //#region src/polyfill/intersection-observer.ts
 function handleIntersectionObserverPolyfill() {
 	if ("IntersectionObserver" in window && "IntersectionObserverEntry" in window && "intersectionRatio" in window.IntersectionObserverEntry.prototype) {
-		if (!("isIntersecting" in window.IntersectionObserverEntry.prototype)) Object.defineProperty(window.IntersectionObserverEntry.prototype, "isIntersecting", { get: function() {
-			return this.intersectionRatio > 0;
-		} });
-	} else handleIntersectionObserverObjectPolyfill();
+		if (!("isIntersecting" in window.IntersectionObserverEntry.prototype)) {
+			Object.defineProperty(window.IntersectionObserverEntry.prototype, "isIntersecting", { get: function() {
+				return this.intersectionRatio > 0;
+			} });
+		}
+	} else {
+		handleIntersectionObserverObjectPolyfill();
+	}
 }
 function handleIntersectionObserverObjectPolyfill() {
 	const document = window.document;
@@ -35,8 +39,11 @@ function handleIntersectionObserverObjectPolyfill() {
 		const targetArea = targetRect.width * targetRect.height;
 		const intersectionRect = this.intersectionRect;
 		const intersectionArea = intersectionRect.width * intersectionRect.height;
-		if (targetArea) this.intersectionRatio = Number((intersectionArea / targetArea).toFixed(4));
-		else this.intersectionRatio = this.isIntersecting ? 1 : 0;
+		if (targetArea) {
+			this.intersectionRatio = Number((intersectionArea / targetArea).toFixed(4));
+		} else {
+			this.intersectionRatio = this.isIntersecting ? 1 : 0;
+		}
 	}
 	/**
 	* Creates the global IntersectionObserver constructor.
@@ -48,8 +55,12 @@ function handleIntersectionObserverObjectPolyfill() {
 	* @constructor
 	*/
 	function IntersectionObserver(callback, options = {}) {
-		if (!isFunction(callback)) throw new Error("callback must be a function");
-		if (options.root && options.root.nodeType != 1) throw new Error("root must be an Element");
+		if (!isFunction(callback)) {
+			throw new Error("callback must be a function");
+		}
+		if (options.root && options.root.nodeType != 1) {
+			throw new Error("root must be an Element");
+		}
 		this._checkForIntersections = throttle(this._checkForIntersections.bind(this), this.THROTTLE_TIMEOUT);
 		this._callback = callback;
 		this._observationTargets = [];
@@ -83,7 +94,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	IntersectionObserver.prototype.observe = function(target) {
 		const isTargetAlreadyObserved = this._observationTargets.some((item) => item.element == target);
 		if (isTargetAlreadyObserved) return;
-		if (!(target && target.nodeType == 1)) throw new Error("target must be an Element");
+		if (!(target && target.nodeType == 1)) {
+			throw new Error("target must be an Element");
+		}
 		this._registerInstance();
 		this._observationTargets.push({
 			element: target,
@@ -135,7 +148,9 @@ function handleIntersectionObserverObjectPolyfill() {
 		let threshold = opt_threshold || [0];
 		if (!Array.isArray(threshold)) threshold = [threshold];
 		return threshold.sort().filter((t, i, a) => {
-			if (!isNumber(t) || isNaN(t) || t < 0 || t > 1) throw new Error("threshold must be a number between 0 and 1 inclusively");
+			if (!isNumber(t) || isNaN(t) || t < 0 || t > 1) {
+				throw new Error("threshold must be a number between 0 and 1 inclusively");
+			}
 			return t !== a[i - 1];
 		});
 	};
@@ -154,7 +169,9 @@ function handleIntersectionObserverObjectPolyfill() {
 		const marginString = opt_rootMargin || "0px";
 		const margins = marginString.split(/\s+/).map((margin) => {
 			const parts = /^(-?\d*\.?\d+)(px|%)$/.exec(margin);
-			if (!parts) throw new Error("rootMargin must be specified in pixels or percent");
+			if (!parts) {
+				throw new Error("rootMargin must be specified in pixels or percent");
+			}
 			return {
 				value: Number.parseFloat(parts[1]),
 				unit: parts[2]
@@ -173,8 +190,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	IntersectionObserver.prototype._monitorIntersections = function() {
 		if (!this._monitoringIntersections) {
 			this._monitoringIntersections = true;
-			if (this.POLL_INTERVAL) this._monitoringInterval = setInterval(this._checkForIntersections, this.POLL_INTERVAL);
-			else {
+			if (this.POLL_INTERVAL) {
+				this._monitoringInterval = setInterval(this._checkForIntersections, this.POLL_INTERVAL);
+			} else {
 				addEvent(window, "resize", this._checkForIntersections, true);
 				addEvent(document, "scroll", this._checkForIntersections, true);
 				if (this.USE_MUTATION_OBSERVER && "MutationObserver" in window) {
@@ -230,12 +248,21 @@ function handleIntersectionObserverObjectPolyfill() {
 				intersectionRatio: -1,
 				isIntersecting: false
 			});
-			if (!oldEntry) this._queuedEntries.push(newEntry);
-			else if (rootIsInDom && rootContainsTarget) {
-				if (this._hasCrossedThreshold(oldEntry, newEntry)) this._queuedEntries.push(newEntry);
-			} else if (oldEntry && oldEntry.isIntersecting) this._queuedEntries.push(newEntry);
+			if (!oldEntry) {
+				this._queuedEntries.push(newEntry);
+			} else if (rootIsInDom && rootContainsTarget) {
+				if (this._hasCrossedThreshold(oldEntry, newEntry)) {
+					this._queuedEntries.push(newEntry);
+				}
+			} else {
+				if (oldEntry && oldEntry.isIntersecting) {
+					this._queuedEntries.push(newEntry);
+				}
+			}
 		}, this);
-		if (this._queuedEntries.length) this._callback(this.takeRecords(), this);
+		if (this._queuedEntries.length) {
+			this._callback(this.takeRecords(), this);
+		}
 	};
 	/**
 	* Accepts a target and root rect computes the intersection between then
@@ -262,7 +289,11 @@ function handleIntersectionObserverObjectPolyfill() {
 			if (parent == this.root || parent == document) {
 				atRoot = true;
 				parentRect = rootRect;
-			} else if (parent != document.body && parent != document.documentElement && parentComputedStyle.overflow != "visible") parentRect = getBoundingClientRect(parent);
+			} else {
+				if (parent != document.body && parent != document.documentElement && parentComputedStyle.overflow != "visible") {
+					parentRect = getBoundingClientRect(parent);
+				}
+			}
 			if (parentRect) {
 				intersectionRect = computeRectIntersection(parentRect, intersectionRect);
 				if (!intersectionRect) break;
@@ -278,8 +309,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	*/
 	IntersectionObserver.prototype._getRootRect = function() {
 		let rootRect;
-		if (this.root) rootRect = getBoundingClientRect(this.root);
-		else {
+		if (this.root) {
+			rootRect = getBoundingClientRect(this.root);
+		} else {
 			const html = document.documentElement;
 			const body = document.body;
 			rootRect = {
@@ -327,7 +359,9 @@ function handleIntersectionObserverObjectPolyfill() {
 		if (oldRatio === newRatio) return;
 		for (let i = 0; i < this.thresholds.length; i++) {
 			const threshold = this.thresholds[i];
-			if (threshold == oldRatio || threshold == newRatio || threshold < oldRatio !== threshold < newRatio) return true;
+			if (threshold == oldRatio || threshold == newRatio || threshold < oldRatio !== threshold < newRatio) {
+				return true;
+			}
 		}
 	};
 	/**
@@ -353,7 +387,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	* @private
 	*/
 	IntersectionObserver.prototype._registerInstance = function() {
-		if (registry.indexOf(this) < 0) registry.push(this);
+		if (registry.indexOf(this) < 0) {
+			registry.push(this);
+		}
 	};
 	/**
 	* Removes the instance from the global IntersectionObserver registry.
@@ -380,8 +416,11 @@ function handleIntersectionObserverObjectPolyfill() {
 	*     phase. Note: this only works in modern browsers.
 	*/
 	function addEvent(node, event, fn, opt_useCapture) {
-		if (isFunction(node.addEventListener)) node.addEventListener(event, fn, opt_useCapture || false);
-		else if (isFunction(node.attachEvent)) node.attachEvent("on" + event, fn);
+		if (isFunction(node.addEventListener)) {
+			node.addEventListener(event, fn, opt_useCapture || false);
+		} else if (isFunction(node.attachEvent)) {
+			node.attachEvent("on" + event, fn);
+		}
 	}
 	/**
 	* Removes a previously added event handler from a DOM node.
@@ -392,8 +431,11 @@ function handleIntersectionObserverObjectPolyfill() {
 	*     flag set to true, it should be set to true here in order to remove it.
 	*/
 	function removeEvent(node, event, fn, opt_useCapture) {
-		if (isFunction(node.removeEventListener)) node.removeEventListener(event, fn, opt_useCapture || false);
-		else if (isFunction(node.detatchEvent)) node.detatchEvent("on" + event, fn);
+		if (isFunction(node.removeEventListener)) {
+			node.removeEventListener(event, fn, opt_useCapture || false);
+		} else if (isFunction(node.detatchEvent)) {
+			node.detatchEvent("on" + event, fn);
+		}
 	}
 	/**
 	* Returns the intersection between two rect objects.
@@ -429,14 +471,16 @@ function handleIntersectionObserverObjectPolyfill() {
 			rect = el.getBoundingClientRect();
 		} catch (err) {}
 		if (!rect) return getEmptyRect();
-		if (!(rect.width && rect.height)) rect = {
-			top: rect.top,
-			right: rect.right,
-			bottom: rect.bottom,
-			left: rect.left,
-			width: rect.right - rect.left,
-			height: rect.bottom - rect.top
-		};
+		if (!(rect.width && rect.height)) {
+			rect = {
+				top: rect.top,
+				right: rect.right,
+				bottom: rect.bottom,
+				left: rect.left,
+				width: rect.right - rect.left,
+				height: rect.bottom - rect.top
+			};
+		}
 		return rect;
 	}
 	/**
@@ -477,8 +521,12 @@ function handleIntersectionObserverObjectPolyfill() {
 	*/
 	function getParentNode(node) {
 		const parent = node.parentNode;
-		if (parent && parent.nodeType == 11 && parent.host) return parent.host;
-		if (parent && parent.assignedSlot) return parent.assignedSlot.parentNode;
+		if (parent && parent.nodeType == 11 && parent.host) {
+			return parent.host;
+		}
+		if (parent && parent.assignedSlot) {
+			return parent.assignedSlot.parentNode;
+		}
 		return parent;
 	}
 	window.IntersectionObserver = IntersectionObserver;

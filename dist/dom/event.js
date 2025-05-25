@@ -41,10 +41,14 @@ var TaroEvent = class {
 				...currentEle !== null ? currentEle.dataset : EMPTY_OBJ,
 				...element !== null ? element.dataset : EMPTY_OBJ
 			};
-			for (const key in this.mpEvent?.detail) target[key] = this.mpEvent.detail[key];
+			for (const key in this.mpEvent?.detail) {
+				target[key] = this.mpEvent.detail[key];
+			}
 			this.cacheTarget = target;
 			return target;
-		} else return cacheTarget;
+		} else {
+			return cacheTarget;
+		}
 	}
 	get currentTarget() {
 		const cacheCurrentTarget = this.cacheCurrentTarget;
@@ -58,35 +62,50 @@ var TaroEvent = class {
 				return this.target;
 			}
 			currentTarget.dataset = element.dataset;
-			for (const key in this.mpEvent?.detail) currentTarget[key] = this.mpEvent.detail[key];
+			for (const key in this.mpEvent?.detail) {
+				currentTarget[key] = this.mpEvent.detail[key];
+			}
 			this.cacheCurrentTarget = currentTarget;
 			return currentTarget;
-		} else return cacheCurrentTarget;
+		} else {
+			return cacheCurrentTarget;
+		}
 	}
 };
 function createEvent(event, node) {
-	if (typeof event === "string") return new TaroEvent(event, {
-		bubbles: true,
-		cancelable: true
-	});
+	if (typeof event === "string") {
+		return new TaroEvent(event, {
+			bubbles: true,
+			cancelable: true
+		});
+	}
 	const domEv = new TaroEvent(event.type, {
 		bubbles: true,
 		cancelable: true
 	}, event);
-	for (const key in event) if (key === CURRENT_TARGET || key === TARGET || key === TYPE || key === TIME_STAMP) continue;
-	else domEv[key] = event[key];
-	if (domEv.type === CONFIRM && node?.nodeName === INPUT) domEv[KEY_CODE] = 13;
+	for (const key in event) {
+		if (key === CURRENT_TARGET || key === TARGET || key === TYPE || key === TIME_STAMP) {
+			continue;
+		} else {
+			domEv[key] = event[key];
+		}
+	}
+	if (domEv.type === CONFIRM && node?.nodeName === INPUT) {
+		domEv[KEY_CODE] = 13;
+	}
 	return domEv;
 }
 const eventsBatch = {};
 function getEventCBResult(event) {
 	const result = event[EVENT_CALLBACK_RESULT];
-	if (!isUndefined(result)) delete event[EVENT_CALLBACK_RESULT];
+	if (!isUndefined(result)) {
+		delete event[EVENT_CALLBACK_RESULT];
+	}
 	return result;
 }
 function eventHandler(event) {
-	event.type === void 0 && Object.defineProperty(event, "type", { value: event._type });
-	event.detail === void 0 && Object.defineProperty(event, "detail", { value: event._detail || { ...event } });
+	event.type === undefined && Object.defineProperty(event, "type", { value: event._type });
+	event.detail === undefined && Object.defineProperty(event, "detail", { value: event._detail || { ...event } });
 	event.currentTarget = event.currentTarget || event.target || { ...event };
 	hooks.call("modifyMpEventImpl", event);
 	const currentTarget = event.currentTarget;
@@ -110,7 +129,9 @@ function eventHandler(event) {
 					dispatch();
 				});
 				return getEventCBResult(event);
-			} else (eventsBatch[type] ||= []).push(dispatch);
+			} else {
+				(eventsBatch[type] ||= []).push(dispatch);
+			}
 		} else {
 			dispatch();
 			return getEventCBResult(event);

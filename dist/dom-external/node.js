@@ -16,8 +16,11 @@ function insertAdjacentHTML(position, html) {
 				this.parentNode?.insertBefore(n, this);
 				break;
 			case "afterbegin":
-				if (this.hasChildNodes()) this.insertBefore(n, this.childNodes[0]);
-				else this.appendChild(n);
+				if (this.hasChildNodes()) {
+					this.insertBefore(n, this.childNodes[0]);
+				} else {
+					this.appendChild(n);
+				}
 				break;
 			case "beforeend":
 				this.appendChild(n);
@@ -31,18 +34,25 @@ function insertAdjacentHTML(position, html) {
 function cloneNode(isDeep = false) {
 	const document = this.ownerDocument;
 	let newNode;
-	if (this.nodeType === NodeType.ELEMENT_NODE) newNode = document.createElement(this.nodeName);
-	else if (this.nodeType === NodeType.TEXT_NODE) newNode = document.createTextNode("");
+	if (this.nodeType === NodeType.ELEMENT_NODE) {
+		newNode = document.createElement(this.nodeName);
+	} else if (this.nodeType === NodeType.TEXT_NODE) {
+		newNode = document.createTextNode("");
+	}
 	for (const key in this) {
 		const value = this[key];
-		if ([PROPS, DATASET].includes(key) && typeof value === OBJECT) newNode[key] = { ...value };
-		else if (key === "_value") newNode[key] = value;
-		else if (key === STYLE) {
+		if ([PROPS, DATASET].includes(key) && typeof value === OBJECT) {
+			newNode[key] = { ...value };
+		} else if (key === "_value") {
+			newNode[key] = value;
+		} else if (key === STYLE) {
 			newNode.style._value = { ...value._value };
 			newNode.style._usedStyleProp = new Set(Array.from(value._usedStyleProp));
 		}
 	}
-	if (isDeep) newNode.childNodes = this.childNodes.map((node) => node.cloneNode(true));
+	if (isDeep) {
+		newNode.childNodes = this.childNodes.map((node) => node.cloneNode(true));
+	}
 	return newNode;
 }
 function contains(node) {

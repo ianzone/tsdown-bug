@@ -43,9 +43,13 @@ options.html = {
 	renderHTMLTag: false
 };
 function setInnerHTML(element, html) {
-	while (element.firstChild) element.removeChild(element.firstChild);
+	while (element.firstChild) {
+		element.removeChild(element.firstChild);
+	}
 	const children = parser(html, element.ownerDocument);
-	for (let i = 0; i < children.length; i++) element.appendChild(children[i]);
+	for (let i = 0; i < children.length; i++) {
+		element.appendChild(children[i]);
+	}
 }
 
 //#endregion

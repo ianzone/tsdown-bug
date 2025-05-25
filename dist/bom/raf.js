@@ -2,8 +2,9 @@
 let now;
 (function() {
 	let loadTime;
-	if (typeof performance !== "undefined" && performance !== null && performance.now) now = () => performance.now();
-	else if (Date.now) {
+	if (typeof performance !== "undefined" && performance !== null && performance.now) {
+		now = () => performance.now();
+	} else if (Date.now) {
 		loadTime = Date.now();
 		now = () => Date.now() - loadTime;
 	} else {

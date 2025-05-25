@@ -21,7 +21,9 @@ var TaroLocation = class extends Events {
 			this.#noCheckUrl = true;
 			const lastHash = this.#url.hash;
 			this.#url.href = generateFullUrl(href);
-			if (lastHash !== this.#url.hash) this.#window.trigger("hashchange");
+			if (lastHash !== this.#url.hash) {
+				this.#window.trigger("hashchange");
+			}
 			this.#noCheckUrl = false;
 		}, null);
 		this.on(CONTEXT_ACTIONS.INIT, () => {
@@ -69,14 +71,20 @@ var TaroLocation = class extends Events {
 	* 校验url的变化，是否需要更新history
 	*/
 	#checkUrlChange(preValue) {
-		if (this.#noCheckUrl) return false;
+		if (this.#noCheckUrl) {
+			return false;
+		}
 		const { protocol, hostname, port, pathname, search, hash } = this.#url._toRaw();
 		if (protocol !== preValue.protocol || hostname !== preValue.hostname || port !== preValue.port) {
 			this.#rollBack(preValue.href);
 			return false;
 		}
-		if (pathname !== preValue.pathname) return true;
-		if (search !== preValue.search) return true;
+		if (pathname !== preValue.pathname) {
+			return true;
+		}
+		if (search !== preValue.search) {
+			return true;
+		}
 		if (hash !== preValue.hash) {
 			this.#window.trigger("hashchange");
 			return true;
@@ -196,7 +204,9 @@ var TaroLocation = class extends Events {
 const Location = process.env.TARO_PLATFORM === "web" ? env_default.window.Location : TaroLocation;
 function generateFullUrl(val = "") {
 	const origin = INIT_URL;
-	if (/^[/?#]/.test(val)) return origin + val;
+	if (/^[/?#]/.test(val)) {
+		return origin + val;
+	}
 	return val;
 }
 

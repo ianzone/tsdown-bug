@@ -28,7 +28,9 @@ var TaroElement = class TaroElement extends TaroNode {
 		let target = this;
 		while (target = target.parentNode) {
 			const listeners = target.__handlers[event.type];
-			if (!isArray(listeners)) continue;
+			if (!isArray(listeners)) {
+				continue;
+			}
 			for (let i = listeners.length; i--;) {
 				const l = listeners[i];
 				l._stop = true;
@@ -72,7 +74,9 @@ var TaroElement = class TaroElement extends TaroNode {
 	get textContent() {
 		let text = "";
 		const childNodes = this.childNodes;
-		for (let i = 0; i < childNodes.length; i++) text += childNodes[i].textContent;
+		for (let i = 0; i < childNodes.length; i++) {
+			text += childNodes[i].textContent;
+		}
 		return text;
 	}
 	set textContent(text) {
@@ -98,18 +102,22 @@ var TaroElement = class TaroElement extends TaroNode {
 	setAttribute(qualifiedName, value) {
 		process.env.NODE_ENV !== "production" && warn(isString(value) && value.length > PROPERTY_THRESHOLD, `元素 ${this.nodeName} 的 ${qualifiedName} 属性值数据量过大，可能会影响渲染性能。考虑降低图片转为 base64 的阈值或在 CSS 中使用 base64。`);
 		const isPureView = this.nodeName === VIEW && !isHasExtractProp(this) && !this.isAnyEventBinded();
-		if (qualifiedName !== STYLE) MutationObserver.record({
-			target: this,
-			type: MutationRecordType.ATTRIBUTES,
-			attributeName: qualifiedName,
-			oldValue: this.getAttribute(qualifiedName)
-		});
+		if (qualifiedName !== STYLE) {
+			MutationObserver.record({
+				target: this,
+				type: MutationRecordType.ATTRIBUTES,
+				attributeName: qualifiedName,
+				oldValue: this.getAttribute(qualifiedName)
+			});
+		}
 		switch (qualifiedName) {
 			case STYLE:
 				this.style.cssText = value;
 				break;
 			case ID:
-				if (this.uid !== this.sid) eventSource.delete(this.uid);
+				if (this.uid !== this.sid) {
+					eventSource.delete(this.uid);
+				}
 				value = String(value);
 				this.props[qualifiedName] = this.uid = value;
 				eventSource.set(value, this);
@@ -117,7 +125,9 @@ var TaroElement = class TaroElement extends TaroNode {
 			default:
 				this.props[qualifiedName] = value;
 				if (qualifiedName.startsWith("data-")) {
-					if (this.dataset === EMPTY_OBJ) this.dataset = Object.create(null);
+					if (this.dataset === EMPTY_OBJ) {
+						this.dataset = Object.create(null);
+					}
 					this.dataset[toCamelCase(qualifiedName.replace(/^data-/, ""))] = value;
 				}
 				break;
@@ -143,14 +153,17 @@ var TaroElement = class TaroElement extends TaroNode {
 		}
 		this.enqueueUpdate(payload);
 		if (this.nodeName === VIEW) {
-			if (qualifiedNameInCamelCase === CATCHMOVE) this.enqueueUpdate({
-				path: `${_path}.${Shortcuts.NodeName}`,
-				value: value ? catchViewAlias : this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : staticViewAlias
-			});
-			else if (isPureView && isHasExtractProp(this)) this.enqueueUpdate({
-				path: `${_path}.${Shortcuts.NodeName}`,
-				value: staticViewAlias
-			});
+			if (qualifiedNameInCamelCase === CATCHMOVE) {
+				this.enqueueUpdate({
+					path: `${_path}.${Shortcuts.NodeName}`,
+					value: value ? catchViewAlias : this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : staticViewAlias
+				});
+			} else if (isPureView && isHasExtractProp(this)) {
+				this.enqueueUpdate({
+					path: `${_path}.${Shortcuts.NodeName}`,
+					value: staticViewAlias
+				});
+			}
 		}
 	}
 	removeAttribute(qualifiedName) {
@@ -161,11 +174,16 @@ var TaroElement = class TaroElement extends TaroNode {
 			attributeName: qualifiedName,
 			oldValue: this.getAttribute(qualifiedName)
 		});
-		if (qualifiedName === STYLE) this.style.cssText = "";
-		else {
+		if (qualifiedName === STYLE) {
+			this.style.cssText = "";
+		} else {
 			const isInterrupt = hooks.call("onRemoveAttribute", this, qualifiedName);
-			if (isInterrupt) return;
-			if (!this.props.hasOwnProperty(qualifiedName)) return;
+			if (isInterrupt) {
+				return;
+			}
+			if (!this.props.hasOwnProperty(qualifiedName)) {
+				return;
+			}
 			delete this.props[qualifiedName];
 		}
 		if (!this._root) return;
@@ -189,14 +207,17 @@ var TaroElement = class TaroElement extends TaroNode {
 		}
 		this.enqueueUpdate(payload);
 		if (this.nodeName === VIEW) {
-			if (qualifiedNameInCamelCase === CATCHMOVE) this.enqueueUpdate({
-				path: `${_path}.${Shortcuts.NodeName}`,
-				value: this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : isHasExtractProp(this) ? staticViewAlias : pureViewAlias
-			});
-			else if (isStaticView && !isHasExtractProp(this)) this.enqueueUpdate({
-				path: `${_path}.${Shortcuts.NodeName}`,
-				value: pureViewAlias
-			});
+			if (qualifiedNameInCamelCase === CATCHMOVE) {
+				this.enqueueUpdate({
+					path: `${_path}.${Shortcuts.NodeName}`,
+					value: this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : isHasExtractProp(this) ? staticViewAlias : pureViewAlias
+				});
+			} else if (isStaticView && !isHasExtractProp(this)) {
+				this.enqueueUpdate({
+					path: `${_path}.${Shortcuts.NodeName}`,
+					value: pureViewAlias
+				});
+			}
 		}
 	}
 	getAttribute(qualifiedName) {
@@ -218,23 +239,34 @@ var TaroElement = class TaroElement extends TaroNode {
 	dispatchEvent(event) {
 		const cancelable = event.cancelable;
 		const listeners = this.__handlers[event.type];
-		if (!isArray(listeners)) return false;
+		if (!isArray(listeners)) {
+			return false;
+		}
 		for (let i = listeners.length; i--;) {
 			const listener = listeners[i];
 			let result;
-			if (listener._stop) listener._stop = false;
-			else {
+			if (listener._stop) {
+				listener._stop = false;
+			} else {
 				hooks.call("modifyDispatchEvent", event, this);
 				result = listener.call(this, event);
 			}
-			if ((result === false || event._end) && cancelable) event.defaultPrevented = true;
+			if ((result === false || event._end) && cancelable) {
+				event.defaultPrevented = true;
+			}
 			if (!isUndefined(result) && event.mpEvent) {
 				const res = hooks.call("modifyTaroEventReturn", this, event, result);
-				if (res) event.mpEvent[EVENT_CALLBACK_RESULT] = result;
+				if (res) {
+					event.mpEvent[EVENT_CALLBACK_RESULT] = result;
+				}
 			}
-			if (event._end && event._stop) break;
+			if (event._end && event._stop) {
+				break;
+			}
 		}
-		if (event._stop) this._stopPropagation(event);
+		if (event._stop) {
+			this._stopPropagation(event);
+		}
 		return listeners != null;
 	}
 	addEventListener(type, handler, options) {

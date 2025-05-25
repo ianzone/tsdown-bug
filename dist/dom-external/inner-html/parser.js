@@ -26,19 +26,30 @@ function hasTerminalParent(tagName, stack) {
 		let currentIndex = stack.length - 1;
 		while (currentIndex >= 0) {
 			const parentTagName = stack[currentIndex].tagName;
-			if (parentTagName === tagName) break;
-			if (tagParents && tagParents.includes(parentTagName)) return true;
+			if (parentTagName === tagName) {
+				break;
+			}
+			if (tagParents && tagParents.includes(parentTagName)) {
+				return true;
+			}
 			currentIndex--;
 		}
 	}
 	return false;
 }
 function getTagName(tag) {
-	if (options.html.renderHTMLTag) return tag;
-	if (specialMiniElements[tag]) return specialMiniElements[tag];
-	else if (isMiniElements(tag)) return tag;
-	else if (isBlockElements(tag)) return "view";
-	else if (isInlineElements(tag)) return "text";
+	if (options.html.renderHTMLTag) {
+		return tag;
+	}
+	if (specialMiniElements[tag]) {
+		return specialMiniElements[tag];
+	} else if (isMiniElements(tag)) {
+		return tag;
+	} else if (isBlockElements(tag)) {
+		return "view";
+	} else if (isInlineElements(tag)) {
+		return "text";
+	}
 	return "view";
 }
 function splitEqual(str) {
@@ -51,26 +62,37 @@ function splitEqual(str) {
 }
 function format(children, document, styleOptions, parent) {
 	return children.filter((child) => {
-		if (child.type === "comment") return false;
-		else if (child.type === "text") return child.content !== "";
+		if (child.type === "comment") {
+			return false;
+		} else if (child.type === "text") {
+			return child.content !== "";
+		}
 		return true;
 	}).map((child) => {
 		if (child.type === "text") {
 			let text = document.createTextNode(child.content);
-			if (isFunction(options.html.transformText)) text = options.html.transformText(text, child);
+			if (isFunction(options.html.transformText)) {
+				text = options.html.transformText(text, child);
+			}
 			parent?.appendChild(text);
 			return text;
 		}
 		const el = document.createElement(getTagName(child.tagName));
 		el.h5tagName = child.tagName;
 		parent?.appendChild(el);
-		if (!options.html.renderHTMLTag) el.className = `h5-${child.tagName}`;
+		if (!options.html.renderHTMLTag) {
+			el.className = `h5-${child.tagName}`;
+		}
 		for (let i = 0; i < child.attributes.length; i++) {
 			const attr = child.attributes[i];
 			const [key, value] = splitEqual(attr);
-			if (key === "class") el.className += " " + unquote(value);
-			else if (key[0] === "o" && key[1] === "n") continue;
-			else el.setAttribute(key, value == null ? true : unquote(value));
+			if (key === "class") {
+				el.className += " " + unquote(value);
+			} else if (key[0] === "o" && key[1] === "n") {
+				continue;
+			} else {
+				el.setAttribute(key, value == null ? true : unquote(value));
+			}
 		}
 		const { styleTagParser, descendantList } = styleOptions;
 		const list = descendantList.slice();
@@ -80,7 +102,9 @@ function format(children, document, styleOptions, parent) {
 			styleTagParser,
 			descendantList: list
 		}, el);
-		if (isFunction(options.html.transformElement)) return options.html.transformElement(el, child);
+		if (isFunction(options.html.transformElement)) {
+			return options.html.transformElement(el, child);
+		}
 		return el;
 	});
 }
@@ -124,9 +148,11 @@ function parse(state) {
 		if (token.close) {
 			let index = stack.length;
 			let shouldRewind = false;
-			while (--index > -1) if (stack[index].tagName === tagName) {
-				shouldRewind = true;
-				break;
+			while (--index > -1) {
+				if (stack[index].tagName === tagName) {
+					shouldRewind = true;
+					break;
+				}
 			}
 			while (cursor < len) {
 				const endToken = tokens[cursor];
@@ -136,11 +162,15 @@ function parse(state) {
 			if (shouldRewind) {
 				stack.splice(index);
 				break;
-			} else continue;
+			} else {
+				continue;
+			}
 		}
 		const isClosingTag = options.html.closingElements.has(tagName);
 		let shouldRewindToAutoClose = isClosingTag;
-		if (shouldRewindToAutoClose) shouldRewindToAutoClose = !hasTerminalParent(tagName, stack);
+		if (shouldRewindToAutoClose) {
+			shouldRewindToAutoClose = !hasTerminalParent(tagName, stack);
+		}
 		if (shouldRewindToAutoClose) {
 			let currentIndex = stack.length - 1;
 			while (currentIndex > 0) {

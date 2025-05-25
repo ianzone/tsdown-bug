@@ -23,10 +23,14 @@ var TaroWindow = class extends Events {
 		const globalProperties = [...Object.getOwnPropertyNames(global || {}), ...Object.getOwnPropertySymbols(global || {})];
 		globalProperties.forEach((property) => {
 			if (property === "atob" || property === "document") return;
-			if (!Object.prototype.hasOwnProperty.call(this, property)) try {
-				this[property] = global[property];
-			} catch (e) {
-				if (process.env.NODE_ENV !== "production") console.warn(`[Taro warn] window.${String(property)} 在赋值到 window 时报错`);
+			if (!Object.prototype.hasOwnProperty.call(this, property)) {
+				try {
+					this[property] = global[property];
+				} catch (e) {
+					if (process.env.NODE_ENV !== "production") {
+						console.warn(`[Taro warn] window.${String(property)} 在赋值到 window 时报错`);
+					}
+				}
 			}
 		});
 		this.Date ||= Date;

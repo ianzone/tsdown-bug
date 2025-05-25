@@ -9,7 +9,9 @@ function treeToArray(root, predict) {
 	const filter = predict ?? returnTrue;
 	let object = root;
 	while (object) {
-		if (object.nodeType === NodeType.ELEMENT_NODE && filter(object)) array.push(object);
+		if (object.nodeType === NodeType.ELEMENT_NODE && filter(object)) {
+			array.push(object);
+		}
 		object = following(object, root);
 	}
 	return array;
@@ -17,12 +19,18 @@ function treeToArray(root, predict) {
 function following(el, root) {
 	const firstChild = el.firstChild;
 	const isElmentTypeValid = el.nodeType === NodeType.ELEMENT_NODE || el.nodeType === NodeType.DOCUMENT_NODE;
-	if (firstChild && isElmentTypeValid) return firstChild;
+	if (firstChild && isElmentTypeValid) {
+		return firstChild;
+	}
 	let current = el;
 	do {
-		if (current === root) return null;
+		if (current === root) {
+			return null;
+		}
 		const nextSibling = current.nextSibling;
-		if (nextSibling) return nextSibling;
+		if (nextSibling) {
+			return nextSibling;
+		}
 		current = current.parentElement;
 	} while (current);
 	return null;

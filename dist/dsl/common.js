@@ -25,17 +25,23 @@ function removePageInstance(id) {
 }
 function safeExecute(path, lifecycle, ...args) {
 	const instance = instances.get(path);
-	if (instance == null) return;
+	if (instance == null) {
+		return;
+	}
 	const func = hooks.call("getLifecycle", instance, lifecycle);
 	if (isArray(func)) {
 		const res = func.map((fn) => fn.apply(instance, args));
 		return res[0];
 	}
-	if (!isFunction(func)) return;
+	if (!isFunction(func)) {
+		return;
+	}
 	return func.apply(instance, args);
 }
 function stringify(obj) {
-	if (obj == null) return "";
+	if (obj == null) {
+		return "";
+	}
 	const path = Object.keys(obj).map((key) => {
 		return key + "=" + obj[key];
 	}).join("&");
@@ -43,8 +49,11 @@ function stringify(obj) {
 }
 function getPath(id, options) {
 	const idx = id.indexOf("?");
-	if (process.env.TARO_PLATFORM === "web") return `${idx > -1 ? id.substring(0, idx) : id}${stringify(options?.stamp ? { stamp: options.stamp } : {})}`;
-	else return `${idx > -1 ? id.substring(0, idx) : id}${stringify(options)}`;
+	if (process.env.TARO_PLATFORM === "web") {
+		return `${idx > -1 ? id.substring(0, idx) : id}${stringify(options?.stamp ? { stamp: options.stamp } : {})}`;
+	} else {
+		return `${idx > -1 ? id.substring(0, idx) : id}${stringify(options)}`;
+	}
 }
 function getOnReadyEventKey(path) {
 	return path + "." + ON_READY;
@@ -71,7 +80,9 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			onShow: getOnShowEventKey(id),
 			onHide: getOnHideEventKey(id)
 		};
-		if (!isUndefined(page.exitState)) Current.router.exitState = page.exitState;
+		if (!isUndefined(page.exitState)) {
+			Current.router.exitState = page.exitState;
+		}
 	}
 	let loadResolver;
 	let hasLoaded;
@@ -85,10 +96,16 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			this.config = pageConfig || {};
 			const uniqueOptions = Object.assign({}, options, { $taroTimestamp: Date.now() });
 			const $taroPath = this.$taroPath = getPath(id, uniqueOptions);
-			if (process.env.TARO_PLATFORM === "web") config.path = $taroPath;
-			if (this.$taroParams == null) this.$taroParams = uniqueOptions;
+			if (process.env.TARO_PLATFORM === "web") {
+				config.path = $taroPath;
+			}
+			if (this.$taroParams == null) {
+				this.$taroParams = uniqueOptions;
+			}
 			setCurrentRouter(this);
-			if (process.env.TARO_PLATFORM !== "web") taroWindowProvider.trigger(CONTEXT_ACTIONS.INIT, $taroPath);
+			if (process.env.TARO_PLATFORM !== "web") {
+				taroWindowProvider.trigger(CONTEXT_ACTIONS.INIT, $taroPath);
+			}
 			const mount = () => {
 				Current.app.mount(component, $taroPath, () => {
 					pageElement = env_default.document.getElementById($taroPath);
@@ -98,15 +115,22 @@ function createPageConfig(component, pageName, data, pageConfig) {
 					if (process.env.TARO_PLATFORM !== "web") {
 						pageElement.ctx = this;
 						pageElement.performUpdate(true, cb);
-					} else isFunction(cb) && cb();
+					} else {
+						isFunction(cb) && cb();
+					}
 				});
 			};
-			if (unmounting) prepareMountList.push(mount);
-			else mount();
+			if (unmounting) {
+				prepareMountList.push(mount);
+			} else {
+				mount();
+			}
 		},
 		[ONUNLOAD]() {
 			const $taroPath = this.$taroPath;
-			if (process.env.TARO_PLATFORM !== "web") taroWindowProvider.trigger(CONTEXT_ACTIONS.DESTORY, $taroPath);
+			if (process.env.TARO_PLATFORM !== "web") {
+				taroWindowProvider.trigger(CONTEXT_ACTIONS.DESTORY, $taroPath);
+			}
 			safeExecute($taroPath, ONUNLOAD);
 			unmounting = true;
 			Current.app.unmount($taroPath, () => {
@@ -133,13 +157,17 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			hasLoaded.then(() => {
 				Current.page = this;
 				setCurrentRouter(this);
-				if (process.env.TARO_PLATFORM !== "web") taroWindowProvider.trigger(CONTEXT_ACTIONS.RECOVER, this.$taroPath);
+				if (process.env.TARO_PLATFORM !== "web") {
+					taroWindowProvider.trigger(CONTEXT_ACTIONS.RECOVER, this.$taroPath);
+				}
 				safeExecute(this.$taroPath, ON_SHOW, options);
 				_raf(() => eventCenter.trigger(getOnShowEventKey(id)));
 			});
 		},
 		[ONHIDE]() {
-			if (process.env.TARO_PLATFORM !== "web") taroWindowProvider.trigger(CONTEXT_ACTIONS.RESTORE, this.$taroPath);
+			if (process.env.TARO_PLATFORM !== "web") {
+				taroWindowProvider.trigger(CONTEXT_ACTIONS.RESTORE, this.$taroPath);
+			}
 			if (Current.page === this) {
 				Current.page = null;
 				Current.router = null;
@@ -148,9 +176,11 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			eventCenter.trigger(getOnHideEventKey(id));
 		}
 	};
-	if (process.env.TARO_PLATFORM === "web") config.getOpenerEventChannel = () => {
-		return EventChannel.pageChannel;
-	};
+	if (process.env.TARO_PLATFORM === "web") {
+		config.getOpenerEventChannel = () => {
+			return EventChannel.pageChannel;
+		};
+	}
 	LIFECYCLES.forEach((lifecycle) => {
 		let isDefer = false;
 		lifecycle = lifecycle.replace(/^defer:/, () => {
@@ -159,23 +189,32 @@ function createPageConfig(component, pageName, data, pageConfig) {
 		});
 		config[lifecycle] = function() {
 			const exec = () => safeExecute(this.$taroPath, lifecycle, ...arguments);
-			if (isDefer) hasLoaded.then(exec);
-			else return exec();
+			if (isDefer) {
+				hasLoaded.then(exec);
+			} else {
+				return exec();
+			}
 		};
 	});
 	SIDE_EFFECT_LIFECYCLES.forEach((lifecycle) => {
-		if (component[lifecycle] || component.prototype?.[lifecycle] || component[lifecycle.replace(/^on/, "enable")] || pageConfig?.[lifecycle.replace(/^on/, "enable")]) config[lifecycle] = function(...args) {
-			const target = args[0]?.target;
-			if (target?.id) {
-				const id$1 = target.id;
-				const element = env_default.document.getElementById(id$1);
-				if (element) target.dataset = element.dataset;
-			}
-			return safeExecute(this.$taroPath, lifecycle, ...args);
-		};
+		if (component[lifecycle] || component.prototype?.[lifecycle] || component[lifecycle.replace(/^on/, "enable")] || pageConfig?.[lifecycle.replace(/^on/, "enable")]) {
+			config[lifecycle] = function(...args) {
+				const target = args[0]?.target;
+				if (target?.id) {
+					const id$1 = target.id;
+					const element = env_default.document.getElementById(id$1);
+					if (element) {
+						target.dataset = element.dataset;
+					}
+				}
+				return safeExecute(this.$taroPath, lifecycle, ...args);
+			};
+		}
 	});
 	config.eh = eventHandler;
-	if (!isUndefined(data)) config.data = data;
+	if (!isUndefined(data)) {
+		config.data = data;
+	}
 	hooks.call("modifyPageObject", config);
 	return config;
 }
@@ -203,12 +242,16 @@ function createComponentConfig(component, componentName, data) {
 			const path = getPath(id, { id: this.pageIdCache });
 			Current.app.unmount(path, () => {
 				instances.delete(path);
-				if (componentElement) componentElement.ctx = null;
+				if (componentElement) {
+					componentElement.ctx = null;
+				}
 			});
 		},
 		methods: { eh: eventHandler }
 	};
-	if (!isUndefined(data)) config.data = data;
+	if (!isUndefined(data)) {
+		config.data = data;
+	}
 	[
 		OPTIONS,
 		EXTERNAL_CLASSES,
@@ -227,7 +270,9 @@ function createRecursiveComponentConfig(componentName) {
 			if (isString(componentId)) {
 				customWrapperCache.set(componentId, this);
 				const el = env_default.document.getElementById(componentId);
-				if (el) el.ctx = this;
+				if (el) {
+					el.ctx = this;
+				}
 			}
 		},
 		[DETACHED]() {
@@ -235,12 +280,16 @@ function createRecursiveComponentConfig(componentName) {
 			if (isString(componentId)) {
 				customWrapperCache.delete(componentId);
 				const el = env_default.document.getElementById(componentId);
-				if (el) el.ctx = null;
+				if (el) {
+					el.ctx = null;
+				}
 			}
 		}
 	} : EMPTY_OBJ;
 	const extraOptions = {};
-	if (process.env.TARO_ENV === "jd") extraOptions.addGlobalClass = true;
+	if (process.env.TARO_ENV === "jd") {
+		extraOptions.addGlobalClass = true;
+	}
 	return hooks.call("modifyRecursiveComponentConfig", {
 		properties: {
 			i: {

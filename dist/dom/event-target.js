@@ -35,8 +35,11 @@ var TaroEventTarget = class {
 		};
 		handler.oldHandler = oldHandler;
 		const handlers = this.__handlers[type];
-		if (isArray(handlers)) handlers.push(handler);
-		else this.__handlers[type] = [handler];
+		if (isArray(handlers)) {
+			handlers.push(handler);
+		} else {
+			this.__handlers[type] = [handler];
+		}
 	}
 	removeEventListener(type, handler) {
 		type = type.toLowerCase();
@@ -45,9 +48,13 @@ var TaroEventTarget = class {
 			this.removeEventListener("end", handler);
 			return;
 		}
-		if (!handler) return;
+		if (!handler) {
+			return;
+		}
 		const handlers = this.__handlers[type];
-		if (!isArray(handlers)) return;
+		if (!isArray(handlers)) {
+			return;
+		}
 		const index = handlers.findIndex((item) => {
 			if (item === handler || item.oldHandler === handler) return true;
 		});

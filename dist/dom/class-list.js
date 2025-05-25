@@ -25,7 +25,9 @@ var ClassList = class {
 				updated = true;
 			}
 		} while (++index < length);
-		if (updated) this._update();
+		if (updated) {
+			this._update();
+		}
 	}
 	remove() {
 		let i = 0;
@@ -42,7 +44,9 @@ var ClassList = class {
 				updated = true;
 			}
 		} while (++i < length);
-		if (updated) this._update();
+		if (updated) {
+			this._update();
+		}
 	}
 	contains(token) {
 		if (!this.checkTokenIsValid(token)) return false;
@@ -51,9 +55,14 @@ var ClassList = class {
 	toggle(token, force) {
 		const result = this.contains(token);
 		const method = result ? force !== true && "remove" : force !== false && "add";
-		if (method) this[method](token);
-		if (force === true || force === false) return force;
-		else return !result;
+		if (method) {
+			this[method](token);
+		}
+		if (force === true || force === false) {
+			return force;
+		} else {
+			return !result;
+		}
 	}
 	replace(token, replacement_token) {
 		if (!this.checkTokenIsValid(token) || !this.checkTokenIsValid(replacement_token)) return;

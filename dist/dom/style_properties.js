@@ -51,7 +51,9 @@ function combine(prefix, list, excludeSelf) {
 	!excludeSelf && styleProperties.push(prefix);
 	list.forEach((item) => {
 		styleProperties.push(prefix + item);
-		if (prefix === WEBKIT) styleProperties.push("Webkit" + item);
+		if (prefix === WEBKIT) {
+			styleProperties.push("Webkit" + item);
+		}
 	});
 }
 const color = "Color";

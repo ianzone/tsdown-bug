@@ -5,11 +5,15 @@ import { options } from "./options.js";
 var Performance = class {
 	recorder = new Map();
 	start(id) {
-		if (!options.debug) return;
+		if (!options.debug) {
+			return;
+		}
 		this.recorder.set(id, Date.now());
 	}
 	stop(id, now = Date.now()) {
-		if (!options.debug) return;
+		if (!options.debug) {
+			return;
+		}
 		const prev = this.recorder.get(id);
 		if (!(prev >= 0)) return;
 		this.recorder.delete(id);
@@ -17,7 +21,9 @@ var Performance = class {
 		console.log(`${id} 时长： ${time}ms 开始时间：${this.#parseTime(prev)} 结束时间：${this.#parseTime(now)}`);
 	}
 	delayStop(id, delay = 500) {
-		if (!options.debug) return;
+		if (!options.debug) {
+			return;
+		}
 		return debounce((now = Date.now(), cb) => {
 			this.stop(id, now);
 			cb?.();

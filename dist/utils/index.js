@@ -7,8 +7,12 @@ import { Shortcuts, getComponentsAlias, internalComponents, isFunction } from "@
 //#region src/utils/index.ts
 const incrementId = () => {
 	const chatCodes = [];
-	for (let i = 65; i <= 90; i++) chatCodes.push(i);
-	for (let i = 97; i <= 122; i++) chatCodes.push(i);
+	for (let i = 65; i <= 90; i++) {
+		chatCodes.push(i);
+	}
+	for (let i = 97; i <= 122; i++) {
+		chatCodes.push(i);
+	}
 	const chatCodesLen = chatCodes.length - 1;
 	const list = [0, 0];
 	return () => {
@@ -49,8 +53,13 @@ function isHasExtractProp(el) {
 * @param type 事件类型
 */
 function isParentBinded(node, type) {
-	while (node = node?.parentElement || null) if (!node || node.nodeName === ROOT_STR || node.nodeName === "root-portal") return false;
-	else if (node.__handlers[type]?.length) return true;
+	while (node = node?.parentElement || null) {
+		if (!node || node.nodeName === ROOT_STR || node.nodeName === "root-portal") {
+			return false;
+		} else if (node.__handlers[type]?.length) {
+			return true;
+		}
+	}
 	return false;
 }
 function shortcutAttr(key) {
@@ -63,7 +72,9 @@ function shortcutAttr(key) {
 }
 const customWrapperCache = new Map();
 function extend(ctor, methodName, options) {
-	if (isFunction(options)) options = { value: options };
+	if (isFunction(options)) {
+		options = { value: options };
+	}
 	Object.defineProperty(ctor.prototype, methodName, {
 		configurable: true,
 		enumerable: true,
@@ -72,7 +83,9 @@ function extend(ctor, methodName, options) {
 }
 let componentsAlias;
 function getComponentsAlias$1() {
-	if (!componentsAlias) componentsAlias = getComponentsAlias(internalComponents);
+	if (!componentsAlias) {
+		componentsAlias = getComponentsAlias(internalComponents);
+	}
 	return componentsAlias;
 }
 function convertNumber2PX(value) {

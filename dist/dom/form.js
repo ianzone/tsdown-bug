@@ -19,8 +19,11 @@ var FormElement = class extends TaroElement {
 	dispatchEvent(event) {
 		if (event.mpEvent) {
 			const val = event.mpEvent.detail.value;
-			if (event.type === CHANGE) this.props.value = val;
-			else if (event.type === INPUT) this.value = val;
+			if (event.type === CHANGE) {
+				this.props.value = val;
+			} else if (event.type === INPUT) {
+				this.value = val;
+			}
 		}
 		return super.dispatchEvent(event);
 	}

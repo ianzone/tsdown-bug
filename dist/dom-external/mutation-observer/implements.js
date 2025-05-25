@@ -40,7 +40,9 @@ var MutationObserverImpl = class {
 	disconnect() {
 		this.target = null;
 		const index = observers.indexOf(this);
-		if (index >= 0) observers.splice(index, 1);
+		if (index >= 0) {
+			observers.splice(index, 1);
+		}
 	}
 	/**
 	* Removes all pending notifications
@@ -71,7 +73,9 @@ const isConcerned = (record, options) => {
 			}
 			return false;
 		case MutationRecordType.CHILD_LIST:
-			if (childList) return true;
+			if (childList) {
+				return true;
+			}
 			return false;
 	}
 };

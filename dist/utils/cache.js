@@ -12,7 +12,9 @@ var RuntimeCache = class {
 		return this.cache.has(identifier);
 	}
 	set(identifier, ctx) {
-		if (identifier && ctx) this.cache.set(identifier, ctx);
+		if (identifier && ctx) {
+			this.cache.set(identifier, ctx);
+		}
 	}
 	get(identifier) {
 		if (this.has(identifier)) return this.cache.get(identifier);

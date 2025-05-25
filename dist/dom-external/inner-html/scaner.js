@@ -16,7 +16,9 @@ function feedPosition(position, str, len) {
 		if (char === "\n") {
 			position.line++;
 			position.column = 0;
-		} else position.column++;
+		} else {
+			position.column++;
+		}
 	}
 }
 function jumpPosition(position, str, end) {
@@ -40,16 +42,22 @@ function isEqualSignChar(char) {
 }
 function shouldBeIgnore(tagName) {
 	const name = tagName.toLowerCase();
-	if (options.html.skipElements.has(name)) return true;
+	if (options.html.skipElements.has(name)) {
+		return true;
+	}
 	return false;
 }
 const alphanumeric = /[A-Za-z0-9]/;
 function findTextEnd(str, index) {
 	while (true) {
 		const textEnd = str.indexOf("<", index);
-		if (textEnd === -1) return textEnd;
+		if (textEnd === -1) {
+			return textEnd;
+		}
 		const char = str.charAt(textEnd + 1);
-		if (char === "/" || char === "!" || alphanumeric.test(char)) return textEnd;
+		if (char === "/" || char === "!" || alphanumeric.test(char)) {
+			return textEnd;
+		}
 		index = textEnd + 1;
 	}
 }
@@ -86,10 +94,13 @@ var Scaner = class {
 			this.scanText();
 			if (position.index === start) {
 				const isComment = html.startsWith("!--", start + 1);
-				if (isComment) this.scanComment();
-				else {
+				if (isComment) {
+					this.scanComment();
+				} else {
 					const tagName = this.scanTag();
-					if (shouldBeIgnore(tagName)) this.scanSkipTag(tagName);
+					if (shouldBeIgnore(tagName)) {
+						this.scanSkipTag(tagName);
+					}
 				}
 			}
 		}
@@ -99,8 +110,12 @@ var Scaner = class {
 		const type = "text";
 		const { html, position } = this;
 		let textEnd = findTextEnd(html, position.index);
-		if (textEnd === position.index) return;
-		if (textEnd === -1) textEnd = html.length;
+		if (textEnd === position.index) {
+			return;
+		}
+		if (textEnd === -1) {
+			textEnd = html.length;
+		}
 		const start = copyPosition(position);
 		const content = html.slice(position.index, textEnd);
 		jumpPosition(position, html, textEnd);
@@ -121,7 +136,9 @@ var Scaner = class {
 		feedPosition(position, html, 4);
 		let contentEnd = html.indexOf("-->", position.index);
 		let commentEnd = contentEnd + 3;
-		if (contentEnd === -1) contentEnd = commentEnd = html.length;
+		if (contentEnd === -1) {
+			contentEnd = commentEnd = html.length;
+		}
 		const content = html.slice(position.index, contentEnd);
 		jumpPosition(position, html, commentEnd);
 		this.tokens.push({
@@ -203,17 +220,23 @@ var Scaner = class {
 			const char = html.charAt(cursor);
 			if (quote) {
 				const isQuoteEnd = char === quote;
-				if (isQuoteEnd) quote = null;
+				if (isQuoteEnd) {
+					quote = null;
+				}
 				cursor++;
 				continue;
 			}
 			const isTagEnd = char === "/" || char === ">";
 			if (isTagEnd) {
-				if (cursor !== wordBegin) words.push(html.slice(wordBegin, cursor));
+				if (cursor !== wordBegin) {
+					words.push(html.slice(wordBegin, cursor));
+				}
 				break;
 			}
 			if (isWordEnd(cursor, wordBegin, html)) {
-				if (cursor !== wordBegin) words.push(html.slice(wordBegin, cursor));
+				if (cursor !== wordBegin) {
+					words.push(html.slice(wordBegin, cursor));
+				}
 				wordBegin = cursor + 1;
 				cursor++;
 				continue;
@@ -293,7 +316,9 @@ var Scaner = class {
 			}
 			jumpPosition(position, html, nextTag);
 			const name = this.scanTag();
-			if (safeTagName === name.toLowerCase()) break;
+			if (safeTagName === name.toLowerCase()) {
+				break;
+			}
 		}
 	}
 };

@@ -16,45 +16,67 @@ function hydrate(node) {
 	SPECIAL_NODES ||= hooks.call("getSpecialNodes");
 	const nodeName = node.nodeName;
 	let compileModeName = null;
-	if (isText(node)) return {
-		sid: node.sid,
-		[Shortcuts.Text]: node.nodeValue,
-		[Shortcuts.NodeName]: componentsAlias[nodeName]?._num || "8"
-	};
+	if (isText(node)) {
+		return {
+			sid: node.sid,
+			[Shortcuts.Text]: node.nodeValue,
+			[Shortcuts.NodeName]: componentsAlias[nodeName]?._num || "8"
+		};
+	}
 	const data = {
 		[Shortcuts.NodeName]: nodeName,
 		sid: node.sid
 	};
-	if (node.uid !== node.sid) data.uid = node.uid;
+	if (node.uid !== node.sid) {
+		data.uid = node.uid;
+	}
 	if (SPECIAL_NODES.indexOf(nodeName) > -1) {
 		if (!node.isAnyEventBinded()) {
 			data[Shortcuts.NodeName] = `static-${nodeName}`;
-			if (nodeName === VIEW && !isHasExtractProp(node)) data[Shortcuts.NodeName] = PURE_VIEW;
+			if (nodeName === VIEW && !isHasExtractProp(node)) {
+				data[Shortcuts.NodeName] = PURE_VIEW;
+			}
 		}
-		if (nodeName === VIEW && node.isOnlyClickBinded() && !isHasExtractProp(node)) data[Shortcuts.NodeName] = CLICK_VIEW;
+		if (nodeName === VIEW && node.isOnlyClickBinded() && !isHasExtractProp(node)) {
+			data[Shortcuts.NodeName] = CLICK_VIEW;
+		}
 	}
 	const { props } = node;
 	for (const prop in props) {
 		const propInCamelCase = toCamelCase(prop);
-		if (!prop.startsWith("data-") && prop !== CLASS && prop !== STYLE && prop !== ID && propInCamelCase !== CATCHMOVE && propInCamelCase !== COMPILE_MODE) data[propInCamelCase] = props[prop];
-		if (process.env.TARO_ENV !== "swan" && nodeName === VIEW && propInCamelCase === CATCHMOVE && props[prop] !== false) data[Shortcuts.NodeName] = CATCH_VIEW;
-		if (propInCamelCase === COMPILE_MODE) compileModeName = props[prop];
+		if (!prop.startsWith("data-") && prop !== CLASS && prop !== STYLE && prop !== ID && propInCamelCase !== CATCHMOVE && propInCamelCase !== COMPILE_MODE) {
+			data[propInCamelCase] = props[prop];
+		}
+		if (process.env.TARO_ENV !== "swan" && nodeName === VIEW && propInCamelCase === CATCHMOVE && props[prop] !== false) {
+			data[Shortcuts.NodeName] = CATCH_VIEW;
+		}
+		if (propInCamelCase === COMPILE_MODE) {
+			compileModeName = props[prop];
+		}
 	}
 	data[Shortcuts.Childnodes] = node.childNodes.filter((node$1) => !isComment(node$1)).map(hydrate);
-	if (node.className !== "") data[Shortcuts.Class] = node.className;
+	if (node.className !== "") {
+		data[Shortcuts.Class] = node.className;
+	}
 	const cssText = node.cssText;
-	if (cssText !== "" && nodeName !== "swiper-item") data[Shortcuts.Style] = cssText;
+	if (cssText !== "" && nodeName !== "swiper-item") {
+		data[Shortcuts.Style] = cssText;
+	}
 	hooks.call("modifyHydrateData", data, node);
 	const nn = data[Shortcuts.NodeName];
 	const componentAlias = componentsAlias[nn];
 	if (componentAlias) {
 		data[Shortcuts.NodeName] = componentAlias._num;
-		for (const prop in data) if (prop in componentAlias) {
-			data[componentAlias[prop]] = data[prop];
-			delete data[prop];
+		for (const prop in data) {
+			if (prop in componentAlias) {
+				data[componentAlias[prop]] = data[prop];
+				delete data[prop];
+			}
 		}
 	}
-	if (compileModeName !== null) data[Shortcuts.NodeName] = compileModeName;
+	if (compileModeName !== null) {
+		data[Shortcuts.NodeName] = compileModeName;
+	}
 	const resData = hooks.call("transferHydrateData", data, node, componentAlias);
 	return resData || data;
 }

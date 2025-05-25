@@ -36,23 +36,38 @@ const URLSearchParams = process.env.TARO_PLATFORM === "web" ? env_default.window
 		query ??= "";
 		const dict = this.#dict;
 		if (typeof query === "string") {
-			if (query.charAt(0) === "?") query = query.slice(1);
+			if (query.charAt(0) === "?") {
+				query = query.slice(1);
+			}
 			for (let pairs = query.split("&"), i = 0, length = pairs.length; i < length; i++) {
 				const value = pairs[i];
 				const index = value.indexOf("=");
 				try {
-					if (index > -1) appendTo(dict, decode(value.slice(0, index)), decode(value.slice(index + 1)));
-					else if (value.length) appendTo(dict, decode(value), "");
+					if (index > -1) {
+						appendTo(dict, decode(value.slice(0, index)), decode(value.slice(index + 1)));
+					} else if (value.length) {
+						appendTo(dict, decode(value), "");
+					}
 				} catch (err) {
-					if (process.env.NODE_ENV !== "production") console.warn(`[Taro warn] URL 参数 ${value} decode 异常`);
+					if (process.env.NODE_ENV !== "production") {
+						console.warn(`[Taro warn] URL 参数 ${value} decode 异常`);
+					}
 				}
 			}
-		} else if (isArray(query)) for (let i = 0, length = query.length; i < length; i++) {
-			const value = query[i];
-			appendTo(dict, value[0], value[1]);
+		} else {
+			if (isArray(query)) {
+				for (let i = 0, length = query.length; i < length; i++) {
+					const value = query[i];
+					appendTo(dict, value[0], value[1]);
+				}
+			} else if (query.forEach) {
+				query.forEach(addEach, dict);
+			} else {
+				for (const key in query) {
+					appendTo(dict, key, query[key]);
+				}
+			}
 		}
-		else if (query.forEach) query.forEach(addEach, dict);
-		else for (const key in query) appendTo(dict, key, query[key]);
 	}
 	append(name, value) {
 		appendTo(this.#dict, name, value);
@@ -93,7 +108,9 @@ const URLSearchParams = process.env.TARO_PLATFORM === "web" ? env_default.window
 		const query = [];
 		for (const key in dict) {
 			const name = encode(key);
-			for (let i = 0, value = dict[key]; i < value.length; i++) query.push(name + "=" + encode(value[i]));
+			for (let i = 0, value = dict[key]; i < value.length; i++) {
+				query.push(name + "=" + encode(value[i]));
+			}
 		}
 		return query.join("&");
 	}

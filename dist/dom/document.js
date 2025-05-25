@@ -59,7 +59,9 @@ var TaroDocument = class extends TaroElement {
 		return isUndefined(el) ? null : el;
 	}
 	querySelector(query) {
-		if (/^#/.test(query)) return this.getElementById(query.slice(1));
+		if (/^#/.test(query)) {
+			return this.getElementById(query.slice(1));
+		}
 		return null;
 	}
 	querySelectorAll() {

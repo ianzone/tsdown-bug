@@ -75,7 +75,9 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 	}
 	get parentElement() {
 		const parentNode = this.parentNode;
-		if (parentNode?.nodeType === NodeType.ELEMENT_NODE) return parentNode;
+		if (parentNode?.nodeType === NodeType.ELEMENT_NODE) {
+			return parentNode;
+		}
 		return null;
 	}
 	get firstChild() {
@@ -92,9 +94,12 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 	set textContent(text) {
 		const removedNodes = this.childNodes.slice();
 		const addedNodes = [];
-		while (this.firstChild) this.removeChild(this.firstChild, { doUpdate: false });
-		if (text === "") this.updateChildNodes(true);
-		else {
+		while (this.firstChild) {
+			this.removeChild(this.firstChild, { doUpdate: false });
+		}
+		if (text === "") {
+			this.updateChildNodes(true);
+		} else {
 			const newText = env_default.document.createTextNode(text);
 			addedNodes.push(newText);
 			this.appendChild(newText);
@@ -129,23 +134,34 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 		if (refChild) {
 			index = this.findIndex(refChild);
 			this.childNodes.splice(index, 0, newChild);
-		} else this.childNodes.push(newChild);
+		} else {
+			this.childNodes.push(newChild);
+		}
 		const childNodesLength = this.childNodes.length;
-		if (this._root) if (!refChild) {
-			const isOnlyChild = childNodesLength === 1;
-			if (isOnlyChild) this.updateChildNodes();
-			else this.enqueueUpdate({
-				path: newChild._path,
-				value: this.hydrate(newChild)
-			});
-		} else if (isReplace) this.enqueueUpdate({
-			path: newChild._path,
-			value: this.hydrate(newChild)
-		});
-		else {
-			const mark = childNodesLength * 2 / 3;
-			if (mark > index) this.updateChildNodes();
-			else this.updateSingleChild(index);
+		if (this._root) {
+			if (!refChild) {
+				const isOnlyChild = childNodesLength === 1;
+				if (isOnlyChild) {
+					this.updateChildNodes();
+				} else {
+					this.enqueueUpdate({
+						path: newChild._path,
+						value: this.hydrate(newChild)
+					});
+				}
+			} else if (isReplace) {
+				this.enqueueUpdate({
+					path: newChild._path,
+					value: this.hydrate(newChild)
+				});
+			} else {
+				const mark = childNodesLength * 2 / 3;
+				if (mark > index) {
+					this.updateChildNodes();
+				} else {
+					this.updateSingleChild(index);
+				}
+			}
 		}
 		MutationObserver.record({
 			type: MutationRecordType.CHILD_LIST,
@@ -191,18 +207,24 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 	*/
 	removeChild(child, options = {}) {
 		const { cleanRef, doUpdate } = options;
-		if (cleanRef !== false && doUpdate !== false) MutationObserver.record({
-			type: MutationRecordType.CHILD_LIST,
-			target: this,
-			removedNodes: [child],
-			nextSibling: child.nextSibling,
-			previousSibling: child.previousSibling
-		});
+		if (cleanRef !== false && doUpdate !== false) {
+			MutationObserver.record({
+				type: MutationRecordType.CHILD_LIST,
+				target: this,
+				removedNodes: [child],
+				nextSibling: child.nextSibling,
+				previousSibling: child.previousSibling
+			});
+		}
 		const index = this.findIndex(child);
 		this.childNodes.splice(index, 1);
 		child.parentNode = null;
-		if (cleanRef !== false) eventSource.removeNodeTree(child);
-		if (this._root && doUpdate !== false) this.updateChildNodes();
+		if (cleanRef !== false) {
+			eventSource.removeNodeTree(child);
+		}
+		if (this._root && doUpdate !== false) {
+			this.updateChildNodes();
+		}
 		return child;
 	}
 	remove(options) {

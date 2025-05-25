@@ -21,12 +21,19 @@ const nextTick = (cb, ctx) => {
 	*/
 	function next() {
 		const pageElement = env_default.document.getElementById(path);
-		if (pageElement?.pendingUpdate) if (process.env.TARO_PLATFORM === "web") pageElement.firstChild?.["componentOnReady"]?.().then(() => {
+		if (pageElement?.pendingUpdate) {
+			if (process.env.TARO_PLATFORM === "web") {
+				pageElement.firstChild?.["componentOnReady"]?.().then(() => {
+					timerFunc();
+				}) ?? timerFunc();
+			} else {
+				pageElement.enqueueUpdateCallback(cb, ctx);
+			}
+		} else if (Date.now() - beginTime > TIMEOUT) {
 			timerFunc();
-		}) ?? timerFunc();
-		else pageElement.enqueueUpdateCallback(cb, ctx);
-		else if (Date.now() - beginTime > TIMEOUT) timerFunc();
-		else setTimeout(() => next(), 20);
+		} else {
+			setTimeout(() => next(), 20);
+		}
 	}
 	next();
 };

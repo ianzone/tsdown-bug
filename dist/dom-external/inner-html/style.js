@@ -33,7 +33,9 @@ var StyleTagParser = class {
 			});
 			content = content.replace(/ /g, "");
 			content = content.replace(/\+\+\+/g, " ");
-			if (!/;$/.test(content)) content += ";";
+			if (!/;$/.test(content)) {
+				content += ";";
+			}
 			selectors.split(",").forEach((src) => {
 				const selectorList = this.parseSelector(src);
 				this.styles.push({
@@ -71,11 +73,16 @@ var StyleTagParser = class {
 				return "";
 			});
 			item = item.replace(/([.#][A-Za-z0-9-_]+)/g, function(_, $1) {
-				if ($1[0] === ID_SELECTOR) selector.id = $1.substr(1);
-				else if ($1[0] === CLASS_SELECTOR) selector.class.push($1.substr(1));
+				if ($1[0] === ID_SELECTOR) {
+					selector.id = $1.substr(1);
+				} else if ($1[0] === CLASS_SELECTOR) {
+					selector.class.push($1.substr(1));
+				}
 				return "";
 			});
-			if (item !== "") selector.tag = item;
+			if (item !== "") {
+				selector.tag = item;
+			}
 			return selector;
 		});
 		return selectors;
@@ -104,18 +111,28 @@ var StyleTagParser = class {
 			}
 			if (isMatch && selector.isAdjacentSibling) {
 				const prev = getPreviousElement(el);
-				if (!prev || !prev.h5tagName) isMatch = false;
-				else {
+				if (!prev || !prev.h5tagName) {
+					isMatch = false;
+				} else {
 					const isSiblingMatch = this.matchCurrent(prev.h5tagName, prev, selectorList[idx - 1]);
-					if (!isSiblingMatch) isMatch = false;
+					if (!isSiblingMatch) {
+						isMatch = false;
+					}
 				}
 			}
 			if (isMatch) {
-				if (idx === selectorList.length - 1) return str + content;
-				else if (idx < selectorList.length - 1) list[i] += 1;
-			} else if (selector.isChild && idx > 0) {
-				list[i] -= 1;
-				if (this.matchCurrent(tagName, el, selectorList[list[i]])) list[i] += 1;
+				if (idx === selectorList.length - 1) {
+					return str + content;
+				} else if (idx < selectorList.length - 1) {
+					list[i] += 1;
+				}
+			} else {
+				if (selector.isChild && idx > 0) {
+					list[i] -= 1;
+					if (this.matchCurrent(tagName, el, selectorList[list[i]])) {
+						list[i] += 1;
+					}
+				}
 			}
 			return str;
 		}, "");
@@ -128,15 +145,22 @@ var StyleTagParser = class {
 			const classList = el.className.split(" ");
 			for (let i = 0; i < selector.class.length; i++) {
 				const cls = selector.class[i];
-				if (classList.indexOf(cls) === -1) return false;
+				if (classList.indexOf(cls) === -1) {
+					return false;
+				}
 			}
 		}
-		if (selector.attrs.length) for (let i = 0; i < selector.attrs.length; i++) {
-			const { all, key, value } = selector.attrs[i];
-			if (all && !el.hasAttribute(key)) return false;
-			else {
-				const attr = el.getAttribute(key);
-				if (attr !== unquote(value || "")) return false;
+		if (selector.attrs.length) {
+			for (let i = 0; i < selector.attrs.length; i++) {
+				const { all, key, value } = selector.attrs[i];
+				if (all && !el.hasAttribute(key)) {
+					return false;
+				} else {
+					const attr = el.getAttribute(key);
+					if (attr !== unquote(value || "")) {
+						return false;
+					}
+				}
 			}
 		}
 		return true;
@@ -147,8 +171,11 @@ function getPreviousElement(el) {
 	if (!parent) return null;
 	const prev = el.previousSibling;
 	if (!prev) return null;
-	if (prev.nodeType === NodeType.ELEMENT_NODE) return prev;
-	else return getPreviousElement(prev);
+	if (prev.nodeType === NodeType.ELEMENT_NODE) {
+		return prev;
+	} else {
+		return getPreviousElement(prev);
+	}
 }
 function sortStyles(styles) {
 	return styles.sort((s1, s2) => {

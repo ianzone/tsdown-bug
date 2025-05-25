@@ -50,6 +50,7 @@ declare class MutationObserverImpl {
    * and returns them in a new Array of MutationRecord objects.
    */
   takeRecords(): MutationRecord[];
-} //#endregion
+}
+declare function recordMutation(record: MutationRecord): void; //#endregion
 export { MutationCallback, MutationObserverImpl as MutationObserverImpl$1, MutationObserverInit };
 //# sourceMappingURL=implements.d.ts.map

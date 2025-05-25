@@ -16,14 +16,24 @@ if (process.env.TARO_PLATFORM !== PLATFORM_TYPE.WEB && process.env.TARO_PLATFORM
 				return "";
 			}
 		});
-		if (ENABLE_ADJACENT_HTML) TaroNode.extend("insertAdjacentHTML", insertAdjacentHTML);
+		if (ENABLE_ADJACENT_HTML) {
+			TaroNode.extend("insertAdjacentHTML", insertAdjacentHTML);
+		}
 	}
-	if (ENABLE_CLONE_NODE) TaroNode.extend("cloneNode", cloneNode);
-	if (ENABLE_CONTAINS) TaroNode.extend("contains", contains);
-	if (ENABLE_SIZE_APIS) TaroElement.extend("getBoundingClientRect", getBoundingClientRectImpl);
-	if (ENABLE_TEMPLATE_CONTENT) TaroElement.extend("content", { get() {
-		return getTemplateContent(this);
-	} });
+	if (ENABLE_CLONE_NODE) {
+		TaroNode.extend("cloneNode", cloneNode);
+	}
+	if (ENABLE_CONTAINS) {
+		TaroNode.extend("contains", contains);
+	}
+	if (ENABLE_SIZE_APIS) {
+		TaroElement.extend("getBoundingClientRect", getBoundingClientRectImpl);
+	}
+	if (ENABLE_TEMPLATE_CONTENT) {
+		TaroElement.extend("content", { get() {
+			return getTemplateContent(this);
+		} });
+	}
 }
 
 //#endregion
