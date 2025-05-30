@@ -1,5 +1,5 @@
-import { NodeType$1 as NodeType } from "./node_types.js";
-import { TaroNode$1 as TaroNode } from "./node.js";
+import { NodeType } from "./node_types.js";
+import { TaroNode } from "./node.js";
 
 //#region src/dom/text.d.ts
 declare class TaroText extends TaroNode {
@@ -13,6 +13,7 @@ declare class TaroText extends TaroNode {
   get nodeValue(): string;
   set data(text: string);
   get data(): string;
-} //#endregion
-export { TaroText as TaroText$1 };
+}
+//#endregion
+export { TaroText };
 //# sourceMappingURL=text.d.ts.map

@@ -1,5 +1,5 @@
-import { Events$1 as Events } from "../emitter/emitter.js";
-import { RuntimeCache$1 as RuntimeCache } from "../utils/cache.js";
+import { Events } from "../emitter/emitter.js";
+import { RuntimeCache } from "../utils/cache.js";
 
 //#region src/bom/location.d.ts
 type Options = {
@@ -35,6 +35,7 @@ declare class TaroLocation extends Events {
   toString(): string;
   get cache(): RuntimeCache<LocationContext>;
 }
-declare const Location: typeof TaroLocation; //#endregion
-export { Location as Location$1, TaroLocation };
+declare const Location: typeof TaroLocation;
+//#endregion
+export { Location, TaroLocation };
 //# sourceMappingURL=location.d.ts.map

@@ -1,6 +1,6 @@
-import { TaroText$1 as TaroText } from "../dom/text.js";
+import { TaroText } from "../dom/text.js";
 import { Element, Text } from "../dom-external/inner-html/parser.js";
-import { TaroElement$1 as TaroElement } from "../dom/element.js";
+import { TaroElement } from "../dom/element.js";
 
 //#region src/interface/options.d.ts
 interface Options {
@@ -16,7 +16,6 @@ interface Options {
   };
   miniGlobal?: any;
 }
-
 //#endregion
 export { Options };
 //# sourceMappingURL=options.d.ts.map

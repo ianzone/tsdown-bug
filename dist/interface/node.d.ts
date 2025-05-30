@@ -7,7 +7,6 @@ interface UpdatePayload {
   path: string;
   value: UpdatePayloadValue;
 }
-
 //#endregion
 export { DataTree, UpdatePayload, UpdatePayloadValue };
 //# sourceMappingURL=node.d.ts.map

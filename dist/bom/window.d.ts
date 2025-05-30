@@ -1,6 +1,6 @@
-import { TaroDocument$1 as TaroDocument } from "../dom/document.js";
+import { TaroDocument } from "../dom/document.js";
 import { TGetComputedStyle } from "./getComputedStyle.js";
-import { Events$1 as Events } from "../emitter/emitter.js";
+import { Events } from "../emitter/emitter.js";
 import { TaroLocation } from "./location.js";
 import { TaroHistory } from "./history.js";
 
@@ -25,7 +25,6 @@ declare class TaroWindow extends Events {
 declare const taroWindowProvider: TaroWindow;
 declare const taroLocationProvider: TaroLocation;
 declare const taroHistoryProvider: TaroHistory;
-
 //#endregion
-export { taroHistoryProvider as taroHistoryProvider$1, taroLocationProvider as taroLocationProvider$1, taroWindowProvider as taroWindowProvider$1 };
+export { taroHistoryProvider, taroLocationProvider, taroWindowProvider };
 //# sourceMappingURL=window.d.ts.map

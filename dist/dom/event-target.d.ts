@@ -8,7 +8,6 @@ declare class TaroEventTarget {
   isAnyEventBinded(): boolean;
   isOnlyClickBinded(): boolean;
 }
-
 //#endregion
-export { TaroEventTarget as TaroEventTarget$1 };
+export { TaroEventTarget };
 //# sourceMappingURL=event-target.d.ts.map

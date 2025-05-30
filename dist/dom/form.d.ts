@@ -1,5 +1,5 @@
-import { TaroEvent$1 as TaroEvent } from "./event.js";
-import { TaroElement$1 as TaroElement } from "./element.js";
+import { TaroEvent } from "./event.js";
+import { TaroElement } from "./element.js";
 
 //#region src/dom/form.d.ts
 declare class FormElement extends TaroElement {
@@ -9,7 +9,6 @@ declare class FormElement extends TaroElement {
   set value(val: string | boolean | number | any[]);
   dispatchEvent(event: TaroEvent): boolean;
 }
-
 //#endregion
-export { FormElement as FormElement$1 };
+export { FormElement };
 //# sourceMappingURL=form.d.ts.map

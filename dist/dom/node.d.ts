@@ -1,10 +1,10 @@
 import { TFunc } from "../interface/utils.js";
 import { UpdatePayload } from "../interface/node.js";
-import { NodeType$1 as NodeType } from "./node_types.js";
-import { TaroEventTarget$1 as TaroEventTarget } from "./event-target.js";
-import { TaroRootElement$1 as TaroRootElement } from "./root.js";
-import { TaroElement$1 as TaroElement } from "./element.js";
-import { TaroDocument$1 as TaroDocument } from "./document.js";
+import { NodeType } from "./node_types.js";
+import { TaroEventTarget } from "./event-target.js";
+import { TaroRootElement } from "./root.js";
+import { TaroElement } from "./element.js";
+import { TaroDocument } from "./document.js";
 
 //#region src/dom/node.d.ts
 interface RemoveChildOptions {
@@ -75,6 +75,7 @@ declare class TaroNode extends TaroEventTarget {
   enqueueUpdate(payload: UpdatePayload): void;
   get ownerDocument(): TaroDocument;
   static extend(methodName: string, options: TFunc | Record<string, any>): void;
-} //#endregion
-export { TaroNode as TaroNode$1 };
+}
+//#endregion
+export { TaroNode };
 //# sourceMappingURL=node.d.ts.map

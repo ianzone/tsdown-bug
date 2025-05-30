@@ -1,4 +1,4 @@
-import { TaroNode$1 as TaroNode } from "../../dom/node.js";
+import { TaroNode } from "../../dom/node.js";
 import { MutationRecord } from "./record.js";
 
 //#region src/dom-external/mutation-observer/implements.d.ts
@@ -51,6 +51,7 @@ declare class MutationObserverImpl {
    */
   takeRecords(): MutationRecord[];
 }
-declare function recordMutation(record: MutationRecord): void; //#endregion
-export { MutationCallback, MutationObserverImpl as MutationObserverImpl$1, MutationObserverInit };
+declare function recordMutation(record: MutationRecord): void;
+//#endregion
+export { MutationCallback, MutationObserverImpl, MutationObserverInit };
 //# sourceMappingURL=implements.d.ts.map

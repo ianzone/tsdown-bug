@@ -1,6 +1,5 @@
 //#region src/bom/URLSearchParams.d.ts
 declare const URLSearchParams: any;
-
 //#endregion
-export { URLSearchParams as URLSearchParams$1 };
+export { URLSearchParams };
 //# sourceMappingURL=URLSearchParams.d.ts.map

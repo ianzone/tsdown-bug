@@ -1,4 +1,4 @@
-import { TaroElement$1 as TaroElement } from "./element.js";
+import { TaroElement } from "./element.js";
 
 //#region src/dom/class-list.d.ts
 declare class ClassList {
@@ -15,6 +15,7 @@ declare class ClassList {
   toString(): string;
   private checkTokenIsValid;
   private _update;
-} //#endregion
-export { ClassList as ClassList$1 };
+}
+//#endregion
+export { ClassList };
 //# sourceMappingURL=class-list.d.ts.map

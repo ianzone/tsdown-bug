@@ -12,5 +12,5 @@ declare class RuntimeCache<T> {
   delete(identifier: string): void;
 }
 //#endregion
-export { RuntimeCache as RuntimeCache$1 };
+export { RuntimeCache };
 //# sourceMappingURL=cache.d.ts.map

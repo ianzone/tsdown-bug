@@ -8,6 +8,7 @@ declare const enum NodeType {
   COMMENT_NODE = 6,
   PROCESSING_INSTRUCTION_NODE = 7,
   DOCUMENT_NODE = 9,
-} //#endregion
-export { NodeType as NodeType$1 };
+}
+//#endregion
+export { NodeType };
 //# sourceMappingURL=node_types.d.ts.map

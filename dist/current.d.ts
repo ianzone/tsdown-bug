@@ -17,6 +17,7 @@ interface Current {
   preloadData?: any;
 }
 declare const Current: Current;
-declare const getCurrentInstance: () => Current; //#endregion
-export { Current as Current$1, getCurrentInstance as getCurrentInstance$1 };
+declare const getCurrentInstance: () => Current;
+//#endregion
+export { Current, getCurrentInstance };
 //# sourceMappingURL=current.d.ts.map

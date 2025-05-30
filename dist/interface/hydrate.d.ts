@@ -29,7 +29,6 @@ interface MiniTextData {
 }
 type MiniData = MiniElementData | MiniTextData;
 type HydratedData = () => MiniData | MiniData[];
-
 //#endregion
 export { HydratedData, MiniData, MiniElementData, MiniTextData, MpInstance };
 //# sourceMappingURL=hydrate.d.ts.map

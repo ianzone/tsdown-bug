@@ -1,4 +1,5 @@
 import { debounce } from "./utils/lodash.js";
+import "./utils/index.js";
 import { options } from "./options.js";
 
 //#region src/perf.ts

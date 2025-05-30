@@ -9,6 +9,7 @@ interface AddEventListenerOptions extends EventListenerOptions {
 interface EventHandler<T = any, R = void> {
   (...args: T[]): R;
   _stop?: boolean;
-} //#endregion
+}
+//#endregion
 export { AddEventListenerOptions, EventHandler, EventListenerOptions };
 //# sourceMappingURL=event-target.d.ts.map

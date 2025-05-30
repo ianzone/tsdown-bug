@@ -20,6 +20,7 @@ import { TaroNode } from "./dom/node.js";
 import { Style } from "./dom/style.js";
 import { TaroElement } from "./dom/element.js";
 import { options } from "./options.js";
+import "./dom-external/index.js";
 import { TaroEvent, createEvent, eventHandler } from "./dom/event.js";
 import { FormElement } from "./dom/form.js";
 import { perf } from "./perf.js";
@@ -29,6 +30,8 @@ import { taroDocumentProvider } from "./bom/document.js";
 import { SVGElement } from "./dom/svg.js";
 import { createComponentConfig, createPageConfig, createRecursiveComponentConfig, getOnHideEventKey, getOnReadyEventKey, getOnShowEventKey, getPageInstance, getPath, injectPageInstance, removePageInstance, safeExecute, stringify } from "./dsl/common.js";
 import { nextTick } from "./next-tick.js";
+import "./dsl/instance.js";
+import "./interface/index.js";
 import { handlePolyfill } from "./polyfill/index.js";
 import { hooks } from "@tarojs/shared";
 

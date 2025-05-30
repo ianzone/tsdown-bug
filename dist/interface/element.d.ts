@@ -2,6 +2,7 @@
 interface Attributes {
   name: string;
   value: string;
-} //#endregion
+}
+//#endregion
 export { Attributes };
 //# sourceMappingURL=element.d.ts.map

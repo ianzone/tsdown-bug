@@ -48,6 +48,7 @@ declare function parseUrl(url?: string): {
   pathname: string;
   search: string;
   hash: string;
-}; //#endregion
-export { TaroURLProvider as TaroURLProvider$1, parseUrl as parseUrl$1 };
+};
+//#endregion
+export { TaroURLProvider, parseUrl };
 //# sourceMappingURL=URL.d.ts.map

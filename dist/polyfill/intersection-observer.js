@@ -1,4 +1,5 @@
 import { throttle } from "../utils/lodash.js";
+import "../utils/index.js";
 import { isFunction, isNumber } from "@tarojs/shared";
 
 //#region src/polyfill/intersection-observer.ts

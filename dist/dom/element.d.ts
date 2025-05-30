@@ -1,9 +1,9 @@
-import { ClassList$1 as ClassList } from "./class-list.js";
+import { ClassList } from "./class-list.js";
 import { Attributes } from "../interface/element.js";
 import { TFunc } from "../interface/utils.js";
-import { TaroNode$1 as TaroNode } from "./node.js";
-import { Style$1 as Style } from "./style.js";
-import { TaroEvent$1 as TaroEvent } from "./event.js";
+import { TaroNode } from "./node.js";
+import { Style } from "./style.js";
+import { TaroEvent } from "./event.js";
 
 //#region src/dom/element.d.ts
 declare class TaroElement extends TaroNode {
@@ -39,6 +39,7 @@ declare class TaroElement extends TaroNode {
   addEventListener(type: any, handler: any, options: any): void;
   removeEventListener(type: any, handler: any, sideEffect?: boolean): void;
   static extend(methodName: string, options: TFunc | Record<string, any>): void;
-} //#endregion
-export { TaroElement as TaroElement$1 };
+}
+//#endregion
+export { TaroElement };
 //# sourceMappingURL=element.d.ts.map

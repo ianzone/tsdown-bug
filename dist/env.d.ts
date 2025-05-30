@@ -1,4 +1,4 @@
-import { TaroDocument$1 as TaroDocument } from "./dom/document.js";
+import { TaroDocument } from "./dom/document.js";
 
 //#region src/env.d.ts
 interface Env {

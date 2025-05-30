@@ -14,7 +14,6 @@ declare function getOnHideEventKey(path: string): string;
 declare function createPageConfig(component: any, pageName?: string, data?: Record<string, unknown>, pageConfig?: PageConfig): PageInstance;
 declare function createComponentConfig(component: React.ComponentClass, componentName?: string, data?: Record<string, unknown>): any;
 declare function createRecursiveComponentConfig(componentName?: string): any;
-
 //#endregion
-export { createComponentConfig as createComponentConfig$1, createPageConfig as createPageConfig$1, createRecursiveComponentConfig as createRecursiveComponentConfig$1, getOnHideEventKey as getOnHideEventKey$1, getOnReadyEventKey as getOnReadyEventKey$1, getOnShowEventKey as getOnShowEventKey$1, getPageInstance as getPageInstance$1, getPath as getPath$1, injectPageInstance as injectPageInstance$1, removePageInstance as removePageInstance$1, safeExecute as safeExecute$1, stringify as stringify$1 };
+export { createComponentConfig, createPageConfig, createRecursiveComponentConfig, getOnHideEventKey, getOnReadyEventKey, getOnShowEventKey, getPageInstance, getPath, injectPageInstance, removePageInstance, safeExecute, stringify };
 //# sourceMappingURL=common.d.ts.map

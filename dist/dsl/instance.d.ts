@@ -1,6 +1,6 @@
 import { MpEvent } from "../interface/event.js";
 import { TFunc } from "../interface/utils.js";
-import { TaroElement$1 as TaroElement } from "../dom/element.js";
+import { TaroElement } from "../dom/element.js";
 import { Component } from "@vue/runtime-core";
 import { Component as Component$1, ComponentClass } from "react";
 
@@ -81,6 +81,7 @@ interface AppInstance extends Show {
   unmount?(id: string, cb?: () => void): void;
   taroGlobalData?: Record<any, any>;
   config?: Record<any, any>;
-} //#endregion
+}
+//#endregion
 export { AppInstance, Instance, PageInstance, PageLifeCycle, PageProps, ReactAppInstance, ReactPageComponent, ReactPageInstance };
 //# sourceMappingURL=instance.d.ts.map

@@ -1,5 +1,5 @@
-import { Events$1 as Events } from "../emitter/emitter.js";
-import { RuntimeCache$1 as RuntimeCache } from "../utils/cache.js";
+import { Events } from "../emitter/emitter.js";
+import { RuntimeCache } from "../utils/cache.js";
 import { TaroLocation } from "./location.js";
 
 //#region src/bom/history.d.ts
@@ -28,6 +28,7 @@ declare class TaroHistory extends Events {
   replaceState(state: any, title: string, url: string): void;
   get cache(): RuntimeCache<HistoryContext>;
 }
-declare const History: typeof TaroHistory; //#endregion
-export { History as History$1, TaroHistory };
+declare const History: typeof TaroHistory;
+//#endregion
+export { History, TaroHistory };
 //# sourceMappingURL=history.d.ts.map

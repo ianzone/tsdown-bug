@@ -1,8 +1,8 @@
-import { TaroText$1 as TaroText } from "./text.js";
-import { TaroRootElement$1 as TaroRootElement } from "./root.js";
-import { createEvent$1 as createEvent } from "./event.js";
-import { TaroElement$1 as TaroElement } from "./element.js";
-import { FormElement$1 as FormElement } from "./form.js";
+import { TaroText } from "./text.js";
+import { TaroRootElement } from "./root.js";
+import { createEvent } from "./event.js";
+import { TaroElement } from "./element.js";
+import { FormElement } from "./form.js";
 
 //#region src/dom/document.d.ts
 declare class TaroDocument extends TaroElement {
@@ -21,7 +21,6 @@ declare class TaroDocument extends TaroElement {
   createComment(): TaroText;
   get defaultView(): any;
 }
-
 //#endregion
-export { TaroDocument as TaroDocument$1 };
+export { TaroDocument };
 //# sourceMappingURL=document.d.ts.map

@@ -1,5 +1,5 @@
 import { EventOptions, MpEvent } from "../interface/event.js";
-import { TaroElement$1 as TaroElement } from "./element.js";
+import { TaroElement } from "./element.js";
 
 //#region src/dom/event.d.ts
 declare class TaroEvent {
@@ -22,6 +22,7 @@ declare class TaroEvent {
   get currentTarget(): any;
 }
 declare function createEvent(event: MpEvent | string, node?: TaroElement): TaroEvent;
-declare function eventHandler(event: MpEvent): any; //#endregion
-export { TaroEvent as TaroEvent$1, createEvent as createEvent$1, eventHandler as eventHandler$1 };
+declare function eventHandler(event: MpEvent): any;
+//#endregion
+export { TaroEvent, createEvent, eventHandler };
 //# sourceMappingURL=event.d.ts.map

@@ -1,4 +1,4 @@
-import { TaroNode$1 as TaroNode } from "./node.js";
+import { TaroNode } from "./node.js";
 
 //#region src/dom/event-source.d.ts
 interface IEventSource extends Map<string | undefined | null, TaroNode> {
@@ -6,7 +6,6 @@ interface IEventSource extends Map<string | undefined | null, TaroNode> {
   removeNodeTree(child: TaroNode): void;
 }
 declare const eventSource: IEventSource;
-
 //#endregion
-export { eventSource as eventSource$1 };
+export { eventSource };
 //# sourceMappingURL=event-source.d.ts.map

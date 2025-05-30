@@ -1,7 +1,7 @@
 import { TFunc } from "../interface/utils.js";
 import { MpInstance } from "../interface/hydrate.js";
 import { UpdatePayload } from "../interface/node.js";
-import { TaroElement$1 as TaroElement } from "./element.js";
+import { TaroElement } from "./element.js";
 
 //#region src/dom/root.d.ts
 declare class TaroRootElement extends TaroElement {
@@ -18,7 +18,6 @@ declare class TaroRootElement extends TaroElement {
   enqueueUpdateCallback(cb: TFunc, ctx?: Record<string, any>): void;
   flushUpdateCallback(): void;
 }
-
 //#endregion
-export { TaroRootElement as TaroRootElement$1 };
+export { TaroRootElement };
 //# sourceMappingURL=root.d.ts.map

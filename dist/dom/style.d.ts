@@ -1,4 +1,4 @@
-import { TaroElement$1 as TaroElement } from "./element.js";
+import { TaroElement } from "./element.js";
 
 //#region src/dom/style.d.ts
 declare class Style {
@@ -13,6 +13,7 @@ declare class Style {
   setProperty(propertyName: string, value?: string | null): void;
   removeProperty(propertyName: string): string;
   getPropertyValue(propertyName: string): any;
-} //#endregion
-export { Style as Style$1 };
+}
+//#endregion
+export { Style };
 //# sourceMappingURL=style.d.ts.map

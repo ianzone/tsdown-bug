@@ -17,13 +17,13 @@ declare class ClassList {
   toString(): string;
   private checkTokenIsValid;
   private _update;
-} //#endregion
+}
+//#endregion
 //#region src/interface/element.d.ts
 interface Attributes {
   name: string;
   value: string;
 }
-
 //#endregion
 //#region src/interface/event.d.ts
 interface EventOptions {
@@ -40,7 +40,6 @@ interface MpEvent {
   target: Target;
   currentTarget: Target;
 }
-
 //#endregion
 //#region src/interface/event-target.d.ts
 interface EventListenerOptions {
@@ -54,12 +53,10 @@ interface EventHandler<T = any, R = void> {
   (...args: T[]): R;
   _stop?: boolean;
 }
-
 //#endregion
 //#region src/interface/utils.d.ts
 type TFunc = (...args: any[]) => any;
 type PageConfig = Record<string, any>;
-
 //#endregion
 //#region src/interface/hydrate.d.ts
 interface MpInstance {
@@ -89,7 +86,6 @@ interface MiniTextData {
 }
 type MiniData = MiniElementData | MiniTextData;
 type HydratedData = () => MiniData | MiniData[];
-
 //#endregion
 //#region src/interface/node.d.ts
 type UpdatePayloadValue = string | boolean | HydratedData;
@@ -98,7 +94,6 @@ interface UpdatePayload {
   path: string;
   value: UpdatePayloadValue;
 }
-
 //#endregion
 //#region src/dom/node_types.d.ts
 declare const enum NodeType {
@@ -111,7 +106,6 @@ declare const enum NodeType {
   PROCESSING_INSTRUCTION_NODE = 7,
   DOCUMENT_NODE = 9,
 }
-
 //#endregion
 //#region src/dom/text.d.ts
 declare class TaroText extends TaroNode {
@@ -126,7 +120,6 @@ declare class TaroText extends TaroNode {
   set data(text: string);
   get data(): string;
 }
-
 //#endregion
 //#region src/dom-external/inner-html/parser.d.ts
 interface Node {
@@ -151,7 +144,6 @@ interface ParsedTaroElement extends TaroElement {
 }
 type ChildNode = Comment | Text | Element;
 declare function parser(html: string, document: TaroDocument): (TaroElement | TaroText)[];
-
 //#endregion
 //#region src/interface/options.d.ts
 interface Options {
@@ -167,7 +159,6 @@ interface Options {
   };
   miniGlobal?: any;
 }
-
 //#endregion
 //#region src/dom/event-target.d.ts
 declare class TaroEventTarget {
@@ -177,7 +168,6 @@ declare class TaroEventTarget {
   isAnyEventBinded(): boolean;
   isOnlyClickBinded(): boolean;
 }
-
 //#endregion
 //#region src/dom/root.d.ts
 declare class TaroRootElement extends TaroElement {
@@ -194,7 +184,6 @@ declare class TaroRootElement extends TaroElement {
   enqueueUpdateCallback(cb: TFunc, ctx?: Record<string, any>): void;
   flushUpdateCallback(): void;
 }
-
 //#endregion
 //#region src/dom/node.d.ts
 interface RemoveChildOptions {
@@ -266,7 +255,6 @@ declare class TaroNode extends TaroEventTarget {
   get ownerDocument(): TaroDocument;
   static extend(methodName: string, options: TFunc | Record<string, any>): void;
 }
-
 //#endregion
 //#region src/dom/style.d.ts
 declare class Style {
@@ -282,7 +270,6 @@ declare class Style {
   removeProperty(propertyName: string): string;
   getPropertyValue(propertyName: string): any;
 }
-
 //#endregion
 //#region src/dom/event.d.ts
 declare class TaroEvent {
@@ -306,7 +293,6 @@ declare class TaroEvent {
 }
 declare function createEvent(event: MpEvent | string, node?: TaroElement): TaroEvent;
 declare function eventHandler(event: MpEvent): any;
-
 //#endregion
 //#region src/dom/element.d.ts
 declare class TaroElement extends TaroNode {
@@ -343,7 +329,6 @@ declare class TaroElement extends TaroNode {
   removeEventListener(type: any, handler: any, sideEffect?: boolean): void;
   static extend(methodName: string, options: TFunc | Record<string, any>): void;
 }
-
 //#endregion
 //#region src/dom/form.d.ts
 declare class FormElement extends TaroElement {
@@ -353,7 +338,6 @@ declare class FormElement extends TaroElement {
   set value(val: string | boolean | number | any[]);
   dispatchEvent(event: TaroEvent): boolean;
 }
-
 //#endregion
 //#region src/dom/document.d.ts
 declare class TaroDocument extends TaroElement {
@@ -372,7 +356,6 @@ declare class TaroDocument extends TaroElement {
   createComment(): TaroText;
   get defaultView(): any;
 }
-
 //#endregion
 //#region src/env.d.ts
 interface Env {
@@ -380,21 +363,17 @@ interface Env {
   document: TaroDocument;
 }
 declare const env: Env;
-
 //#endregion
 //#region src/bom/document.d.ts
 declare const taroDocumentProvider: TaroDocument;
-
 //#endregion
 //#region src/bom/getComputedStyle.d.ts
 type TGetComputedStyle = typeof window.getComputedStyle | ((el: TaroElement) => Style);
 declare const taroGetComputedStyleProvider: TGetComputedStyle;
-
 //#endregion
 //#region src/emitter/emitter.d.ts
 declare const eventCenter: Events;
 type EventsType = typeof Events;
-
 //#endregion
 //#region src/utils/cache.d.ts
 /**
@@ -409,7 +388,6 @@ declare class RuntimeCache<T> {
   get(identifier: string): T | undefined;
   delete(identifier: string): void;
 }
-
 //#endregion
 //#region src/bom/location.d.ts
 type Options$2 = {
@@ -446,7 +424,6 @@ declare class TaroLocation extends Events {
   get cache(): RuntimeCache<LocationContext>;
 }
 declare const Location: typeof TaroLocation;
-
 //#endregion
 //#region src/bom/history.d.ts
 interface HistoryState {
@@ -475,17 +452,14 @@ declare class TaroHistory extends Events {
   get cache(): RuntimeCache<HistoryContext>;
 }
 declare const History: typeof TaroHistory;
-
 //#endregion
 //#region src/bom/navigator.d.ts
 declare const nav: typeof window.navigator;
-
 //#endregion
 //#region src/bom/raf.d.ts
 declare let now: () => number;
 declare const _raf: typeof requestAnimationFrame | ((callback: any) => NodeJS.Timeout);
 declare const _caf: typeof cancelAnimationFrame;
-
 //#endregion
 //#region src/bom/URL.d.ts
 declare class TaroURL {
@@ -538,11 +512,9 @@ declare function parseUrl(url?: string): {
   search: string;
   hash: string;
 };
-
 //#endregion
 //#region src/bom/URLSearchParams.d.ts
 declare const URLSearchParams$1: any;
-
 //#endregion
 //#region src/bom/window.d.ts
 declare class TaroWindow extends Events {
@@ -565,11 +537,9 @@ declare class TaroWindow extends Events {
 declare const taroWindowProvider: TaroWindow;
 declare const taroLocationProvider: TaroLocation;
 declare const taroHistoryProvider: TaroHistory;
-
 //#endregion
 //#region src/dom/svg.d.ts
 declare class SVGElement extends TaroElement {}
-
 //#endregion
 //#region src/dom-external/mutation-observer/record.d.ts
 /**
@@ -595,7 +565,6 @@ declare const enum MutationRecordType {
   CHARACTER_DATA = "characterData",
   CHILD_LIST = "childList",
 }
-
 //#endregion
 //#region src/dom-external/mutation-observer/implements.d.ts
 type MutationCallback = (mutations: MutationRecord[]) => any;
@@ -648,7 +617,6 @@ declare class MutationObserverImpl {
   takeRecords(): MutationRecord[];
 }
 declare function recordMutation(record: MutationRecord): void;
-
 //#endregion
 //#region src/dom-external/mutation-observer/index.d.ts
 declare class MutationObserver {
@@ -659,7 +627,6 @@ declare class MutationObserver {
   takeRecords(): MutationRecord[];
   static record(record: MutationRecord): void;
 }
-
 //#endregion
 //#region src/constants/index.d.ts
 declare const PROPERTY_THRESHOLD = 2046;
@@ -722,7 +689,6 @@ declare enum CONTEXT_ACTIONS {
   RECOVER = "2",
   DESTORY = "3",
 }
-
 //#endregion
 //#region src/dsl/instance.d.ts
 interface Instance<T = Record<string, any>> extends Component$1<T>, Show, PageInstance {
@@ -802,7 +768,6 @@ interface AppInstance extends Show {
   taroGlobalData?: Record<any, any>;
   config?: Record<any, any>;
 }
-
 //#endregion
 //#region src/current.d.ts
 interface Router {
@@ -822,7 +787,6 @@ interface Current {
 }
 declare const Current: Current;
 declare const getCurrentInstance: () => Current;
-
 //#endregion
 //#region src/dom/event-source.d.ts
 interface IEventSource extends Map<string | undefined | null, TaroNode> {
@@ -830,7 +794,6 @@ interface IEventSource extends Map<string | undefined | null, TaroNode> {
   removeNodeTree(child: TaroNode): void;
 }
 declare const eventSource: IEventSource;
-
 //#endregion
 //#region src/dsl/common.d.ts
 declare function injectPageInstance(inst: Instance<PageProps>, id: string): void;
@@ -845,7 +808,6 @@ declare function getOnHideEventKey(path: string): string;
 declare function createPageConfig(component: any, pageName?: string, data?: Record<string, unknown>, pageConfig?: PageConfig): PageInstance;
 declare function createComponentConfig(component: React.ComponentClass, componentName?: string, data?: Record<string, unknown>): any;
 declare function createRecursiveComponentConfig(componentName?: string): any;
-
 //#endregion
 //#region src/hydrate.d.ts
 /**
@@ -855,15 +817,12 @@ declare function createRecursiveComponentConfig(componentName?: string): any;
  * it's a vnode traverser and modifier: that's exactly what Taro's doing in here.
  */
 declare function hydrate(node: TaroElement | TaroText): MiniData;
-
 //#endregion
 //#region src/next-tick.d.ts
 declare const nextTick: (cb: TFunc, ctx?: Record<string, any>) => void;
-
 //#endregion
 //#region src/options.d.ts
 declare const options: Options;
-
 //#endregion
 //#region src/perf.d.ts
 declare class Performance {
@@ -874,12 +833,10 @@ declare class Performance {
   delayStop(id: string, delay?: number): ((...args: any[]) => void) | undefined;
 }
 declare const perf: Performance;
-
 //#endregion
 //#region src/utils/lodash.d.ts
 declare function throttle(fn: any, threshold?: number, scope?: any): (...args: any[]) => void;
 declare function debounce(fn: any, ms?: number, scope?: any): (...args: any[]) => void;
-
 //#endregion
 //#region src/utils/router.d.ts
 declare const addLeadingSlash: (url?: string) => string;
@@ -889,7 +846,6 @@ declare const stripTrailing: (str?: string) => string;
 declare const stripSuffix: (path?: string, suffix?: string) => string;
 declare const getHomePage: (path?: string, basename?: string, customRoutes?: Record<string, string | string[]>, entryPagePath?: string) => string;
 declare const getCurrentPage: (routerMode?: string, basename?: string) => string;
-
 //#endregion
 //#region src/utils/index.d.ts
 declare const incrementId: () => () => string;
@@ -911,11 +867,9 @@ interface Ctor {
 declare function extend(ctor: Ctor, methodName: string, options: TFunc | Record<string, any>): void;
 declare function getComponentsAlias(): any;
 declare function convertNumber2PX(value: number): string;
-
 //#endregion
 //#region src/polyfill/index.d.ts
 declare function handlePolyfill(): void;
-
 //#endregion
 export { A, APP, AddEventListenerOptions, AppInstance, Attributes, BEHAVIORS, BODY, CATCHMOVE, CATCH_VIEW, CHANGE, CLASS, CLICK_VIEW, COMMENT, COMPILE_MODE, CONFIRM, CONTAINER, CONTEXT_ACTIONS, CURRENT_TARGET, CUSTOM_WRAPPER, Current, DATASET, DATE, DOCUMENT_ELEMENT_NAME, DOCUMENT_FRAGMENT, DataTree, EVENT_CALLBACK_RESULT, EXTERNAL_CLASSES, EventHandler, EventListenerOptions, EventOptions, Events, EventsType, FOCUS, FormElement, HEAD, HOOKS_APP_ID, HTML, History, HydratedData, ID, INPUT, Instance, KEY_CODE, Location, MiniData, MiniElementData, MiniTextData, MpEvent, MpInstance, MutationObserver, OBJECT, ON_HIDE, ON_LOAD, ON_READY, ON_SHOW, OPTIONS, Options, PAGE_INIT, PROPERTY_THRESHOLD, PROPS, PURE_VIEW, PageConfig, PageInstance, PageLifeCycle, PageProps, ROOT_STR, ReactAppInstance, ReactPageComponent, ReactPageInstance, SET_DATA, SET_TIMEOUT, STATIC_VIEW, STYLE, SVGElement, Style, TARGET, TARO_RUNTIME, TFunc, TIME_STAMP, TOUCHMOVE, TYPE, TaroElement, TaroEvent, TaroNode, TaroRootElement, TaroText, UID, TaroURLProvider as URL, URLSearchParams$1 as URLSearchParams, UpdatePayload, UpdatePayloadValue, VALUE, VIEW, addLeadingSlash, _caf as cancelAnimationFrame, convertNumber2PX, createComponentConfig, createEvent, createPageConfig, createRecursiveComponentConfig, customWrapperCache, debounce, taroDocumentProvider as document, env, eventCenter, eventHandler, eventSource, extend, getComponentsAlias, taroGetComputedStyleProvider as getComputedStyle, getCurrentInstance, getCurrentPage, getHomePage, getOnHideEventKey, getOnReadyEventKey, getOnShowEventKey, getPageInstance, getPath, handlePolyfill, hasBasename, taroHistoryProvider as history, hooks, hydrate, incrementId, injectPageInstance, isComment, isElement, isHasExtractProp, isParentBinded, isText, taroLocationProvider as location, nav as navigator, nextTick, now, options, parseUrl, perf, removePageInstance, _raf as requestAnimationFrame, safeExecute, shortcutAttr, stringify, stripBasename, stripSuffix, stripTrailing, throttle, taroWindowProvider as window };
 //# sourceMappingURL=index.cjs.d.ts.map
