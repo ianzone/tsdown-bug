@@ -1,8 +1,10 @@
+import { __toESM } from "./_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "./node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { A, APP, BEHAVIORS, BODY, CATCHMOVE, CATCH_VIEW, CHANGE, CLASS, CLICK_VIEW, COMMENT, COMPILE_MODE, CONFIRM, CONTAINER, CONTEXT_ACTIONS, CURRENT_TARGET, CUSTOM_WRAPPER, DATASET, DATE, DOCUMENT_ELEMENT_NAME, DOCUMENT_FRAGMENT, EVENT_CALLBACK_RESULT, EXTERNAL_CLASSES, FOCUS, HEAD, HOOKS_APP_ID, HTML, ID, INPUT, KEY_CODE, OBJECT, ON_HIDE, ON_LOAD, ON_READY, ON_SHOW, OPTIONS, PAGE_INIT, PROPERTY_THRESHOLD, PROPS, PURE_VIEW, ROOT_STR, SET_DATA, SET_TIMEOUT, STATIC_VIEW, STYLE, TARGET, TARO_RUNTIME, TIME_STAMP, TOUCHMOVE, TYPE, UID, VALUE, VIEW } from "./constants/index.js";
 import { MutationObserver } from "./dom-external/mutation-observer/index.js";
 import { debounce, throttle } from "./utils/lodash.js";
-import { Events, eventCenter } from "./emitter/emitter.js";
-import { env_default } from "./env.js";
+import { eventCenter, import_index_cjs } from "./emitter/emitter.js";
+import env_default from "./env.js";
 import { taroGetComputedStyleProvider } from "./bom/getComputedStyle.js";
 import { History } from "./bom/history.js";
 import { Current, getCurrentInstance } from "./current.js";
@@ -33,6 +35,12 @@ import { nextTick } from "./next-tick.js";
 import "./dsl/instance.js";
 import "./interface/index.js";
 import { handlePolyfill } from "./polyfill/index.js";
-import { hooks } from "@tarojs/shared";
 
+//#region src/index.ts
+var import_index_cjs$1 = __toESM(require_index_cjs(), 1);
+
+//#endregion
+var Events = import_index_cjs.Events;
+var hooks = import_index_cjs$1.hooks;
 export { A, APP, BEHAVIORS, BODY, CATCHMOVE, CATCH_VIEW, CHANGE, CLASS, CLICK_VIEW, COMMENT, COMPILE_MODE, CONFIRM, CONTAINER, CONTEXT_ACTIONS, CURRENT_TARGET, CUSTOM_WRAPPER, Current, DATASET, DATE, DOCUMENT_ELEMENT_NAME, DOCUMENT_FRAGMENT, EVENT_CALLBACK_RESULT, EXTERNAL_CLASSES, Events, FOCUS, FormElement, HEAD, HOOKS_APP_ID, HTML, History, ID, INPUT, KEY_CODE, Location, MutationObserver, OBJECT, ON_HIDE, ON_LOAD, ON_READY, ON_SHOW, OPTIONS, PAGE_INIT, PROPERTY_THRESHOLD, PROPS, PURE_VIEW, ROOT_STR, SET_DATA, SET_TIMEOUT, STATIC_VIEW, STYLE, SVGElement, Style, TARGET, TARO_RUNTIME, TIME_STAMP, TOUCHMOVE, TYPE, TaroElement, TaroEvent, TaroNode, TaroRootElement, TaroText, UID, TaroURLProvider as URL, URLSearchParams, VALUE, VIEW, addLeadingSlash, _caf as cancelAnimationFrame, convertNumber2PX, createComponentConfig, createEvent, createPageConfig, createRecursiveComponentConfig, customWrapperCache, debounce, taroDocumentProvider as document, env_default as env, eventCenter, eventHandler, eventSource, extend, getComponentsAlias, taroGetComputedStyleProvider as getComputedStyle, getCurrentInstance, getCurrentPage, getHomePage, getOnHideEventKey, getOnReadyEventKey, getOnShowEventKey, getPageInstance, getPath, handlePolyfill, hasBasename, taroHistoryProvider as history, hooks, hydrate, incrementId, injectPageInstance, isComment, isElement, isHasExtractProp, isParentBinded, isText, taroLocationProvider as location, nav as navigator, nextTick, now, options, parseUrl, perf, removePageInstance, _raf as requestAnimationFrame, safeExecute, shortcutAttr, stringify, stripBasename, stripSuffix, stripTrailing, throttle, taroWindowProvider as window };
+//# sourceMappingURL=index.js.map

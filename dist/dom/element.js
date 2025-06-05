@@ -1,3 +1,5 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CATCHMOVE, CATCH_VIEW, CLASS, CLICK_VIEW, EVENT_CALLBACK_RESULT, FOCUS, ID, PROPERTY_THRESHOLD, PURE_VIEW, STATIC_VIEW, STYLE, VIEW } from "../constants/index.js";
 import { MutationRecordType } from "../dom-external/mutation-observer/record.js";
 import { MutationObserver } from "../dom-external/mutation-observer/index.js";
@@ -8,27 +10,27 @@ import { eventSource } from "./event-source.js";
 import { TaroNode } from "./node.js";
 import { Style } from "./style.js";
 import { treeToArray } from "./tree.js";
-import { EMPTY_OBJ, Shortcuts, hooks, isArray, isFunction, isObject, isString, isUndefined, toCamelCase, warn } from "@tarojs/shared";
 
 //#region src/dom/element.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 var TaroElement = class TaroElement extends TaroNode {
 	ctx;
 	tagName;
 	props = {};
 	style;
-	dataset = EMPTY_OBJ;
+	dataset = import_index_cjs.EMPTY_OBJ;
 	innerHTML;
 	constructor() {
 		super();
 		this.nodeType = NodeType.ELEMENT_NODE;
 		this.style = new Style(this);
-		hooks.call("patchElement", this);
+		import_index_cjs.call("patchElement", this);
 	}
 	_stopPropagation(event) {
 		let target = this;
 		while (target = target.parentNode) {
 			const listeners = target.__handlers[event.type];
-			if (!isArray(listeners)) {
+			if (!(0, import_index_cjs.isArray)(listeners)) {
 				continue;
 			}
 			for (let i = listeners.length; i--;) {
@@ -83,7 +85,7 @@ var TaroElement = class TaroElement extends TaroNode {
 		super.textContent = text;
 	}
 	hasAttribute(qualifiedName) {
-		return !isUndefined(this.props[qualifiedName]);
+		return !(0, import_index_cjs.isUndefined)(this.props[qualifiedName]);
 	}
 	hasAttributes() {
 		return this.attributes.length > 0;
@@ -100,7 +102,7 @@ var TaroElement = class TaroElement extends TaroNode {
 		this.setAttribute(FOCUS, false);
 	}
 	setAttribute(qualifiedName, value) {
-		process.env.NODE_ENV !== "production" && warn(isString(value) && value.length > PROPERTY_THRESHOLD, `元素 ${this.nodeName} 的 ${qualifiedName} 属性值数据量过大，可能会影响渲染性能。考虑降低图片转为 base64 的阈值或在 CSS 中使用 base64。`);
+		process.env.NODE_ENV !== "production" && (0, import_index_cjs.warn)((0, import_index_cjs.isString)(value) && value.length > PROPERTY_THRESHOLD, `元素 ${this.nodeName} 的 ${qualifiedName} 属性值数据量过大，可能会影响渲染性能。考虑降低图片转为 base64 的阈值或在 CSS 中使用 base64。`);
 		const isPureView = this.nodeName === VIEW && !isHasExtractProp(this) && !this.isAnyEventBinded();
 		if (qualifiedName !== STYLE) {
 			MutationObserver.record({
@@ -125,10 +127,10 @@ var TaroElement = class TaroElement extends TaroNode {
 			default:
 				this.props[qualifiedName] = value;
 				if (qualifiedName.startsWith("data-")) {
-					if (this.dataset === EMPTY_OBJ) {
+					if (this.dataset === import_index_cjs.EMPTY_OBJ) {
 						this.dataset = Object.create(null);
 					}
-					this.dataset[toCamelCase(qualifiedName.replace(/^data-/, ""))] = value;
+					this.dataset[(0, import_index_cjs.toCamelCase)(qualifiedName.replace(/^data-/, ""))] = value;
 				}
 				break;
 		}
@@ -141,26 +143,26 @@ var TaroElement = class TaroElement extends TaroNode {
 		const catchViewAlias = componentsAlias[CATCH_VIEW]._num;
 		const _path = this._path;
 		qualifiedName = shortcutAttr(qualifiedName);
-		const qualifiedNameInCamelCase = toCamelCase(qualifiedName);
+		const qualifiedNameInCamelCase = (0, import_index_cjs.toCamelCase)(qualifiedName);
 		const payload = {
 			path: `${_path}.${qualifiedNameInCamelCase}`,
-			value: isFunction(value) ? () => value : value
+			value: (0, import_index_cjs.isFunction)(value) ? () => value : value
 		};
-		hooks.call("modifySetAttrPayload", this, qualifiedName, payload, componentsAlias);
+		import_index_cjs.call("modifySetAttrPayload", this, qualifiedName, payload, componentsAlias);
 		if (_alias) {
 			const qualifiedNameAlias = _alias[qualifiedNameInCamelCase] || qualifiedName;
-			payload.path = `${_path}.${toCamelCase(qualifiedNameAlias)}`;
+			payload.path = `${_path}.${(0, import_index_cjs.toCamelCase)(qualifiedNameAlias)}`;
 		}
 		this.enqueueUpdate(payload);
 		if (this.nodeName === VIEW) {
 			if (qualifiedNameInCamelCase === CATCHMOVE) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs.NodeName}`,
 					value: value ? catchViewAlias : this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : staticViewAlias
 				});
 			} else if (isPureView && isHasExtractProp(this)) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs.NodeName}`,
 					value: staticViewAlias
 				});
 			}
@@ -177,7 +179,7 @@ var TaroElement = class TaroElement extends TaroNode {
 		if (qualifiedName === STYLE) {
 			this.style.cssText = "";
 		} else {
-			const isInterrupt = hooks.call("onRemoveAttribute", this, qualifiedName);
+			const isInterrupt = import_index_cjs.call("onRemoveAttribute", this, qualifiedName);
 			if (isInterrupt) {
 				return;
 			}
@@ -195,26 +197,26 @@ var TaroElement = class TaroElement extends TaroNode {
 		const clickViewAlias = componentsAlias[CLICK_VIEW]._num;
 		const _path = this._path;
 		qualifiedName = shortcutAttr(qualifiedName);
-		const qualifiedNameInCamelCase = toCamelCase(qualifiedName);
+		const qualifiedNameInCamelCase = (0, import_index_cjs.toCamelCase)(qualifiedName);
 		const payload = {
 			path: `${_path}.${qualifiedNameInCamelCase}`,
 			value: ""
 		};
-		hooks.call("modifyRmAttrPayload", this, qualifiedName, payload, componentsAlias);
+		import_index_cjs.call("modifyRmAttrPayload", this, qualifiedName, payload, componentsAlias);
 		if (_alias) {
 			const qualifiedNameAlias = _alias[qualifiedNameInCamelCase] || qualifiedName;
-			payload.path = `${_path}.${toCamelCase(qualifiedNameAlias)}`;
+			payload.path = `${_path}.${(0, import_index_cjs.toCamelCase)(qualifiedNameAlias)}`;
 		}
 		this.enqueueUpdate(payload);
 		if (this.nodeName === VIEW) {
 			if (qualifiedNameInCamelCase === CATCHMOVE) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs.NodeName}`,
 					value: this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : isHasExtractProp(this) ? staticViewAlias : pureViewAlias
 				});
 			} else if (isStaticView && !isHasExtractProp(this)) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs.NodeName}`,
 					value: pureViewAlias
 				});
 			}
@@ -239,7 +241,7 @@ var TaroElement = class TaroElement extends TaroNode {
 	dispatchEvent(event) {
 		const cancelable = event.cancelable;
 		const listeners = this.__handlers[event.type];
-		if (!isArray(listeners)) {
+		if (!(0, import_index_cjs.isArray)(listeners)) {
 			return false;
 		}
 		for (let i = listeners.length; i--;) {
@@ -248,14 +250,14 @@ var TaroElement = class TaroElement extends TaroNode {
 			if (listener._stop) {
 				listener._stop = false;
 			} else {
-				hooks.call("modifyDispatchEvent", event, this);
+				import_index_cjs.call("modifyDispatchEvent", event, this);
 				result = listener.call(this, event);
 			}
 			if ((result === false || event._end) && cancelable) {
 				event.defaultPrevented = true;
 			}
-			if (!isUndefined(result) && event.mpEvent) {
-				const res = hooks.call("modifyTaroEventReturn", this, event, result);
+			if (!(0, import_index_cjs.isUndefined)(result) && event.mpEvent) {
+				const res = import_index_cjs.call("modifyTaroEventReturn", this, event, result);
 				if (res) {
 					event.mpEvent[EVENT_CALLBACK_RESULT] = result;
 				}
@@ -271,18 +273,18 @@ var TaroElement = class TaroElement extends TaroNode {
 	}
 	addEventListener(type, handler, options) {
 		const name = this.nodeName;
-		const SPECIAL_NODES = hooks.call("getSpecialNodes");
+		const SPECIAL_NODES = import_index_cjs.call("getSpecialNodes");
 		let sideEffect = true;
-		if (isObject(options) && options.sideEffect === false) {
+		if ((0, import_index_cjs.isObject)(options) && options.sideEffect === false) {
 			sideEffect = false;
 			delete options.sideEffect;
 		}
-		hooks.call("modifyAddEventListener", this, sideEffect, getComponentsAlias);
+		import_index_cjs.call("modifyAddEventListener", this, sideEffect, getComponentsAlias);
 		if (sideEffect !== false && !this.isAnyEventBinded() && SPECIAL_NODES.indexOf(name) > -1) {
 			const componentsAlias = getComponentsAlias();
 			const alias = componentsAlias[name]._num;
 			this.enqueueUpdate({
-				path: `${this._path}.${Shortcuts.NodeName}`,
+				path: `${this._path}.${import_index_cjs.NodeName}`,
 				value: alias
 			});
 		}
@@ -291,14 +293,14 @@ var TaroElement = class TaroElement extends TaroNode {
 	removeEventListener(type, handler, sideEffect = true) {
 		super.removeEventListener(type, handler);
 		const name = this.nodeName;
-		const SPECIAL_NODES = hooks.call("getSpecialNodes");
-		hooks.call("modifyRemoveEventListener", this, sideEffect, getComponentsAlias);
+		const SPECIAL_NODES = import_index_cjs.call("getSpecialNodes");
+		import_index_cjs.call("modifyRemoveEventListener", this, sideEffect, getComponentsAlias);
 		if (sideEffect !== false && !this.isAnyEventBinded() && SPECIAL_NODES.indexOf(name) > -1) {
 			const componentsAlias = getComponentsAlias();
 			const value = isHasExtractProp(this) ? `static-${name}` : `pure-${name}`;
 			const valueAlias = componentsAlias[value]._num;
 			this.enqueueUpdate({
-				path: `${this._path}.${Shortcuts.NodeName}`,
+				path: `${this._path}.${import_index_cjs.NodeName}`,
 				value: valueAlias
 			});
 		}

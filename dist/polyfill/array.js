@@ -1,15 +1,17 @@
-import { isFunction } from "@tarojs/shared";
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 
 //#region src/polyfill/array.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 function handleArrayFindPolyfill() {
-	if (!isFunction(Array.prototype.find)) {
+	if (!(0, import_index_cjs.isFunction)(Array.prototype.find)) {
 		Object.defineProperty(Array.prototype, "find", { value(predicate) {
 			if (this == null) {
 				throw new TypeError("\"this\" is null or not defined");
 			}
 			const o = Object(this);
 			const len = o.length >>> 0;
-			if (!isFunction(predicate)) {
+			if (!(0, import_index_cjs.isFunction)(predicate)) {
 				throw new TypeError("predicate must be a function");
 			}
 			const thisArg = arguments[1];
@@ -26,7 +28,7 @@ function handleArrayFindPolyfill() {
 	}
 }
 function handleArrayIncludesPolyfill() {
-	if (!isFunction(Array.prototype.includes)) {
+	if (!(0, import_index_cjs.isFunction)(Array.prototype.includes)) {
 		Object.defineProperty(Array.prototype, "includes", { value(searchElement, fromIndex) {
 			if (this == null) {
 				throw new TypeError("\"this\" is null or not defined");

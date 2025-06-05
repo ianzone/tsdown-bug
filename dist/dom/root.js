@@ -1,11 +1,13 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CUSTOM_WRAPPER, PAGE_INIT, ROOT_STR, SET_DATA } from "../constants/index.js";
 import { customWrapperCache, isComment } from "../utils/index.js";
 import { TaroElement } from "./element.js";
 import { options } from "../options.js";
 import { perf } from "../perf.js";
-import { Shortcuts, hooks, isArray, isFunction, isUndefined } from "@tarojs/shared";
 
 //#region src/dom/root.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 function findCustomWrapper(root, dataPathArr) {
 	const list = dataPathArr.slice(1);
 	let currentData = root;
@@ -14,10 +16,10 @@ function findCustomWrapper(root, dataPathArr) {
 	list.some((item, i) => {
 		const key = item.replace(/^\[(.+)\]$/, "$1").replace(/\bcn\b/g, "childNodes");
 		currentData = currentData[key];
-		if (isArray(currentData)) {
+		if ((0, import_index_cjs.isArray)(currentData)) {
 			currentData = currentData.filter((el) => !isComment(el));
 		}
-		if (isUndefined(currentData)) return true;
+		if ((0, import_index_cjs.isUndefined)(currentData)) return true;
 		if (currentData.nodeName === CUSTOM_WRAPPER) {
 			const res = customWrapperCache.get(currentData.sid);
 			if (res) {
@@ -60,7 +62,7 @@ var TaroRootElement = class extends TaroElement {
 	}
 	performUpdate(initRender = false, prerender) {
 		this.pendingUpdate = true;
-		const ctx = hooks.call("proxyToRaw", this.ctx);
+		const ctx = import_index_cjs.call("proxyToRaw", this.ctx);
 		this.scheduleTask(() => {
 			const setDataMark = `${SET_DATA} 开始时间戳 ${Date.now()}`;
 			perf.start(setDataMark);
@@ -68,7 +70,7 @@ var TaroRootElement = class extends TaroElement {
 			const resetPaths = new Set(initRender ? ["root.cn.[0]", "root.cn[0]"] : []);
 			while (this.updatePayloads.length > 0) {
 				const { path, value } = this.updatePayloads.shift();
-				if (path.endsWith(Shortcuts.Childnodes)) {
+				if (path.endsWith(import_index_cjs.Childnodes)) {
 					resetPaths.add(path);
 				}
 				data[path] = value;
@@ -80,11 +82,11 @@ var TaroRootElement = class extends TaroElement {
 					}
 				});
 				const value = data[path];
-				if (isFunction(value)) {
+				if ((0, import_index_cjs.isFunction)(value)) {
 					data[path] = value();
 				}
 			}
-			if (isFunction(prerender)) return prerender(data);
+			if ((0, import_index_cjs.isFunction)(prerender)) return prerender(data);
 			this.pendingUpdate = false;
 			let normalUpdate = {};
 			const customWrapperMap = new Map();

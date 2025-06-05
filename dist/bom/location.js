@@ -1,15 +1,17 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CONTEXT_ACTIONS } from "../constants/index.js";
-import { Events } from "../emitter/emitter.js";
-import { env_default } from "../env.js";
+import { import_index_cjs } from "../emitter/emitter.js";
+import env_default from "../env.js";
 import { RuntimeCache } from "../utils/cache.js";
 import { getCurrentInstance } from "../current.js";
 import { TaroURLProvider } from "./URL.js";
-import { isNumber, isString, warn } from "@tarojs/shared";
 
 //#region src/bom/location.ts
+var import_index_cjs$1 = __toESM(require_index_cjs(), 1);
 const INIT_URL = "https://taro.com";
 const cache = new RuntimeCache("location");
-var TaroLocation = class extends Events {
+var TaroLocation = class extends import_index_cjs.Events {
 	#url = new TaroURLProvider(INIT_URL);
 	#noCheckUrl = false;
 	#window;
@@ -97,7 +99,7 @@ var TaroLocation = class extends Events {
 	}
 	set protocol(val) {
 		const REG = /^(http|https):$/i;
-		if (!val || !isString(val) || !REG.test(val.trim())) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val) || !REG.test(val.trim())) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.protocol = val;
@@ -107,7 +109,7 @@ var TaroLocation = class extends Events {
 		return this.#url.host;
 	}
 	set host(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val)) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.host = val;
@@ -117,7 +119,7 @@ var TaroLocation = class extends Events {
 		return this.#url.hostname;
 	}
 	set hostname(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val)) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.hostname = val;
@@ -128,7 +130,7 @@ var TaroLocation = class extends Events {
 	}
 	set port(val) {
 		const xVal = Number(val = val.trim());
-		if (!isNumber(xVal) || xVal <= 0) return;
+		if (!(0, import_index_cjs$1.isNumber)(xVal) || xVal <= 0) return;
 		const preValue = this.#getPreValue();
 		this.#url.port = val;
 		if (this.#checkUrlChange(preValue)) this.#recordHistory();
@@ -137,7 +139,7 @@ var TaroLocation = class extends Events {
 		return this.#url.pathname;
 	}
 	set pathname(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val)) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.pathname = val;
@@ -147,7 +149,7 @@ var TaroLocation = class extends Events {
 		return this.#url.search;
 	}
 	set search(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val)) return;
 		val = val.trim();
 		val = val.startsWith("?") ? val : `?${val}`;
 		const preValue = this.#getPreValue();
@@ -158,7 +160,7 @@ var TaroLocation = class extends Events {
 		return this.#url.hash;
 	}
 	set hash(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val)) return;
 		val = val.trim();
 		val = val.startsWith("#") ? val : `#${val}`;
 		const preValue = this.#getPreValue();
@@ -170,7 +172,7 @@ var TaroLocation = class extends Events {
 	}
 	set href(val) {
 		const REG = /^(http:|https:)?\/\/.+/;
-		if (!val || !isString(val) || !REG.test(val = val.trim())) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val) || !REG.test(val = val.trim())) return;
 		const preValue = this.#getPreValue();
 		this.#url.href = val;
 		if (this.#checkUrlChange(preValue)) this.#recordHistory();
@@ -180,16 +182,16 @@ var TaroLocation = class extends Events {
 	}
 	set origin(val) {
 		const REG = /^(http:|https:)?\/\/.+/;
-		if (!val || !isString(val) || !REG.test(val = val.trim())) return;
+		if (!val || !(0, import_index_cjs$1.isString)(val) || !REG.test(val = val.trim())) return;
 		const preValue = this.#getPreValue();
 		this.#url.origin = val;
 		if (this.#checkUrlChange(preValue)) this.#recordHistory();
 	}
 	assign() {
-		warn(true, "小程序环境中调用location.assign()无效.");
+		(0, import_index_cjs$1.warn)(true, "小程序环境中调用location.assign()无效.");
 	}
 	reload() {
-		warn(true, "小程序环境中调用location.reload()无效.");
+		(0, import_index_cjs$1.warn)(true, "小程序环境中调用location.reload()无效.");
 	}
 	replace(url) {
 		this.trigger("__set_href_without_history__", url);

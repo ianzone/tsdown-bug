@@ -1,6 +1,8 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { A, COMMENT, DOCUMENT_ELEMENT_NAME, ROOT_STR } from "../constants/index.js";
 import { NodeType } from "./node_types.js";
-import { env_default } from "../env.js";
+import env_default from "../env.js";
 import { eventSource } from "./event-source.js";
 import { TaroElement } from "./element.js";
 import { createEvent } from "./event.js";
@@ -9,9 +11,9 @@ import { TaroRootElement } from "./root.js";
 import { TaroText } from "./text.js";
 import { AnchorElement } from "./anchor-element.js";
 import { TransferElement } from "./transfer.js";
-import { controlledComponent, isUndefined, toCamelCase } from "@tarojs/shared";
 
 //#region src/dom/document.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 var TaroDocument = class extends TaroElement {
 	documentElement;
 	head;
@@ -30,7 +32,7 @@ var TaroDocument = class extends TaroElement {
 			case nodeName === ROOT_STR:
 				element = new TaroRootElement();
 				return element;
-			case controlledComponent.has(nodeName):
+			case import_index_cjs.has(nodeName):
 				element = new FormElement();
 				break;
 			case nodeName === A:
@@ -38,7 +40,7 @@ var TaroDocument = class extends TaroElement {
 				break;
 			case nodeName === "page-meta":
 			case nodeName === "navigation-bar":
-				element = new TransferElement(toCamelCase(nodeName));
+				element = new TransferElement((0, import_index_cjs.toCamelCase)(nodeName));
 				break;
 			default:
 				element = new TaroElement();
@@ -56,7 +58,7 @@ var TaroDocument = class extends TaroElement {
 	}
 	getElementById(id) {
 		const el = eventSource.get(id);
-		return isUndefined(el) ? null : el;
+		return (0, import_index_cjs.isUndefined)(el) ? null : el;
 	}
 	querySelector(query) {
 		if (/^#/.test(query)) {

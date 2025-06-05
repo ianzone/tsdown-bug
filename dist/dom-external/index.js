@@ -1,12 +1,14 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { TaroNode } from "../dom/node.js";
 import { TaroElement } from "../dom/element.js";
 import { setInnerHTML } from "./inner-html/html.js";
 import { getBoundingClientRectImpl, getTemplateContent } from "./element.js";
 import { cloneNode, contains, insertAdjacentHTML } from "./node.js";
-import { PLATFORM_TYPE } from "@tarojs/shared";
 
 //#region src/dom-external/index.ts
-if (process.env.TARO_PLATFORM !== PLATFORM_TYPE.WEB && process.env.TARO_PLATFORM !== PLATFORM_TYPE.HARMONY) {
+var import_index_cjs = __toESM(require_index_cjs(), 1);
+if (process.env.TARO_PLATFORM !== import_index_cjs.WEB && process.env.TARO_PLATFORM !== import_index_cjs.HARMONY) {
 	if (ENABLE_INNER_HTML) {
 		TaroNode.extend("innerHTML", {
 			set(html) {

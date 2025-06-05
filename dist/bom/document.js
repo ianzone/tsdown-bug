@@ -1,5 +1,5 @@
 import { APP, BODY, CONTAINER, HEAD, HTML } from "../constants/index.js";
-import { env_default } from "../env.js";
+import env_default from "../env.js";
 import { TaroDocument } from "../dom/document.js";
 
 //#region src/bom/document.ts

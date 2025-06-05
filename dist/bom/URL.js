@@ -1,8 +1,10 @@
-import { env_default } from "../env.js";
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
+import env_default from "../env.js";
 import { URLSearchParams } from "./URLSearchParams.js";
-import { isString, isUndefined } from "@tarojs/shared";
 
 //#region src/bom/URL.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 var TaroURL = class {
 	static createObjectURL() {
 		throw new Error("Oops, not support URL.createObjectURL() in miniprogram.");
@@ -17,7 +19,7 @@ var TaroURL = class {
 	#protocol = "";
 	#search;
 	constructor(url, base) {
-		if (!isString(url)) url = String(url);
+		if (!(0, import_index_cjs.isString)(url)) url = String(url);
 		const parseResult = parseUrlBase(url, base);
 		const { hash, hostname, pathname, port, protocol, search } = parseResult;
 		this.#hash = hash;
@@ -31,13 +33,13 @@ var TaroURL = class {
 		return this.#protocol;
 	}
 	set protocol(val) {
-		isString(val) && (this.#protocol = val.trim());
+		(0, import_index_cjs.isString)(val) && (this.#protocol = val.trim());
 	}
 	get host() {
 		return this.hostname + (this.port ? ":" + this.port : "");
 	}
 	set host(val) {
-		if (val && isString(val)) {
+		if (val && (0, import_index_cjs.isString)(val)) {
 			val = val.trim();
 			const { hostname, port } = parseUrl(`//${val}`);
 			this.hostname = hostname;
@@ -48,19 +50,19 @@ var TaroURL = class {
 		return this.#hostname;
 	}
 	set hostname(val) {
-		val && isString(val) && (this.#hostname = val.trim());
+		val && (0, import_index_cjs.isString)(val) && (this.#hostname = val.trim());
 	}
 	get port() {
 		return this.#port;
 	}
 	set port(val) {
-		isString(val) && (this.#port = val.trim());
+		(0, import_index_cjs.isString)(val) && (this.#port = val.trim());
 	}
 	get pathname() {
 		return this.#pathname;
 	}
 	set pathname(val) {
-		if (isString(val)) {
+		if ((0, import_index_cjs.isString)(val)) {
 			val = val.trim();
 			const HEAD_REG = /^(\/|\.\/|\.\.\/)/;
 			let temp = val;
@@ -76,7 +78,7 @@ var TaroURL = class {
 		return val.length === 0 || val.startsWith("?") ? val : `?${val}`;
 	}
 	set search(val) {
-		if (isString(val)) {
+		if ((0, import_index_cjs.isString)(val)) {
 			val = val.trim();
 			this.#search = new URLSearchParams(val);
 		}
@@ -85,7 +87,7 @@ var TaroURL = class {
 		return this.#hash;
 	}
 	set hash(val) {
-		if (isString(val)) {
+		if ((0, import_index_cjs.isString)(val)) {
 			val = val.trim();
 			if (val) this.#hash = val.startsWith("#") ? val : `#${val}`;
 			else this.#hash = "";
@@ -95,7 +97,7 @@ var TaroURL = class {
 		return `${this.protocol}//${this.host}${this.pathname}${this.search}${this.hash}`;
 	}
 	set href(val) {
-		if (val && isString(val)) {
+		if (val && (0, import_index_cjs.isString)(val)) {
 			val = val.trim();
 			const { protocol, hostname, port, hash, search, pathname } = parseUrl(val);
 			this.protocol = protocol;
@@ -110,7 +112,7 @@ var TaroURL = class {
 		return `${this.protocol}//${this.host}`;
 	}
 	set origin(val) {
-		if (val && isString(val)) {
+		if (val && (0, import_index_cjs.isString)(val)) {
 			val = val.trim();
 			const { protocol, hostname, port } = parseUrl(val);
 			this.protocol = protocol;
@@ -154,7 +156,7 @@ function parseUrl(url = "") {
 		search: "",
 		hash: ""
 	};
-	if (!url || !isString(url)) return result;
+	if (!url || !(0, import_index_cjs.isString)(url)) return result;
 	url = url.trim();
 	const PATTERN = /^(([^:/?#]+):)?\/\/(([^/?#]+):(.+)@)?([^/?#:]*)(:(\d+))?([^?#]*)(\?([^#]*))?(#(.*))?/;
 	const matches = url.match(PATTERN);
@@ -174,7 +176,7 @@ function parseUrlBase(url, base) {
 	const VALID_URL = /^(https?:)\/\//i;
 	let fullUrl = "";
 	let parsedBase = null;
-	if (!isUndefined(base)) {
+	if (!(0, import_index_cjs.isUndefined)(base)) {
 		base = String(base).trim();
 		if (!VALID_URL.test(base)) throw new TypeError(`Failed to construct 'URL': Invalid base URL`);
 		parsedBase = parseUrl(base);

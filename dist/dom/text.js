@@ -1,10 +1,12 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { MutationRecordType } from "../dom-external/mutation-observer/record.js";
 import { MutationObserver } from "../dom-external/mutation-observer/index.js";
 import { NodeType } from "./node_types.js";
 import { TaroNode } from "./node.js";
-import { Shortcuts } from "@tarojs/shared";
 
 //#region src/dom/text.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 var TaroText = class extends TaroNode {
 	_value;
 	nodeType = NodeType.TEXT_NODE;
@@ -21,7 +23,7 @@ var TaroText = class extends TaroNode {
 		});
 		this._value = text;
 		this.enqueueUpdate({
-			path: `${this._path}.${Shortcuts.Text}`,
+			path: `${this._path}.${import_index_cjs.Text}`,
 			value: text
 		});
 	}

@@ -1,15 +1,17 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CONTEXT_ACTIONS } from "../constants/index.js";
-import { Events } from "../emitter/emitter.js";
-import { env_default } from "../env.js";
+import { import_index_cjs } from "../emitter/emitter.js";
+import env_default from "../env.js";
 import { taroGetComputedStyleProvider } from "./getComputedStyle.js";
 import { History } from "./history.js";
 import { Location } from "./location.js";
 import { nav } from "./navigator.js";
 import { _caf, _raf } from "./raf.js";
-import { isString } from "@tarojs/shared";
 
 //#region src/bom/window.ts
-var TaroWindow = class extends Events {
+var import_index_cjs$1 = __toESM(require_index_cjs(), 1);
+var TaroWindow = class extends import_index_cjs.Events {
 	navigator = nav;
 	requestAnimationFrame = _raf;
 	cancelAnimationFrame = _caf;
@@ -61,11 +63,11 @@ var TaroWindow = class extends Events {
 		return env_default.document;
 	}
 	addEventListener(event, callback) {
-		if (!isString(event)) return;
+		if (!(0, import_index_cjs$1.isString)(event)) return;
 		this.on(event, callback, null);
 	}
 	removeEventListener(event, callback) {
-		if (!isString(event)) return;
+		if (!(0, import_index_cjs$1.isString)(event)) return;
 		this.off(event, callback, null);
 	}
 	setTimeout(...args) {

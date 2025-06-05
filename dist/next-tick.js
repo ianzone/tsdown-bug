@@ -1,4 +1,4 @@
-import { env_default } from "./env.js";
+import env_default from "./env.js";
 import { Current } from "./current.js";
 
 //#region src/next-tick.ts

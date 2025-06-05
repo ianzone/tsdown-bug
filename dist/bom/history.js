@@ -1,12 +1,14 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CONTEXT_ACTIONS } from "../constants/index.js";
-import { Events } from "../emitter/emitter.js";
-import { env_default } from "../env.js";
+import { import_index_cjs } from "../emitter/emitter.js";
+import env_default from "../env.js";
 import { RuntimeCache } from "../utils/cache.js";
-import { isNumber, isString } from "@tarojs/shared";
 
 //#region src/bom/history.ts
+var import_index_cjs$1 = __toESM(require_index_cjs(), 1);
 const cache = new RuntimeCache("history");
-var TaroHistory = class extends Events {
+var TaroHistory = class extends import_index_cjs.Events {
 	#location;
 	#stack = [];
 	#cur = 0;
@@ -65,7 +67,7 @@ var TaroHistory = class extends Events {
 		return this.#stack[this.#cur].state;
 	}
 	go(delta) {
-		if (!isNumber(delta) || isNaN(delta)) return;
+		if (!(0, import_index_cjs$1.isNumber)(delta) || isNaN(delta)) return;
 		let targetIdx = this.#cur + delta;
 		targetIdx = Math.min(Math.max(targetIdx, 0), this.length - 1);
 		this.#cur = targetIdx;
@@ -79,7 +81,7 @@ var TaroHistory = class extends Events {
 		this.go(1);
 	}
 	pushState(state, title, url) {
-		if (!url || !isString(url)) return;
+		if (!url || !(0, import_index_cjs$1.isString)(url)) return;
 		this.#stack = this.#stack.slice(0, this.#cur + 1);
 		this.#stack.push({
 			state,
@@ -90,7 +92,7 @@ var TaroHistory = class extends Events {
 		this.#location.trigger("__set_href_without_history__", url);
 	}
 	replaceState(state, title, url) {
-		if (!url || !isString(url)) return;
+		if (!url || !(0, import_index_cjs$1.isString)(url)) return;
 		this.#stack[this.#cur] = {
 			state,
 			title,

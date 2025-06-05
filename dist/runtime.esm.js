@@ -1,5 +1,1441 @@
-import { EMPTY_OBJ, EventChannel, Events, PLATFORM_TYPE, Shortcuts, controlledComponent, ensure, getComponentsAlias as getComponentsAlias$1, hooks, hooks as hooks$1, internalComponents, isArray, isFunction, isNull, isNumber, isObject, isString, isUndefined, noop, toCamelCase, toDashed, warn } from "@tarojs/shared";
+import "node:module";
 
+//#region rolldown:runtime
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __commonJS = (cb, mod) => function() {
+	return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __copyProps = (to, from, except, desc) => {
+	if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
+		key = keys[i];
+		if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+			get: ((k) => from[k]).bind(null, key),
+			enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+		});
+	}
+	return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+	value: mod,
+	enumerable: true
+}) : target, mod));
+
+//#endregion
+//#region node_modules/.pnpm/@tarojs+shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js
+var require_index_cjs = __commonJS({ "node_modules/.pnpm/@tarojs+shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js"(exports) {
+	const DEFAULT_EMPTY_ARRAY = "[]";
+	const NO_DEFAULT_VALUE = "";
+	const DEFAULT_TRUE = "!0";
+	const DEFAULT_FALSE = "!1";
+	const touchEvents = {
+		bindTouchStart: NO_DEFAULT_VALUE,
+		bindTouchMove: NO_DEFAULT_VALUE,
+		bindTouchEnd: NO_DEFAULT_VALUE,
+		bindTouchCancel: NO_DEFAULT_VALUE,
+		bindLongTap: NO_DEFAULT_VALUE
+	};
+	const animation = {
+		animation: NO_DEFAULT_VALUE,
+		bindAnimationStart: NO_DEFAULT_VALUE,
+		bindAnimationIteration: NO_DEFAULT_VALUE,
+		bindAnimationEnd: NO_DEFAULT_VALUE,
+		bindTransitionEnd: NO_DEFAULT_VALUE
+	};
+	function singleQuote(s) {
+		return `'${s}'`;
+	}
+	const View = Object.assign(Object.assign({
+		"hover-class": singleQuote("none"),
+		"hover-stop-propagation": DEFAULT_FALSE,
+		"hover-start-time": "50",
+		"hover-stay-time": "400"
+	}, touchEvents), animation);
+	const Icon = {
+		type: NO_DEFAULT_VALUE,
+		size: "23",
+		color: NO_DEFAULT_VALUE
+	};
+	const MapComp = Object.assign({
+		longitude: NO_DEFAULT_VALUE,
+		latitude: NO_DEFAULT_VALUE,
+		scale: "16",
+		markers: DEFAULT_EMPTY_ARRAY,
+		covers: NO_DEFAULT_VALUE,
+		polyline: DEFAULT_EMPTY_ARRAY,
+		circles: DEFAULT_EMPTY_ARRAY,
+		controls: DEFAULT_EMPTY_ARRAY,
+		"include-points": DEFAULT_EMPTY_ARRAY,
+		"show-location": NO_DEFAULT_VALUE,
+		"layer-style": "1",
+		bindMarkerTap: NO_DEFAULT_VALUE,
+		bindControlTap: NO_DEFAULT_VALUE,
+		bindCalloutTap: NO_DEFAULT_VALUE,
+		bindUpdated: NO_DEFAULT_VALUE
+	}, touchEvents);
+	const Progress = {
+		percent: NO_DEFAULT_VALUE,
+		"stroke-width": "6",
+		color: singleQuote("#09BB07"),
+		activeColor: singleQuote("#09BB07"),
+		backgroundColor: singleQuote("#EBEBEB"),
+		active: DEFAULT_FALSE,
+		"active-mode": singleQuote("backwards"),
+		"show-info": DEFAULT_FALSE
+	};
+	const RichText = { nodes: DEFAULT_EMPTY_ARRAY };
+	const Text = Object.assign({
+		selectable: DEFAULT_FALSE,
+		space: NO_DEFAULT_VALUE,
+		decode: DEFAULT_FALSE
+	}, touchEvents);
+	const Button = Object.assign({
+		size: singleQuote("default"),
+		type: NO_DEFAULT_VALUE,
+		plain: DEFAULT_FALSE,
+		disabled: NO_DEFAULT_VALUE,
+		loading: DEFAULT_FALSE,
+		"form-type": NO_DEFAULT_VALUE,
+		"open-type": NO_DEFAULT_VALUE,
+		"hover-class": singleQuote("button-hover"),
+		"hover-stop-propagation": DEFAULT_FALSE,
+		"hover-start-time": "20",
+		"hover-stay-time": "70",
+		name: NO_DEFAULT_VALUE,
+		bindagreeprivacyauthorization: NO_DEFAULT_VALUE
+	}, touchEvents);
+	const Checkbox = {
+		value: NO_DEFAULT_VALUE,
+		disabled: NO_DEFAULT_VALUE,
+		checked: DEFAULT_FALSE,
+		color: singleQuote("#09BB07"),
+		name: NO_DEFAULT_VALUE
+	};
+	const CheckboxGroup = {
+		bindChange: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const Form = {
+		"report-submit": DEFAULT_FALSE,
+		bindSubmit: NO_DEFAULT_VALUE,
+		bindReset: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const Input = {
+		value: NO_DEFAULT_VALUE,
+		type: singleQuote(NO_DEFAULT_VALUE),
+		password: DEFAULT_FALSE,
+		placeholder: NO_DEFAULT_VALUE,
+		"placeholder-style": NO_DEFAULT_VALUE,
+		"placeholder-class": singleQuote("input-placeholder"),
+		disabled: NO_DEFAULT_VALUE,
+		maxlength: "140",
+		"cursor-spacing": "0",
+		focus: DEFAULT_FALSE,
+		"confirm-type": singleQuote("done"),
+		"confirm-hold": DEFAULT_FALSE,
+		cursor: "-1",
+		"selection-start": "-1",
+		"selection-end": "-1",
+		bindInput: NO_DEFAULT_VALUE,
+		bindFocus: NO_DEFAULT_VALUE,
+		bindBlur: NO_DEFAULT_VALUE,
+		bindConfirm: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const Label = Object.assign({
+		for: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	}, touchEvents);
+	const Picker = {
+		mode: singleQuote("selector"),
+		disabled: NO_DEFAULT_VALUE,
+		range: NO_DEFAULT_VALUE,
+		"range-key": NO_DEFAULT_VALUE,
+		value: NO_DEFAULT_VALUE,
+		start: NO_DEFAULT_VALUE,
+		end: NO_DEFAULT_VALUE,
+		fields: singleQuote("day"),
+		"custom-item": NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE,
+		bindCancel: NO_DEFAULT_VALUE,
+		bindChange: NO_DEFAULT_VALUE,
+		bindColumnChange: NO_DEFAULT_VALUE
+	};
+	const PickerView = {
+		value: NO_DEFAULT_VALUE,
+		"indicator-style": NO_DEFAULT_VALUE,
+		"indicator-class": NO_DEFAULT_VALUE,
+		"mask-style": NO_DEFAULT_VALUE,
+		"mask-class": NO_DEFAULT_VALUE,
+		bindChange: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const PickerViewColumn = { name: NO_DEFAULT_VALUE };
+	const Radio = {
+		value: NO_DEFAULT_VALUE,
+		checked: DEFAULT_FALSE,
+		disabled: NO_DEFAULT_VALUE,
+		color: singleQuote("#09BB07"),
+		name: NO_DEFAULT_VALUE
+	};
+	const RadioGroup = {
+		bindChange: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const Slider = {
+		min: "0",
+		max: "100",
+		step: "1",
+		disabled: NO_DEFAULT_VALUE,
+		value: "0",
+		activeColor: singleQuote("#1aad19"),
+		backgroundColor: singleQuote("#e9e9e9"),
+		"block-size": "28",
+		"block-color": singleQuote("#ffffff"),
+		"show-value": DEFAULT_FALSE,
+		bindChange: NO_DEFAULT_VALUE,
+		bindChanging: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const Switch = {
+		checked: DEFAULT_FALSE,
+		disabled: NO_DEFAULT_VALUE,
+		type: singleQuote("switch"),
+		color: singleQuote("#04BE02"),
+		bindChange: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const Textarea = {
+		value: NO_DEFAULT_VALUE,
+		placeholder: NO_DEFAULT_VALUE,
+		"placeholder-style": NO_DEFAULT_VALUE,
+		"placeholder-class": singleQuote("textarea-placeholder"),
+		disabled: NO_DEFAULT_VALUE,
+		maxlength: "140",
+		"auto-focus": DEFAULT_FALSE,
+		focus: DEFAULT_FALSE,
+		"auto-height": DEFAULT_FALSE,
+		fixed: DEFAULT_FALSE,
+		"cursor-spacing": "0",
+		cursor: "-1",
+		"selection-start": "-1",
+		"selection-end": "-1",
+		bindFocus: NO_DEFAULT_VALUE,
+		bindBlur: NO_DEFAULT_VALUE,
+		bindLineChange: NO_DEFAULT_VALUE,
+		bindInput: NO_DEFAULT_VALUE,
+		bindConfirm: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE
+	};
+	const CoverImage = {
+		src: NO_DEFAULT_VALUE,
+		bindLoad: "eh",
+		bindError: "eh"
+	};
+	const CoverView = Object.assign({ "scroll-top": DEFAULT_FALSE }, touchEvents);
+	const MovableArea = { "scale-area": DEFAULT_FALSE };
+	const MovableView = Object.assign(Object.assign({
+		direction: "none",
+		inertia: DEFAULT_FALSE,
+		"out-of-bounds": DEFAULT_FALSE,
+		x: NO_DEFAULT_VALUE,
+		y: NO_DEFAULT_VALUE,
+		damping: "20",
+		friction: "2",
+		disabled: NO_DEFAULT_VALUE,
+		scale: DEFAULT_FALSE,
+		"scale-min": "0.5",
+		"scale-max": "10",
+		"scale-value": "1",
+		bindChange: NO_DEFAULT_VALUE,
+		bindScale: NO_DEFAULT_VALUE,
+		bindHTouchMove: NO_DEFAULT_VALUE,
+		bindVTouchMove: NO_DEFAULT_VALUE,
+		width: singleQuote("10px"),
+		height: singleQuote("10px")
+	}, touchEvents), animation);
+	const ScrollView = Object.assign(Object.assign({
+		"scroll-x": DEFAULT_FALSE,
+		"scroll-y": DEFAULT_FALSE,
+		"upper-threshold": "50",
+		"lower-threshold": "50",
+		"scroll-top": NO_DEFAULT_VALUE,
+		"scroll-left": NO_DEFAULT_VALUE,
+		"scroll-into-view": NO_DEFAULT_VALUE,
+		"scroll-with-animation": DEFAULT_FALSE,
+		"enable-back-to-top": DEFAULT_FALSE,
+		bindScrollToUpper: NO_DEFAULT_VALUE,
+		bindScrollToLower: NO_DEFAULT_VALUE,
+		bindScroll: NO_DEFAULT_VALUE
+	}, touchEvents), animation);
+	const Swiper = Object.assign({
+		"indicator-dots": DEFAULT_FALSE,
+		"indicator-color": singleQuote("rgba(0, 0, 0, .3)"),
+		"indicator-active-color": singleQuote("#000000"),
+		autoplay: DEFAULT_FALSE,
+		current: "0",
+		interval: "5000",
+		duration: "500",
+		circular: DEFAULT_FALSE,
+		vertical: DEFAULT_FALSE,
+		"previous-margin": singleQuote("0px"),
+		"next-margin": singleQuote("0px"),
+		"display-multiple-items": "1",
+		bindChange: NO_DEFAULT_VALUE,
+		bindTransition: NO_DEFAULT_VALUE,
+		bindAnimationFinish: NO_DEFAULT_VALUE
+	}, touchEvents);
+	const SwiperItem = { "item-id": NO_DEFAULT_VALUE };
+	const Navigator = {
+		url: NO_DEFAULT_VALUE,
+		"open-type": singleQuote("navigate"),
+		delta: "1",
+		"hover-class": singleQuote("navigator-hover"),
+		"hover-stop-propagation": DEFAULT_FALSE,
+		"hover-start-time": "50",
+		"hover-stay-time": "600",
+		bindSuccess: NO_DEFAULT_VALUE,
+		bindFail: NO_DEFAULT_VALUE,
+		bindComplete: NO_DEFAULT_VALUE
+	};
+	const Audio = {
+		id: NO_DEFAULT_VALUE,
+		src: NO_DEFAULT_VALUE,
+		loop: DEFAULT_FALSE,
+		controls: DEFAULT_FALSE,
+		poster: NO_DEFAULT_VALUE,
+		name: NO_DEFAULT_VALUE,
+		author: NO_DEFAULT_VALUE,
+		bindError: NO_DEFAULT_VALUE,
+		bindPlay: NO_DEFAULT_VALUE,
+		bindPause: NO_DEFAULT_VALUE,
+		bindTimeUpdate: NO_DEFAULT_VALUE,
+		bindEnded: NO_DEFAULT_VALUE
+	};
+	const Camera = {
+		"device-position": singleQuote("back"),
+		flash: singleQuote("auto"),
+		bindStop: NO_DEFAULT_VALUE,
+		bindError: NO_DEFAULT_VALUE
+	};
+	const Image = Object.assign({
+		src: NO_DEFAULT_VALUE,
+		mode: singleQuote("scaleToFill"),
+		"lazy-load": DEFAULT_FALSE,
+		bindError: NO_DEFAULT_VALUE,
+		bindLoad: NO_DEFAULT_VALUE
+	}, touchEvents);
+	const LivePlayer = Object.assign({
+		src: NO_DEFAULT_VALUE,
+		autoplay: DEFAULT_FALSE,
+		muted: DEFAULT_FALSE,
+		orientation: singleQuote("vertical"),
+		"object-fit": singleQuote("contain"),
+		"background-mute": DEFAULT_FALSE,
+		"min-cache": "1",
+		"max-cache": "3",
+		bindStateChange: NO_DEFAULT_VALUE,
+		bindFullScreenChange: NO_DEFAULT_VALUE,
+		bindNetStatus: NO_DEFAULT_VALUE
+	}, animation);
+	const Video = Object.assign({
+		src: NO_DEFAULT_VALUE,
+		duration: NO_DEFAULT_VALUE,
+		controls: DEFAULT_TRUE,
+		"danmu-list": NO_DEFAULT_VALUE,
+		"danmu-btn": NO_DEFAULT_VALUE,
+		"enable-danmu": NO_DEFAULT_VALUE,
+		autoplay: DEFAULT_FALSE,
+		loop: DEFAULT_FALSE,
+		muted: DEFAULT_FALSE,
+		"initial-time": "0",
+		"page-gesture": DEFAULT_FALSE,
+		direction: NO_DEFAULT_VALUE,
+		"show-progress": DEFAULT_TRUE,
+		"show-fullscreen-btn": DEFAULT_TRUE,
+		"show-play-btn": DEFAULT_TRUE,
+		"show-center-play-btn": DEFAULT_TRUE,
+		"enable-progress-gesture": DEFAULT_TRUE,
+		"object-fit": singleQuote("contain"),
+		poster: NO_DEFAULT_VALUE,
+		"show-mute-btn": DEFAULT_FALSE,
+		bindPlay: NO_DEFAULT_VALUE,
+		bindPause: NO_DEFAULT_VALUE,
+		bindEnded: NO_DEFAULT_VALUE,
+		bindTimeUpdate: NO_DEFAULT_VALUE,
+		bindFullScreenChange: NO_DEFAULT_VALUE,
+		bindWaiting: NO_DEFAULT_VALUE,
+		bindError: NO_DEFAULT_VALUE
+	}, animation);
+	const Canvas = Object.assign({
+		"canvas-id": NO_DEFAULT_VALUE,
+		"disable-scroll": DEFAULT_FALSE,
+		bindError: NO_DEFAULT_VALUE
+	}, touchEvents);
+	const Ad = {
+		"unit-id": NO_DEFAULT_VALUE,
+		"ad-intervals": NO_DEFAULT_VALUE,
+		bindLoad: NO_DEFAULT_VALUE,
+		bindError: NO_DEFAULT_VALUE,
+		bindClose: NO_DEFAULT_VALUE
+	};
+	const WebView = {
+		src: NO_DEFAULT_VALUE,
+		bindMessage: NO_DEFAULT_VALUE,
+		bindLoad: NO_DEFAULT_VALUE,
+		bindError: NO_DEFAULT_VALUE
+	};
+	const Block = {};
+	const SlotView = { name: NO_DEFAULT_VALUE };
+	const Slot = { name: NO_DEFAULT_VALUE };
+	const NativeSlot = { name: NO_DEFAULT_VALUE };
+	const Script = {};
+	const internalComponents$3 = {
+		View,
+		Icon,
+		Progress,
+		RichText,
+		Text,
+		Button,
+		Checkbox,
+		CheckboxGroup,
+		Form,
+		Input,
+		Label,
+		Picker,
+		PickerView,
+		PickerViewColumn,
+		Radio,
+		RadioGroup,
+		Slider,
+		Switch,
+		CoverImage,
+		Textarea,
+		CoverView,
+		MovableArea,
+		MovableView,
+		ScrollView,
+		Swiper,
+		SwiperItem,
+		Navigator,
+		Audio,
+		Camera,
+		Image,
+		LivePlayer,
+		Video,
+		Canvas,
+		Ad,
+		WebView,
+		Block,
+		Map: MapComp,
+		Slot,
+		SlotView,
+		NativeSlot,
+		Script
+	};
+	const controlledComponent$1 = new Set([
+		"input",
+		"checkbox",
+		"picker",
+		"picker-view",
+		"radio",
+		"slider",
+		"switch",
+		"textarea"
+	]);
+	const focusComponents = new Set(["input", "textarea"]);
+	const voidElements = new Set([
+		"progress",
+		"icon",
+		"rich-text",
+		"input",
+		"textarea",
+		"slider",
+		"switch",
+		"audio",
+		"ad",
+		"official-account",
+		"open-data",
+		"navigation-bar"
+	]);
+	const nestElements = new Map([
+		["view", -1],
+		["catch-view", -1],
+		["cover-view", -1],
+		["static-view", -1],
+		["pure-view", -1],
+		["click-view", -1],
+		["block", -1],
+		["text", -1],
+		["static-text", 6],
+		["slot", 8],
+		["slot-view", 8],
+		["label", 6],
+		["form", 4],
+		["scroll-view", 4],
+		["swiper", 4],
+		["swiper-item", 4]
+	]);
+	exports.PLATFORM_TYPE = void 0;
+	(function(PLATFORM_TYPE$1) {
+		PLATFORM_TYPE$1["MINI"] = "mini";
+		PLATFORM_TYPE$1["ASCF"] = "ascf";
+		PLATFORM_TYPE$1["WEB"] = "web";
+		PLATFORM_TYPE$1["RN"] = "rn";
+		PLATFORM_TYPE$1["HARMONY"] = "harmony";
+		PLATFORM_TYPE$1["QUICK"] = "quickapp";
+	})(exports.PLATFORM_TYPE || (exports.PLATFORM_TYPE = {}));
+	const COMPILE_MODE_IDENTIFIER_PREFIX = "f";
+	const COMPILE_MODE_SUB_RENDER_FN = "subRenderFn";
+	const PLATFORM_CONFIG_MAP = {
+		h5: { type: exports.PLATFORM_TYPE.WEB },
+		harmony: { type: exports.PLATFORM_TYPE.HARMONY },
+		ascf: { type: exports.PLATFORM_TYPE.ASCF },
+		mini: { type: exports.PLATFORM_TYPE.MINI },
+		rn: { type: exports.PLATFORM_TYPE.RN },
+		quickapp: { type: exports.PLATFORM_TYPE.QUICK }
+	};
+	var Events$4 = class Events$4 {
+		constructor(opts) {
+			var _a;
+			this.callbacks = (_a = opts === null || opts === void 0 ? void 0 : opts.callbacks) !== null && _a !== void 0 ? _a : {};
+		}
+		on(eventName, callback, context) {
+			let event, tail, _eventName;
+			if (!callback) {
+				return this;
+			}
+			if (typeof eventName === "symbol") {
+				_eventName = [eventName];
+			} else {
+				_eventName = eventName.split(Events$4.eventSplitter);
+			}
+			this.callbacks || (this.callbacks = {});
+			const calls = this.callbacks;
+			while (event = _eventName.shift()) {
+				const list = calls[event];
+				const node = list ? list.tail : {};
+				node.next = tail = {};
+				node.context = context;
+				node.callback = callback;
+				calls[event] = {
+					tail,
+					next: list ? list.next : node
+				};
+			}
+			return this;
+		}
+		once(events, callback, context) {
+			const wrapper = (...args) => {
+				callback.apply(this, args);
+				this.off(events, wrapper, context);
+			};
+			this.on(events, wrapper, context);
+			return this;
+		}
+		off(events, callback, context) {
+			let event, calls, _events;
+			if (!(calls = this.callbacks)) {
+				return this;
+			}
+			if (!(events || callback || context)) {
+				delete this.callbacks;
+				return this;
+			}
+			if (typeof events === "symbol") {
+				_events = [events];
+			} else {
+				_events = events ? events.split(Events$4.eventSplitter) : Object.keys(calls);
+			}
+			while (event = _events.shift()) {
+				let node = calls[event];
+				delete calls[event];
+				if (!node || !(callback || context)) {
+					continue;
+				}
+				const tail = node.tail;
+				while ((node = node.next) !== tail) {
+					const cb = node.callback;
+					const ctx = node.context;
+					if (callback && cb !== callback || context && ctx !== context) {
+						this.on(event, cb, ctx);
+					}
+				}
+			}
+			return this;
+		}
+		trigger(events, ...args) {
+			let event, node, calls, _events;
+			if (!(calls = this.callbacks)) {
+				return this;
+			}
+			if (typeof events === "symbol") {
+				_events = [events];
+			} else {
+				_events = events.split(Events$4.eventSplitter);
+			}
+			while (event = _events.shift()) {
+				if (node = calls[event]) {
+					const tail = node.tail;
+					while ((node = node.next) !== tail) {
+						node.callback.apply(node.context || this, args);
+					}
+				}
+			}
+			return this;
+		}
+	};
+	Events$4.eventSplitter = ",";
+	var PageEvts = class extends Events$4 {
+		constructor() {
+			super(...arguments);
+			this.exeList = [];
+		}
+		on(eventName, callback) {
+			super.on(eventName, callback, this);
+			this.exeList = this.exeList.reduce((prev, item) => {
+				if (item.eventName === eventName) {
+					super.trigger(item.eventName, item.data);
+				} else {
+					prev.push(item);
+				}
+				return prev;
+			}, []);
+			return this;
+		}
+		emit(events, data) {
+			routeChannel.trigger(events, data);
+		}
+	};
+	const pageChannel = new PageEvts();
+	var RouteEvts = class extends Events$4 {
+		emit(events, data) {
+			pageChannel.off(events);
+			pageChannel.exeList.push({
+				eventName: events,
+				data
+			});
+		}
+		addEvents(events) {
+			if (!events || typeof events !== "object") return;
+			Object.keys(events).forEach((key) => {
+				this.off(key);
+				this.on(key, events[key], this);
+			});
+		}
+	};
+	const routeChannel = new RouteEvts();
+	const EventChannel$1 = {
+		pageChannel,
+		routeChannel
+	};
+	function isString$7(o) {
+		return typeof o === "string";
+	}
+	function isUndefined$8(o) {
+		return typeof o === "undefined";
+	}
+	function isNull$1(o) {
+		return o === null;
+	}
+	function isObject$4(o) {
+		return o !== null && typeof o === "object";
+	}
+	function isBoolean(o) {
+		return o === true || o === false;
+	}
+	function isFunction$8(o) {
+		return typeof o === "function";
+	}
+	function isNumber$3(o) {
+		if (Number.isFinite) return Number.isFinite(o);
+		return typeof o === "number";
+	}
+	function isBooleanStringLiteral(o) {
+		return o === "true" || o === "false" || o === "!0" || o === "!1";
+	}
+	function isObjectStringLiteral(o) {
+		return o === "{}";
+	}
+	const isArray$6 = Array.isArray;
+	const isWebPlatform = () => process.env.TARO_ENV === "h5" || process.env.TARO_PLATFORM === "web";
+	exports.HOOK_TYPE = void 0;
+	(function(HOOK_TYPE) {
+		HOOK_TYPE[HOOK_TYPE["SINGLE"] = 0] = "SINGLE";
+		HOOK_TYPE[HOOK_TYPE["MULTI"] = 1] = "MULTI";
+		HOOK_TYPE[HOOK_TYPE["WATERFALL"] = 2] = "WATERFALL";
+	})(exports.HOOK_TYPE || (exports.HOOK_TYPE = {}));
+	const defaultMiniLifecycle = {
+		app: [
+			"onLaunch",
+			"onShow",
+			"onHide"
+		],
+		page: [
+			"onLoad",
+			"onUnload",
+			"onReady",
+			"onShow",
+			"onHide",
+			[
+				"onPullDownRefresh",
+				"onReachBottom",
+				"onPageScroll",
+				"onResize",
+				"defer:onTabItemTap",
+				"onTitleClick",
+				"onOptionMenuClick",
+				"onPopMenuClick",
+				"onPullIntercept",
+				"onAddToFavorites"
+			],
+			["onShareAppMessage", "onShareTimeline"]
+		],
+		component: ["attached", "detached"]
+	};
+	function TaroHook(type, initial) {
+		return {
+			type,
+			initial: initial || null
+		};
+	}
+	var TaroHooks = class extends Events$4 {
+		constructor(hooks$11, opts) {
+			super(opts);
+			this.hooks = hooks$11;
+			for (const hookName in hooks$11) {
+				const { initial } = hooks$11[hookName];
+				if (isFunction$8(initial)) {
+					this.on(hookName, initial);
+				}
+			}
+		}
+		tapOneOrMany(hookName, callback) {
+			const list = isFunction$8(callback) ? [callback] : callback;
+			list.forEach((cb) => this.on(hookName, cb));
+		}
+		tap(hookName, callback) {
+			const hooks$11 = this.hooks;
+			const { type, initial } = hooks$11[hookName];
+			if (type === exports.HOOK_TYPE.SINGLE) {
+				this.off(hookName);
+				this.on(hookName, isFunction$8(callback) ? callback : callback[callback.length - 1]);
+			} else {
+				initial && this.off(hookName, initial);
+				this.tapOneOrMany(hookName, callback);
+			}
+		}
+		call(hookName, ...rest) {
+			var _a;
+			const hook = this.hooks[hookName];
+			if (!hook) return;
+			const { type } = hook;
+			const calls = this.callbacks;
+			if (!calls) return;
+			const list = calls[hookName];
+			if (list) {
+				const tail = list.tail;
+				let node = list.next;
+				let args = rest;
+				let res;
+				while (node !== tail) {
+					res = (_a = node.callback) === null || _a === void 0 ? void 0 : _a.apply(node.context || this, args);
+					if (type === exports.HOOK_TYPE.WATERFALL) {
+						const params = [res];
+						args = params;
+					}
+					node = node.next;
+				}
+				return res;
+			}
+		}
+		isExist(hookName) {
+			var _a;
+			return Boolean((_a = this.callbacks) === null || _a === void 0 ? void 0 : _a[hookName]);
+		}
+	};
+	const hooks$10 = new TaroHooks({
+		getMiniLifecycle: TaroHook(exports.HOOK_TYPE.SINGLE, (defaultConfig) => defaultConfig),
+		getMiniLifecycleImpl: TaroHook(exports.HOOK_TYPE.SINGLE, function() {
+			return this.call("getMiniLifecycle", defaultMiniLifecycle);
+		}),
+		getLifecycle: TaroHook(exports.HOOK_TYPE.SINGLE, (instance, lifecycle) => instance[lifecycle]),
+		modifyRecursiveComponentConfig: TaroHook(exports.HOOK_TYPE.SINGLE, (defaultConfig) => defaultConfig),
+		getPathIndex: TaroHook(exports.HOOK_TYPE.SINGLE, (indexOfNode) => `[${indexOfNode}]`),
+		getEventCenter: TaroHook(exports.HOOK_TYPE.SINGLE, (Events$5) => new Events$5()),
+		isBubbleEvents: TaroHook(exports.HOOK_TYPE.SINGLE, (eventName) => {
+			/**
+			* 支持冒泡的事件, 除 支付宝小程序外，其余的可冒泡事件都和微信保持一致
+			* 详见 见 https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html
+			*/
+			const BUBBLE_EVENTS = new Set([
+				"touchstart",
+				"touchmove",
+				"touchcancel",
+				"touchend",
+				"touchforcechange",
+				"tap",
+				"longpress",
+				"longtap",
+				"transitionend",
+				"animationstart",
+				"animationiteration",
+				"animationend"
+			]);
+			return BUBBLE_EVENTS.has(eventName);
+		}),
+		getSpecialNodes: TaroHook(exports.HOOK_TYPE.SINGLE, () => [
+			"view",
+			"text",
+			"image"
+		]),
+		onRemoveAttribute: TaroHook(exports.HOOK_TYPE.SINGLE),
+		batchedEventUpdates: TaroHook(exports.HOOK_TYPE.SINGLE),
+		mergePageInstance: TaroHook(exports.HOOK_TYPE.SINGLE),
+		modifyPageObject: TaroHook(exports.HOOK_TYPE.SINGLE),
+		createPullDownComponent: TaroHook(exports.HOOK_TYPE.SINGLE),
+		getDOMNode: TaroHook(exports.HOOK_TYPE.SINGLE),
+		modifyHydrateData: TaroHook(exports.HOOK_TYPE.SINGLE),
+		transferHydrateData: TaroHook(exports.HOOK_TYPE.SINGLE),
+		modifySetAttrPayload: TaroHook(exports.HOOK_TYPE.SINGLE),
+		modifyRmAttrPayload: TaroHook(exports.HOOK_TYPE.SINGLE),
+		onAddEvent: TaroHook(exports.HOOK_TYPE.SINGLE),
+		proxyToRaw: TaroHook(exports.HOOK_TYPE.SINGLE, function(proxyObj) {
+			return proxyObj;
+		}),
+		modifyMpEvent: TaroHook(exports.HOOK_TYPE.MULTI),
+		modifyMpEventImpl: TaroHook(exports.HOOK_TYPE.SINGLE, function(e) {
+			try {
+				this.call("modifyMpEvent", e);
+			} catch (error) {
+				console.warn("[Taro modifyMpEvent hook Error]: " + (error === null || error === void 0 ? void 0 : error.message));
+			}
+		}),
+		injectNewStyleProperties: TaroHook(exports.HOOK_TYPE.SINGLE),
+		modifyTaroEvent: TaroHook(exports.HOOK_TYPE.MULTI),
+		dispatchTaroEvent: TaroHook(exports.HOOK_TYPE.SINGLE, (e, node) => {
+			node.dispatchEvent(e);
+		}),
+		dispatchTaroEventFinish: TaroHook(exports.HOOK_TYPE.MULTI),
+		modifyTaroEventReturn: TaroHook(exports.HOOK_TYPE.SINGLE, () => undefined),
+		modifyDispatchEvent: TaroHook(exports.HOOK_TYPE.MULTI),
+		initNativeApi: TaroHook(exports.HOOK_TYPE.MULTI),
+		patchElement: TaroHook(exports.HOOK_TYPE.MULTI),
+		modifyAddEventListener: TaroHook(exports.HOOK_TYPE.SINGLE),
+		modifyRemoveEventListener: TaroHook(exports.HOOK_TYPE.SINGLE),
+		getMemoryLevel: TaroHook(exports.HOOK_TYPE.SINGLE)
+	});
+	const EMPTY_OBJ$4 = {};
+	const EMPTY_ARR = [];
+	const noop$1 = (..._) => {};
+	/**
+	* box creates a boxed value.
+	*
+	* @typeparam T Value type.
+	* @param v Value.
+	* @returns Boxed value.
+	*/
+	const box = (v) => ({ v });
+	/**
+	* box creates a boxed value.
+	*
+	* @typeparam T Value type.
+	* @param b Boxed value.
+	* @returns Value.
+	*/
+	const unbox = (b) => b.v;
+	function toDashed$1(s) {
+		return s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+	}
+	function toCamelCase$4(s) {
+		let camel = "";
+		let nextCap = false;
+		for (let i = 0; i < s.length; i++) {
+			if (s[i] !== "-") {
+				camel += nextCap ? s[i].toUpperCase() : s[i];
+				nextCap = false;
+			} else {
+				nextCap = true;
+			}
+		}
+		return camel;
+	}
+	const toKebabCase = function(string) {
+		return string.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+	};
+	function capitalize(s) {
+		return s.charAt(0).toUpperCase() + s.slice(1);
+	}
+	const hasOwnProperty = Object.prototype.hasOwnProperty;
+	const hasOwn = (val, key) => hasOwnProperty.call(val, key);
+	/**
+	* ensure takes a condition and throw a error if the condition fails,
+	* like failure::ensure: https://docs.rs/failure/0.1.1/failure/macro.ensure.html
+	* @param condition condition.
+	* @param msg error message.
+	*/
+	function ensure$2(condition, msg$1) {
+		if (!condition) {
+			if (process.env.NODE_ENV !== "production") {
+				const reportIssue = "\n如有疑问，请提交 issue 至：https://github.com/nervjs/taro/issues";
+				throw new Error(msg$1 + reportIssue);
+			} else {
+				throw new Error(msg$1);
+			}
+		}
+	}
+	function warn$4(condition, msg$1) {
+		if (process.env.NODE_ENV !== "production") {
+			if (condition) {
+				console.warn(`[taro warn] ${msg$1}`);
+			}
+		}
+	}
+	function queryToJson(str) {
+		const dec = decodeURIComponent;
+		const qp = str.split("&");
+		const ret = {};
+		let name;
+		let val;
+		for (let i = 0, l = qp.length, item; i < l; ++i) {
+			item = qp[i];
+			if (item.length) {
+				const s = item.indexOf("=");
+				if (s < 0) {
+					name = dec(item);
+					val = "";
+				} else {
+					name = dec(item.slice(0, s));
+					val = dec(item.slice(s + 1));
+				}
+				if (typeof ret[name] === "string") {
+					ret[name] = [ret[name]];
+				}
+				if (Array.isArray(ret[name])) {
+					ret[name].push(val);
+				} else {
+					ret[name] = val;
+				}
+			}
+		}
+		return ret;
+	}
+	let _uniqueId = 1;
+	const _loadTime = new Date().getTime().toString();
+	function getUniqueKey() {
+		return _loadTime + _uniqueId++;
+	}
+	const cacheData = {};
+	function cacheDataSet(key, val) {
+		cacheData[key] = val;
+	}
+	function cacheDataGet(key, delelteAfterGet) {
+		const temp = cacheData[key];
+		delelteAfterGet && delete cacheData[key];
+		return temp;
+	}
+	function cacheDataHas(key) {
+		return key in cacheData;
+	}
+	function mergeInternalComponents(components) {
+		Object.keys(components).forEach((name) => {
+			if (name in internalComponents$3) {
+				Object.assign(internalComponents$3[name], components[name]);
+			} else {
+				internalComponents$3[name] = components[name];
+			}
+		});
+		return internalComponents$3;
+	}
+	function getComponentsAlias$2(origin) {
+		const mapping = {};
+		const viewAttrs = origin.View;
+		const extraList = {
+			"#text": {},
+			StaticView: viewAttrs,
+			StaticImage: origin.Image,
+			StaticText: origin.Text,
+			PureView: viewAttrs,
+			CatchView: viewAttrs,
+			ClickView: viewAttrs
+		};
+		origin = Object.assign(Object.assign({}, origin), extraList);
+		Object.keys(origin).sort((a, b) => {
+			const reg = /^(Static|Pure|Catch|Click)*(View|Image|Text)$/;
+			const isACommonly = reg.test(a);
+			const isBCommonly = reg.test(b);
+			if (isACommonly && isBCommonly) {
+				return a > b ? 1 : -1;
+			} else if (isACommonly) {
+				return -1;
+			} else if (isBCommonly) {
+				return 1;
+			} else {
+				return a >= b ? 1 : -1;
+			}
+		}).forEach((key, num) => {
+			const obj = { _num: String(num) };
+			Object.keys(origin[key]).filter((attr) => !/^bind/.test(attr) && !["focus", "blur"].includes(attr)).sort().forEach((attr, index) => {
+				obj[toCamelCase$4(attr)] = "p" + index;
+			});
+			mapping[toDashed$1(key)] = obj;
+		});
+		return mapping;
+	}
+	function getPlatformType(platform = "weapp", configNameOrType = exports.PLATFORM_TYPE.MINI) {
+		if (Object.keys(PLATFORM_CONFIG_MAP).includes(platform)) {
+			configNameOrType = platform;
+		}
+		const param = PLATFORM_CONFIG_MAP[configNameOrType] || {};
+		return param.type || configNameOrType;
+	}
+	function mergeReconciler(hostConfig, hooksForTest) {
+		const obj = hooksForTest || hooks$10;
+		const keys = Object.keys(hostConfig);
+		keys.forEach((key) => {
+			obj.tap(key, hostConfig[key]);
+		});
+	}
+	function nonsupport(api) {
+		return function() {
+			console.warn(`小程序暂不支持 ${api}`);
+		};
+	}
+	function setUniqueKeyToRoute(key, obj) {
+		const routerParamsPrivateKey = "__key_";
+		const useDataCacheApis = [
+			"navigateTo",
+			"redirectTo",
+			"reLaunch",
+			"switchTab"
+		];
+		if (useDataCacheApis.indexOf(key) > -1) {
+			const url = obj.url = obj.url || "";
+			const hasMark = url.indexOf("?") > -1;
+			const cacheKey = getUniqueKey();
+			obj.url += (hasMark ? "&" : "?") + `${routerParamsPrivateKey}=${cacheKey}`;
+		}
+	}
+	function indent(str, size$1) {
+		return str.split("\n").map((line, index) => {
+			const indent$1 = index === 0 ? "" : Array(size$1).fill(" ").join("");
+			return indent$1 + line;
+		}).join("\n");
+	}
+	const needPromiseApis = new Set([
+		"addPhoneContact",
+		"authorize",
+		"canvasGetImageData",
+		"canvasPutImageData",
+		"canvasToTempFilePath",
+		"checkSession",
+		"chooseAddress",
+		"chooseImage",
+		"chooseInvoiceTitle",
+		"chooseLocation",
+		"chooseVideo",
+		"clearStorage",
+		"closeBLEConnection",
+		"closeBluetoothAdapter",
+		"closeSocket",
+		"compressImage",
+		"connectSocket",
+		"createBLEConnection",
+		"downloadFile",
+		"exitMiniProgram",
+		"getAvailableAudioSources",
+		"getBLEDeviceCharacteristics",
+		"getBLEDeviceServices",
+		"getBatteryInfo",
+		"getBeacons",
+		"getBluetoothAdapterState",
+		"getBluetoothDevices",
+		"getClipboardData",
+		"getConnectedBluetoothDevices",
+		"getConnectedWifi",
+		"getExtConfig",
+		"getFileInfo",
+		"getImageInfo",
+		"getLocation",
+		"getNetworkType",
+		"getSavedFileInfo",
+		"getSavedFileList",
+		"getScreenBrightness",
+		"getSetting",
+		"getStorage",
+		"getStorageInfo",
+		"getSystemInfo",
+		"getUserInfo",
+		"getWifiList",
+		"hideHomeButton",
+		"hideShareMenu",
+		"hideTabBar",
+		"hideTabBarRedDot",
+		"loadFontFace",
+		"login",
+		"makePhoneCall",
+		"navigateBack",
+		"navigateBackMiniProgram",
+		"navigateTo",
+		"navigateToBookshelf",
+		"navigateToMiniProgram",
+		"notifyBLECharacteristicValueChange",
+		"hideKeyboard",
+		"hideLoading",
+		"hideNavigationBarLoading",
+		"hideToast",
+		"openBluetoothAdapter",
+		"openDocument",
+		"openLocation",
+		"openSetting",
+		"pageScrollTo",
+		"previewImage",
+		"queryBookshelf",
+		"reLaunch",
+		"readBLECharacteristicValue",
+		"redirectTo",
+		"removeSavedFile",
+		"removeStorage",
+		"removeTabBarBadge",
+		"requestSubscribeMessage",
+		"saveFile",
+		"saveImageToPhotosAlbum",
+		"saveVideoToPhotosAlbum",
+		"scanCode",
+		"sendSocketMessage",
+		"setBackgroundColor",
+		"setBackgroundTextStyle",
+		"setClipboardData",
+		"setEnableDebug",
+		"setInnerAudioOption",
+		"setKeepScreenOn",
+		"setNavigationBarColor",
+		"setNavigationBarTitle",
+		"setScreenBrightness",
+		"setStorage",
+		"setTabBarBadge",
+		"setTabBarItem",
+		"setTabBarStyle",
+		"showActionSheet",
+		"showFavoriteGuide",
+		"showLoading",
+		"showModal",
+		"showShareMenu",
+		"showTabBar",
+		"showTabBarRedDot",
+		"showToast",
+		"startBeaconDiscovery",
+		"startBluetoothDevicesDiscovery",
+		"startDeviceMotionListening",
+		"startPullDownRefresh",
+		"stopBeaconDiscovery",
+		"stopBluetoothDevicesDiscovery",
+		"stopCompass",
+		"startCompass",
+		"startAccelerometer",
+		"stopAccelerometer",
+		"showNavigationBarLoading",
+		"stopDeviceMotionListening",
+		"stopPullDownRefresh",
+		"switchTab",
+		"uploadFile",
+		"vibrateLong",
+		"vibrateShort",
+		"writeBLECharacteristicValue"
+	]);
+	function getCanIUseWebp(taro) {
+		return function() {
+			var _a;
+			const res = (_a = taro.getSystemInfoSync) === null || _a === void 0 ? void 0 : _a.call(taro);
+			if (!res) {
+				if (process.env.NODE_ENV !== "production") {
+					console.error("不支持 API canIUseWebp");
+				}
+				return false;
+			}
+			const { platform } = res;
+			const platformLower = platform.toLowerCase();
+			if (platformLower === "android" || platformLower === "devtools") {
+				return true;
+			}
+			return false;
+		};
+	}
+	function getNormalRequest(global$1) {
+		return function request(options$1) {
+			options$1 = options$1 ? isString$7(options$1) ? { url: options$1 } : options$1 : {};
+			const originSuccess = options$1.success;
+			const originFail = options$1.fail;
+			const originComplete = options$1.complete;
+			let requestTask;
+			const p = new Promise((resolve, reject) => {
+				options$1.success = (res) => {
+					originSuccess && originSuccess(res);
+					resolve(res);
+				};
+				options$1.fail = (res) => {
+					originFail && originFail(res);
+					reject(res);
+				};
+				options$1.complete = (res) => {
+					originComplete && originComplete(res);
+				};
+				requestTask = global$1.request(options$1);
+			});
+			equipTaskMethodsIntoPromise(requestTask, p);
+			p.abort = (cb) => {
+				cb && cb();
+				if (requestTask) {
+					requestTask.abort();
+				}
+				return p;
+			};
+			return p;
+		};
+	}
+	function processApis(taro, global$1, config = {}) {
+		const patchNeedPromiseApis = config.needPromiseApis || [];
+		const _needPromiseApis = new Set([...patchNeedPromiseApis, ...needPromiseApis]);
+		const preserved = [
+			"getEnv",
+			"interceptors",
+			"Current",
+			"getCurrentInstance",
+			"options",
+			"nextTick",
+			"eventCenter",
+			"Events",
+			"preload",
+			"webpackJsonp"
+		];
+		const apis = new Set(!config.isOnlyPromisify ? Object.keys(global$1).filter((api) => preserved.indexOf(api) === -1) : patchNeedPromiseApis);
+		if (config.modifyApis) {
+			config.modifyApis(apis);
+		}
+		apis.forEach((key) => {
+			if (_needPromiseApis.has(key)) {
+				const originKey = key;
+				taro[originKey] = (options$1 = {}, ...args) => {
+					let key$1 = originKey;
+					if (typeof options$1 === "string") {
+						if (args.length) {
+							return global$1[key$1](options$1, ...args);
+						}
+						return global$1[key$1](options$1);
+					}
+					if (config.transformMeta) {
+						const transformResult = config.transformMeta(key$1, options$1);
+						key$1 = transformResult.key;
+						options$1 = transformResult.options;
+						if (!global$1.hasOwnProperty(key$1)) {
+							return nonsupport(key$1)();
+						}
+					}
+					let task = null;
+					const obj = Object.assign({}, options$1);
+					setUniqueKeyToRoute(key$1, options$1);
+					const p = new Promise((resolve, reject) => {
+						obj.success = (res) => {
+							var _a, _b;
+							(_a = config.modifyAsyncResult) === null || _a === void 0 ? void 0 : _a.call(config, key$1, res);
+							(_b = options$1.success) === null || _b === void 0 ? void 0 : _b.call(options$1, res);
+							if (key$1 === "connectSocket") {
+								resolve(Promise.resolve().then(() => task ? Object.assign(task, res) : res));
+							} else {
+								resolve(res);
+							}
+						};
+						obj.fail = (res) => {
+							var _a;
+							(_a = options$1.fail) === null || _a === void 0 ? void 0 : _a.call(options$1, res);
+							reject(res);
+						};
+						obj.complete = (res) => {
+							var _a;
+							(_a = options$1.complete) === null || _a === void 0 ? void 0 : _a.call(options$1, res);
+						};
+						if (args.length) {
+							task = global$1[key$1](obj, ...args);
+						} else {
+							task = global$1[key$1](obj);
+						}
+					});
+					if (["uploadFile", "downloadFile"].includes(key$1)) {
+						equipTaskMethodsIntoPromise(task, p);
+						p.progress = (cb) => {
+							task === null || task === void 0 ? void 0 : task.onProgressUpdate(cb);
+							return p;
+						};
+						p.abort = (cb) => {
+							cb === null || cb === void 0 ? void 0 : cb();
+							task === null || task === void 0 ? void 0 : task.abort();
+							return p;
+						};
+					}
+					return p;
+				};
+			} else {
+				let platformKey = key;
+				if (config.transformMeta) {
+					platformKey = config.transformMeta(key, {}).key;
+				}
+				if (!global$1.hasOwnProperty(platformKey)) {
+					taro[key] = nonsupport(key);
+					return;
+				}
+				if (isFunction$8(global$1[key])) {
+					taro[key] = (...args) => {
+						if (config.handleSyncApis) {
+							return config.handleSyncApis(key, global$1, args);
+						} else {
+							return global$1[platformKey].apply(global$1, args);
+						}
+					};
+				} else {
+					taro[key] = global$1[platformKey];
+				}
+			}
+		});
+		!config.isOnlyPromisify && equipCommonApis(taro, global$1, config);
+	}
+	/**
+	* 挂载常用 API
+	* @param taro Taro 对象
+	* @param global 小程序全局对象，如微信的 wx，支付宝的 my
+	*/
+	function equipCommonApis(taro, global$1, apis = {}) {
+		taro.canIUseWebp = getCanIUseWebp(taro);
+		taro.getCurrentPages = getCurrentPages || nonsupport("getCurrentPages");
+		taro.getApp = getApp || nonsupport("getApp");
+		taro.env = global$1.env || {};
+		try {
+			taro.requirePlugin = requirePlugin || nonsupport("requirePlugin");
+		} catch (error) {
+			taro.requirePlugin = nonsupport("requirePlugin");
+		}
+		const request = apis.request || getNormalRequest(global$1);
+		function taroInterceptor(chain) {
+			return request(chain.requestParams);
+		}
+		const link = new taro.Link(taroInterceptor);
+		taro.request = link.request.bind(link);
+		taro.addInterceptor = link.addInterceptor.bind(link);
+		taro.cleanInterceptors = link.cleanInterceptors.bind(link);
+		taro.miniGlobal = taro.options.miniGlobal = global$1;
+		taro.getAppInfo = function() {
+			return {
+				platform: process.env.TARO_PLATFORM || "MiniProgram",
+				taroVersion: process.env.TARO_VERSION || "unknown",
+				designWidth: taro.config.designWidth
+			};
+		};
+		taro.createSelectorQuery = delayRef(taro, global$1, "createSelectorQuery", "exec");
+		taro.createIntersectionObserver = delayRef(taro, global$1, "createIntersectionObserver", "observe");
+	}
+	/**
+	* 将Task对象中的方法挂载到promise对象中，适配小程序api原生返回结果
+	* @param task Task对象 {RequestTask | DownloadTask | UploadTask}
+	* @param promise Promise
+	*/
+	function equipTaskMethodsIntoPromise(task, promise) {
+		if (!task || !promise) return;
+		const taskMethods = [
+			"abort",
+			"onHeadersReceived",
+			"offHeadersReceived",
+			"onProgressUpdate",
+			"offProgressUpdate",
+			"onChunkReceived",
+			"offChunkReceived"
+		];
+		task && taskMethods.forEach((method) => {
+			if (method in task) {
+				promise[method] = task[method].bind(task);
+			}
+		});
+	}
+	function delayRef(taro, global$1, name, method) {
+		return function(...args) {
+			const res = global$1[name](...args);
+			const raw = res[method].bind(res);
+			res[method] = function(...methodArgs) {
+				taro.nextTick(() => raw(...methodArgs));
+			};
+			return res;
+		};
+	}
+	exports.Shortcuts = void 0;
+	(function(Shortcuts$8) {
+		Shortcuts$8["Container"] = "container";
+		Shortcuts$8["Childnodes"] = "cn";
+		Shortcuts$8["Text"] = "v";
+		Shortcuts$8["NodeType"] = "nt";
+		Shortcuts$8["NodeName"] = "nn";
+		Shortcuts$8["Sid"] = "sid";
+		Shortcuts$8["Style"] = "st";
+		Shortcuts$8["Class"] = "cl";
+		Shortcuts$8["Src"] = "src";
+	})(exports.Shortcuts || (exports.Shortcuts = {}));
+	exports.COMPILE_MODE_IDENTIFIER_PREFIX = COMPILE_MODE_IDENTIFIER_PREFIX;
+	exports.COMPILE_MODE_SUB_RENDER_FN = COMPILE_MODE_SUB_RENDER_FN;
+	exports.EMPTY_ARR = EMPTY_ARR;
+	exports.EMPTY_OBJ = EMPTY_OBJ$4;
+	exports.EventChannel = EventChannel$1;
+	exports.Events = Events$4;
+	exports.PLATFORM_CONFIG_MAP = PLATFORM_CONFIG_MAP;
+	exports.TaroHook = TaroHook;
+	exports.TaroHooks = TaroHooks;
+	exports.animation = animation;
+	exports.box = box;
+	exports.cacheDataGet = cacheDataGet;
+	exports.cacheDataHas = cacheDataHas;
+	exports.cacheDataSet = cacheDataSet;
+	exports.capitalize = capitalize;
+	exports.controlledComponent = controlledComponent$1;
+	exports.ensure = ensure$2;
+	exports.focusComponents = focusComponents;
+	exports.getComponentsAlias = getComponentsAlias$2;
+	exports.getPlatformType = getPlatformType;
+	exports.getUniqueKey = getUniqueKey;
+	exports.hasOwn = hasOwn;
+	exports.hooks = hooks$10;
+	exports.indent = indent;
+	exports.internalComponents = internalComponents$3;
+	exports.isArray = isArray$6;
+	exports.isBoolean = isBoolean;
+	exports.isBooleanStringLiteral = isBooleanStringLiteral;
+	exports.isFunction = isFunction$8;
+	exports.isNull = isNull$1;
+	exports.isNumber = isNumber$3;
+	exports.isObject = isObject$4;
+	exports.isObjectStringLiteral = isObjectStringLiteral;
+	exports.isString = isString$7;
+	exports.isUndefined = isUndefined$8;
+	exports.isWebPlatform = isWebPlatform;
+	exports.mergeInternalComponents = mergeInternalComponents;
+	exports.mergeReconciler = mergeReconciler;
+	exports.nestElements = nestElements;
+	exports.nonsupport = nonsupport;
+	exports.noop = noop$1;
+	exports.processApis = processApis;
+	exports.queryToJson = queryToJson;
+	exports.setUniqueKeyToRoute = setUniqueKeyToRoute;
+	exports.singleQuote = singleQuote;
+	exports.toCamelCase = toCamelCase$4;
+	exports.toDashed = toDashed$1;
+	exports.toKebabCase = toKebabCase;
+	exports.touchEvents = touchEvents;
+	exports.unbox = unbox;
+	exports.voidElements = voidElements;
+	exports.warn = warn$4;
+} });
+
+//#endregion
 //#region src/constants/index.ts
 const PROPERTY_THRESHOLD = 2046;
 const TARO_RUNTIME = "Taro runtime";
@@ -180,6 +1616,7 @@ function recordMutation(record) {
 
 //#endregion
 //#region src/dom-external/mutation-observer/index.ts
+var import_index_cjs$26 = __toESM(require_index_cjs(), 1);
 var MutationObserver$1 = class {
 	core;
 	constructor(callback) {
@@ -190,9 +1627,9 @@ var MutationObserver$1 = class {
 				console.warn("[Taro Warning] 若要使用 MutationObserver，请在 Taro 编译配置中设置 'mini.runtime.enableMutationObserver: true'");
 			}
 			this.core = {
-				observe: noop,
-				disconnect: noop,
-				takeRecords: noop
+				observe: import_index_cjs$26.noop,
+				disconnect: import_index_cjs$26.noop,
+				takeRecords: import_index_cjs$26.noop
 			};
 		}
 	}
@@ -257,13 +1694,15 @@ function debounce(fn, ms = 250, scope) {
 
 //#endregion
 //#region src/emitter/emitter.ts
-const eventCenter = hooks$1.call("getEventCenter", Events);
+var import_index_cjs$25 = __toESM(require_index_cjs(), 1);
+const eventCenter = import_index_cjs$25.call("getEventCenter", import_index_cjs$25.Events);
 
 //#endregion
 //#region src/env.ts
+var import_index_cjs$24 = __toESM(require_index_cjs(), 1);
 const env = {
-	window: process.env.TARO_PLATFORM === "web" ? window : EMPTY_OBJ,
-	document: process.env.TARO_PLATFORM === "web" ? document : EMPTY_OBJ
+	window: process.env.TARO_PLATFORM === "web" ? window : import_index_cjs$24.EMPTY_OBJ,
+	document: process.env.TARO_PLATFORM === "web" ? document : import_index_cjs$24.EMPTY_OBJ
 };
 var env_default = env;
 
@@ -302,8 +1741,9 @@ var RuntimeCache = class {
 
 //#endregion
 //#region src/bom/history.ts
+var import_index_cjs$23 = __toESM(require_index_cjs(), 1);
 const cache$1 = new RuntimeCache("history");
-var TaroHistory = class extends Events {
+var TaroHistory = class extends import_index_cjs$25.Events {
 	#location;
 	#stack = [];
 	#cur = 0;
@@ -362,7 +1802,7 @@ var TaroHistory = class extends Events {
 		return this.#stack[this.#cur].state;
 	}
 	go(delta) {
-		if (!isNumber(delta) || isNaN(delta)) return;
+		if (!(0, import_index_cjs$23.isNumber)(delta) || isNaN(delta)) return;
 		let targetIdx = this.#cur + delta;
 		targetIdx = Math.min(Math.max(targetIdx, 0), this.length - 1);
 		this.#cur = targetIdx;
@@ -376,7 +1816,7 @@ var TaroHistory = class extends Events {
 		this.go(1);
 	}
 	pushState(state, title, url) {
-		if (!url || !isString(url)) return;
+		if (!url || !(0, import_index_cjs$23.isString)(url)) return;
 		this.#stack = this.#stack.slice(0, this.#cur + 1);
 		this.#stack.push({
 			state,
@@ -387,7 +1827,7 @@ var TaroHistory = class extends Events {
 		this.#location.trigger("__set_href_without_history__", url);
 	}
 	replaceState(state, title, url) {
-		if (!url || !isString(url)) return;
+		if (!url || !(0, import_index_cjs$23.isString)(url)) return;
 		this.#stack[this.#cur] = {
 			state,
 			title,
@@ -412,6 +1852,7 @@ const getCurrentInstance = () => Current;
 
 //#endregion
 //#region src/bom/URLSearchParams.ts
+var import_index_cjs$22 = __toESM(require_index_cjs(), 1);
 const findReg = /[!'()~]|%20|%00/g;
 const plusReg = /\+/g;
 const replaceCharMap = {
@@ -427,7 +1868,7 @@ function replacer(match) {
 	return replaceCharMap[match];
 }
 function appendTo(dict, name, value) {
-	const res = isArray(value) ? value.join(",") : value;
+	const res = (0, import_index_cjs$22.isArray)(value) ? value.join(",") : value;
 	if (name in dict) dict[name].push(res);
 	else dict[name] = [res];
 }
@@ -465,7 +1906,7 @@ const URLSearchParams = process.env.TARO_PLATFORM === "web" ? env_default.window
 				}
 			}
 		} else {
-			if (isArray(query)) {
+			if ((0, import_index_cjs$22.isArray)(query)) {
 				for (let i = 0, length = query.length; i < length; i++) {
 					const value = query[i];
 					appendTo(dict, value[0], value[1]);
@@ -528,6 +1969,7 @@ const URLSearchParams = process.env.TARO_PLATFORM === "web" ? env_default.window
 
 //#endregion
 //#region src/bom/URL.ts
+var import_index_cjs$21 = __toESM(require_index_cjs(), 1);
 var TaroURL = class {
 	static createObjectURL() {
 		throw new Error("Oops, not support URL.createObjectURL() in miniprogram.");
@@ -542,7 +1984,7 @@ var TaroURL = class {
 	#protocol = "";
 	#search;
 	constructor(url, base) {
-		if (!isString(url)) url = String(url);
+		if (!(0, import_index_cjs$21.isString)(url)) url = String(url);
 		const parseResult = parseUrlBase(url, base);
 		const { hash, hostname, pathname, port, protocol, search } = parseResult;
 		this.#hash = hash;
@@ -556,13 +1998,13 @@ var TaroURL = class {
 		return this.#protocol;
 	}
 	set protocol(val) {
-		isString(val) && (this.#protocol = val.trim());
+		(0, import_index_cjs$21.isString)(val) && (this.#protocol = val.trim());
 	}
 	get host() {
 		return this.hostname + (this.port ? ":" + this.port : "");
 	}
 	set host(val) {
-		if (val && isString(val)) {
+		if (val && (0, import_index_cjs$21.isString)(val)) {
 			val = val.trim();
 			const { hostname, port } = parseUrl(`//${val}`);
 			this.hostname = hostname;
@@ -573,19 +2015,19 @@ var TaroURL = class {
 		return this.#hostname;
 	}
 	set hostname(val) {
-		val && isString(val) && (this.#hostname = val.trim());
+		val && (0, import_index_cjs$21.isString)(val) && (this.#hostname = val.trim());
 	}
 	get port() {
 		return this.#port;
 	}
 	set port(val) {
-		isString(val) && (this.#port = val.trim());
+		(0, import_index_cjs$21.isString)(val) && (this.#port = val.trim());
 	}
 	get pathname() {
 		return this.#pathname;
 	}
 	set pathname(val) {
-		if (isString(val)) {
+		if ((0, import_index_cjs$21.isString)(val)) {
 			val = val.trim();
 			const HEAD_REG = /^(\/|\.\/|\.\.\/)/;
 			let temp = val;
@@ -601,7 +2043,7 @@ var TaroURL = class {
 		return val.length === 0 || val.startsWith("?") ? val : `?${val}`;
 	}
 	set search(val) {
-		if (isString(val)) {
+		if ((0, import_index_cjs$21.isString)(val)) {
 			val = val.trim();
 			this.#search = new URLSearchParams(val);
 		}
@@ -610,7 +2052,7 @@ var TaroURL = class {
 		return this.#hash;
 	}
 	set hash(val) {
-		if (isString(val)) {
+		if ((0, import_index_cjs$21.isString)(val)) {
 			val = val.trim();
 			if (val) this.#hash = val.startsWith("#") ? val : `#${val}`;
 			else this.#hash = "";
@@ -620,7 +2062,7 @@ var TaroURL = class {
 		return `${this.protocol}//${this.host}${this.pathname}${this.search}${this.hash}`;
 	}
 	set href(val) {
-		if (val && isString(val)) {
+		if (val && (0, import_index_cjs$21.isString)(val)) {
 			val = val.trim();
 			const { protocol, hostname, port, hash, search, pathname } = parseUrl(val);
 			this.protocol = protocol;
@@ -635,7 +2077,7 @@ var TaroURL = class {
 		return `${this.protocol}//${this.host}`;
 	}
 	set origin(val) {
-		if (val && isString(val)) {
+		if (val && (0, import_index_cjs$21.isString)(val)) {
 			val = val.trim();
 			const { protocol, hostname, port } = parseUrl(val);
 			this.protocol = protocol;
@@ -679,7 +2121,7 @@ function parseUrl(url = "") {
 		search: "",
 		hash: ""
 	};
-	if (!url || !isString(url)) return result;
+	if (!url || !(0, import_index_cjs$21.isString)(url)) return result;
 	url = url.trim();
 	const PATTERN = /^(([^:/?#]+):)?\/\/(([^/?#]+):(.+)@)?([^/?#:]*)(:(\d+))?([^?#]*)(\?([^#]*))?(#(.*))?/;
 	const matches = url.match(PATTERN);
@@ -699,7 +2141,7 @@ function parseUrlBase(url, base) {
 	const VALID_URL = /^(https?:)\/\//i;
 	let fullUrl = "";
 	let parsedBase = null;
-	if (!isUndefined(base)) {
+	if (!(0, import_index_cjs$21.isUndefined)(base)) {
 		base = String(base).trim();
 		if (!VALID_URL.test(base)) throw new TypeError(`Failed to construct 'URL': Invalid base URL`);
 		parsedBase = parseUrl(base);
@@ -725,9 +2167,10 @@ function parseUrlBase(url, base) {
 
 //#endregion
 //#region src/bom/location.ts
+var import_index_cjs$20 = __toESM(require_index_cjs(), 1);
 const INIT_URL = "https://taro.com";
 const cache = new RuntimeCache("location");
-var TaroLocation = class extends Events {
+var TaroLocation = class extends import_index_cjs$25.Events {
 	#url = new TaroURLProvider(INIT_URL);
 	#noCheckUrl = false;
 	#window;
@@ -815,7 +2258,7 @@ var TaroLocation = class extends Events {
 	}
 	set protocol(val) {
 		const REG = /^(http|https):$/i;
-		if (!val || !isString(val) || !REG.test(val.trim())) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val) || !REG.test(val.trim())) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.protocol = val;
@@ -825,7 +2268,7 @@ var TaroLocation = class extends Events {
 		return this.#url.host;
 	}
 	set host(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val)) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.host = val;
@@ -835,7 +2278,7 @@ var TaroLocation = class extends Events {
 		return this.#url.hostname;
 	}
 	set hostname(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val)) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.hostname = val;
@@ -846,7 +2289,7 @@ var TaroLocation = class extends Events {
 	}
 	set port(val) {
 		const xVal = Number(val = val.trim());
-		if (!isNumber(xVal) || xVal <= 0) return;
+		if (!(0, import_index_cjs$20.isNumber)(xVal) || xVal <= 0) return;
 		const preValue = this.#getPreValue();
 		this.#url.port = val;
 		if (this.#checkUrlChange(preValue)) this.#recordHistory();
@@ -855,7 +2298,7 @@ var TaroLocation = class extends Events {
 		return this.#url.pathname;
 	}
 	set pathname(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val)) return;
 		val = val.trim();
 		const preValue = this.#getPreValue();
 		this.#url.pathname = val;
@@ -865,7 +2308,7 @@ var TaroLocation = class extends Events {
 		return this.#url.search;
 	}
 	set search(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val)) return;
 		val = val.trim();
 		val = val.startsWith("?") ? val : `?${val}`;
 		const preValue = this.#getPreValue();
@@ -876,7 +2319,7 @@ var TaroLocation = class extends Events {
 		return this.#url.hash;
 	}
 	set hash(val) {
-		if (!val || !isString(val)) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val)) return;
 		val = val.trim();
 		val = val.startsWith("#") ? val : `#${val}`;
 		const preValue = this.#getPreValue();
@@ -888,7 +2331,7 @@ var TaroLocation = class extends Events {
 	}
 	set href(val) {
 		const REG = /^(http:|https:)?\/\/.+/;
-		if (!val || !isString(val) || !REG.test(val = val.trim())) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val) || !REG.test(val = val.trim())) return;
 		const preValue = this.#getPreValue();
 		this.#url.href = val;
 		if (this.#checkUrlChange(preValue)) this.#recordHistory();
@@ -898,16 +2341,16 @@ var TaroLocation = class extends Events {
 	}
 	set origin(val) {
 		const REG = /^(http:|https:)?\/\/.+/;
-		if (!val || !isString(val) || !REG.test(val = val.trim())) return;
+		if (!val || !(0, import_index_cjs$20.isString)(val) || !REG.test(val = val.trim())) return;
 		const preValue = this.#getPreValue();
 		this.#url.origin = val;
 		if (this.#checkUrlChange(preValue)) this.#recordHistory();
 	}
 	assign() {
-		warn(true, "小程序环境中调用location.assign()无效.");
+		(0, import_index_cjs$20.warn)(true, "小程序环境中调用location.assign()无效.");
 	}
 	reload() {
-		warn(true, "小程序环境中调用location.reload()无效.");
+		(0, import_index_cjs$20.warn)(true, "小程序环境中调用location.reload()无效.");
 	}
 	replace(url) {
 		this.trigger("__set_href_without_history__", url);
@@ -979,7 +2422,8 @@ const _caf = process.env.TARO_PLATFORM === "web" ? cancelAnimationFrame : functi
 
 //#endregion
 //#region src/bom/window.ts
-var TaroWindow = class extends Events {
+var import_index_cjs$19 = __toESM(require_index_cjs(), 1);
+var TaroWindow = class extends import_index_cjs$25.Events {
 	navigator = nav;
 	requestAnimationFrame = _raf;
 	cancelAnimationFrame = _caf;
@@ -1031,11 +2475,11 @@ var TaroWindow = class extends Events {
 		return env_default.document;
 	}
 	addEventListener(event, callback) {
-		if (!isString(event)) return;
+		if (!(0, import_index_cjs$19.isString)(event)) return;
 		this.on(event, callback, null);
 	}
 	removeEventListener(event, callback) {
-		if (!isString(event)) return;
+		if (!(0, import_index_cjs$19.isString)(event)) return;
 		this.off(event, callback, null);
 	}
 	setTimeout(...args) {
@@ -1068,6 +2512,7 @@ const getCurrentPage = (routerMode = "hash", basename = "/") => {
 
 //#endregion
 //#region src/utils/index.ts
+var import_index_cjs$18 = __toESM(require_index_cjs(), 1);
 const incrementId = () => {
 	const chatCodes = [];
 	for (let i = 65; i <= 90; i++) {
@@ -1127,15 +2572,15 @@ function isParentBinded(node, type) {
 }
 function shortcutAttr(key) {
 	switch (key) {
-		case STYLE: return Shortcuts.Style;
+		case STYLE: return import_index_cjs$18.Style;
 		case ID: return UID;
-		case CLASS: return Shortcuts.Class;
+		case CLASS: return import_index_cjs$18.Class;
 		default: return key;
 	}
 }
 const customWrapperCache = new Map();
 function extend(ctor, methodName, options$1) {
-	if (isFunction(options$1)) {
+	if ((0, import_index_cjs$18.isFunction)(options$1)) {
 		options$1 = { value: options$1 };
 	}
 	Object.defineProperty(ctor.prototype, methodName, {
@@ -1147,7 +2592,7 @@ function extend(ctor, methodName, options$1) {
 let componentsAlias$1;
 function getComponentsAlias() {
 	if (!componentsAlias$1) {
-		componentsAlias$1 = getComponentsAlias$1(internalComponents);
+		componentsAlias$1 = (0, import_index_cjs$18.getComponentsAlias)(import_index_cjs$18.internalComponents);
 	}
 	return componentsAlias$1;
 }
@@ -1260,6 +2705,7 @@ const eventSource = new EventSource();
 
 //#endregion
 //#region src/hydrate.ts
+var import_index_cjs$17 = __toESM(require_index_cjs(), 1);
 let SPECIAL_NODES;
 let componentsAlias;
 /**
@@ -1270,18 +2716,18 @@ let componentsAlias;
 */
 function hydrate(node) {
 	componentsAlias ||= getComponentsAlias();
-	SPECIAL_NODES ||= hooks$1.call("getSpecialNodes");
+	SPECIAL_NODES ||= import_index_cjs$17.call("getSpecialNodes");
 	const nodeName = node.nodeName;
 	let compileModeName = null;
 	if (isText(node)) {
 		return {
 			sid: node.sid,
-			[Shortcuts.Text]: node.nodeValue,
-			[Shortcuts.NodeName]: componentsAlias[nodeName]?._num || "8"
+			[import_index_cjs$17.Text]: node.nodeValue,
+			[import_index_cjs$17.NodeName]: componentsAlias[nodeName]?._num || "8"
 		};
 	}
 	const data = {
-		[Shortcuts.NodeName]: nodeName,
+		[import_index_cjs$17.NodeName]: nodeName,
 		sid: node.sid
 	};
 	if (node.uid !== node.sid) {
@@ -1289,41 +2735,41 @@ function hydrate(node) {
 	}
 	if (SPECIAL_NODES.indexOf(nodeName) > -1) {
 		if (!node.isAnyEventBinded()) {
-			data[Shortcuts.NodeName] = `static-${nodeName}`;
+			data[import_index_cjs$17.NodeName] = `static-${nodeName}`;
 			if (nodeName === VIEW && !isHasExtractProp(node)) {
-				data[Shortcuts.NodeName] = PURE_VIEW;
+				data[import_index_cjs$17.NodeName] = PURE_VIEW;
 			}
 		}
 		if (nodeName === VIEW && node.isOnlyClickBinded() && !isHasExtractProp(node)) {
-			data[Shortcuts.NodeName] = CLICK_VIEW;
+			data[import_index_cjs$17.NodeName] = CLICK_VIEW;
 		}
 	}
 	const { props } = node;
 	for (const prop in props) {
-		const propInCamelCase = toCamelCase(prop);
+		const propInCamelCase = (0, import_index_cjs$17.toCamelCase)(prop);
 		if (!prop.startsWith("data-") && prop !== CLASS && prop !== STYLE && prop !== ID && propInCamelCase !== CATCHMOVE && propInCamelCase !== COMPILE_MODE) {
 			data[propInCamelCase] = props[prop];
 		}
 		if (process.env.TARO_ENV !== "swan" && nodeName === VIEW && propInCamelCase === CATCHMOVE && props[prop] !== false) {
-			data[Shortcuts.NodeName] = CATCH_VIEW;
+			data[import_index_cjs$17.NodeName] = CATCH_VIEW;
 		}
 		if (propInCamelCase === COMPILE_MODE) {
 			compileModeName = props[prop];
 		}
 	}
-	data[Shortcuts.Childnodes] = node.childNodes.filter((node$1) => !isComment(node$1)).map(hydrate);
+	data[import_index_cjs$17.Childnodes] = node.childNodes.filter((node$1) => !isComment(node$1)).map(hydrate);
 	if (node.className !== "") {
-		data[Shortcuts.Class] = node.className;
+		data[import_index_cjs$17.Class] = node.className;
 	}
 	const cssText = node.cssText;
 	if (cssText !== "" && nodeName !== "swiper-item") {
-		data[Shortcuts.Style] = cssText;
+		data[import_index_cjs$17.Style] = cssText;
 	}
-	hooks$1.call("modifyHydrateData", data, node);
-	const nn = data[Shortcuts.NodeName];
+	import_index_cjs$17.call("modifyHydrateData", data, node);
+	const nn = data[import_index_cjs$17.NodeName];
 	const componentAlias = componentsAlias[nn];
 	if (componentAlias) {
-		data[Shortcuts.NodeName] = componentAlias._num;
+		data[import_index_cjs$17.NodeName] = componentAlias._num;
 		for (const prop in data) {
 			if (prop in componentAlias) {
 				data[componentAlias[prop]] = data[prop];
@@ -1332,19 +2778,20 @@ function hydrate(node) {
 		}
 	}
 	if (compileModeName !== null) {
-		data[Shortcuts.NodeName] = compileModeName;
+		data[import_index_cjs$17.NodeName] = compileModeName;
 	}
-	const resData = hooks$1.call("transferHydrateData", data, node, componentAlias);
+	const resData = import_index_cjs$17.call("transferHydrateData", data, node, componentAlias);
 	return resData || data;
 }
 
 //#endregion
 //#region src/dom/event-target.ts
+var import_index_cjs$16 = __toESM(require_index_cjs(), 1);
 var TaroEventTarget = class {
 	__handlers = {};
 	addEventListener(type, handler, options$1) {
 		type = type.toLowerCase();
-		hooks$1.call("onAddEvent", type, handler, options$1, this);
+		import_index_cjs$16.call("onAddEvent", type, handler, options$1, this);
 		if (type === "regionchange") {
 			this.addEventListener("begin", handler, options$1);
 			this.addEventListener("end", handler, options$1);
@@ -1352,7 +2799,7 @@ var TaroEventTarget = class {
 		}
 		let isCapture = Boolean(options$1);
 		let isOnce = false;
-		if (isObject(options$1)) {
+		if ((0, import_index_cjs$16.isObject)(options$1)) {
 			isCapture = Boolean(options$1.capture);
 			isOnce = Boolean(options$1.once);
 		}
@@ -1367,14 +2814,14 @@ var TaroEventTarget = class {
 			});
 			return;
 		}
-		process.env.NODE_ENV !== "production" && warn(isCapture, "Taro 暂未实现 event 的 capture 特性。");
+		process.env.NODE_ENV !== "production" && (0, import_index_cjs$16.warn)(isCapture, "Taro 暂未实现 event 的 capture 特性。");
 		const oldHandler = handler;
 		handler = function() {
 			return oldHandler.apply(this, arguments);
 		};
 		handler.oldHandler = oldHandler;
 		const handlers = this.__handlers[type];
-		if (isArray(handlers)) {
+		if ((0, import_index_cjs$16.isArray)(handlers)) {
 			handlers.push(handler);
 		} else {
 			this.__handlers[type] = [handler];
@@ -1391,13 +2838,13 @@ var TaroEventTarget = class {
 			return;
 		}
 		const handlers = this.__handlers[type];
-		if (!isArray(handlers)) {
+		if (!(0, import_index_cjs$16.isArray)(handlers)) {
 			return;
 		}
 		const index = handlers.findIndex((item) => {
 			if (item === handler || item.oldHandler === handler) return true;
 		});
-		process.env.NODE_ENV !== "production" && warn(index === -1, `事件: '${type}' 没有注册在 DOM 中，因此不会被移除。`);
+		process.env.NODE_ENV !== "production" && (0, import_index_cjs$16.warn)(index === -1, `事件: '${type}' 没有注册在 DOM 中，因此不会被移除。`);
 		handlers.splice(index, 1);
 	}
 	isAnyEventBinded() {
@@ -1414,7 +2861,8 @@ var TaroEventTarget = class {
 
 //#endregion
 //#region src/dom/node.ts
-const CHILDNODES = Shortcuts.Childnodes;
+var import_index_cjs$15 = __toESM(require_index_cjs(), 1);
+const CHILDNODES = import_index_cjs$15.Childnodes;
 const nodeId = incrementId();
 var TaroNode = class TaroNode extends TaroEventTarget {
 	uid;
@@ -1456,7 +2904,7 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 	}
 	findIndex(refChild) {
 		const index = this.childNodes.indexOf(refChild);
-		ensure(index !== -1, "The node to be replaced is not a child of this node.");
+		(0, import_index_cjs$15.ensure)(index !== -1, "The node to be replaced is not a child of this node.");
 		return index;
 	}
 	get _path() {
@@ -1464,7 +2912,7 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 		if (parentNode) {
 			const list = parentNode.childNodes.filter((node) => !isComment(node));
 			const indexOfNode = list.indexOf(this);
-			const index = hooks$1.call("getPathIndex", indexOfNode);
+			const index = import_index_cjs$15.call("getPathIndex", indexOfNode);
 			return `${parentNode._path}.${CHILDNODES}.${index}`;
 		}
 		return "";
@@ -2024,6 +3472,7 @@ combine(WEBKIT, [
 
 //#endregion
 //#region src/dom/style.ts
+var import_index_cjs$14 = __toESM(require_index_cjs(), 1);
 function recordCss(obj) {
 	MutationObserver$1.record({
 		type: MutationRecordType.ATTRIBUTES,
@@ -2036,17 +3485,17 @@ function enqueueUpdate(obj) {
 	const element = obj._element;
 	if (element._root) {
 		element.enqueueUpdate({
-			path: `${element._path}.${Shortcuts.Style}`,
+			path: `${element._path}.${import_index_cjs$14.Style}`,
 			value: obj.cssText
 		});
 	}
 }
 function setStyle(newVal, styleKey) {
-	process.env.NODE_ENV !== "production" && warn(isString(newVal) && newVal.length > PROPERTY_THRESHOLD, `Style 属性 ${styleKey} 的值数据量过大，可能会影响渲染性能，考虑使用 CSS 类或其它方案替代。`);
+	process.env.NODE_ENV !== "production" && (0, import_index_cjs$14.warn)((0, import_index_cjs$14.isString)(newVal) && newVal.length > PROPERTY_THRESHOLD, `Style 属性 ${styleKey} 的值数据量过大，可能会影响渲染性能，考虑使用 CSS 类或其它方案替代。`);
 	const old = this[styleKey];
 	if (old === newVal) return;
 	!this._pending && recordCss(this);
-	if (isNull(newVal) || isUndefined(newVal) || newVal === "") {
+	if ((0, import_index_cjs$14.isNull)(newVal) || (0, import_index_cjs$14.isUndefined)(newVal) || newVal === "") {
 		this._usedStyleProp.delete(styleKey);
 		delete this._value[styleKey];
 	} else {
@@ -2063,7 +3512,7 @@ function initStyle(ctor, styleProperties$1) {
 		properties[styleKey] = {
 			get() {
 				const val = this._value[styleKey];
-				return isNull(val) || isUndefined(val) ? "" : val;
+				return (0, import_index_cjs$14.isNull)(val) || (0, import_index_cjs$14.isUndefined)(val) ? "" : val;
 			},
 			set(newVal) {
 				setStyle.call(this, newVal, styleKey);
@@ -2102,8 +3551,8 @@ var Style = class {
 		const texts = [];
 		this._usedStyleProp.forEach((key) => {
 			const val = this[key];
-			if (isNull(val) || isUndefined(val)) return;
-			let styleName = isCssVariable(key) ? key : toDashed(key);
+			if ((0, import_index_cjs$14.isNull)(val) || (0, import_index_cjs$14.isUndefined)(val)) return;
+			let styleName = isCssVariable(key) ? key : (0, import_index_cjs$14.toDashed)(key);
 			if (styleName.indexOf("webkit") === 0 || styleName.indexOf("Webkit") === 0) {
 				styleName = `-${styleName}`;
 			}
@@ -2117,7 +3566,7 @@ var Style = class {
 		this._usedStyleProp.forEach((prop) => {
 			this.removeProperty(prop);
 		});
-		if (str === "" || isUndefined(str) || isNull(str)) {
+		if (str === "" || (0, import_index_cjs$14.isUndefined)(str) || (0, import_index_cjs$14.isNull)(str)) {
 			this._pending = false;
 			enqueueUpdate(this);
 			return;
@@ -2130,7 +3579,7 @@ var Style = class {
 			}
 			const [propName, ...valList] = rule.split(":");
 			const val = valList.join(":");
-			if (isUndefined(val)) {
+			if ((0, import_index_cjs$14.isUndefined)(val)) {
 				continue;
 			}
 			this.setProperty(propName.trim(), val.trim());
@@ -2142,16 +3591,16 @@ var Style = class {
 		if (propertyName[0] === "-") {
 			this.setCssVariables(propertyName);
 		} else {
-			propertyName = toCamelCase(propertyName);
+			propertyName = (0, import_index_cjs$14.toCamelCase)(propertyName);
 		}
-		if (isNull(value) || isUndefined(value)) {
+		if ((0, import_index_cjs$14.isNull)(value) || (0, import_index_cjs$14.isUndefined)(value)) {
 			this.removeProperty(propertyName);
 		} else {
 			this[propertyName] = value;
 		}
 	}
 	removeProperty(propertyName) {
-		propertyName = toCamelCase(propertyName);
+		propertyName = (0, import_index_cjs$14.toCamelCase)(propertyName);
 		if (!this._usedStyleProp.has(propertyName)) {
 			return "";
 		}
@@ -2160,7 +3609,7 @@ var Style = class {
 		return value;
 	}
 	getPropertyValue(propertyName) {
-		propertyName = toCamelCase(propertyName);
+		propertyName = (0, import_index_cjs$14.toCamelCase)(propertyName);
 		const value = this[propertyName];
 		if (!value) {
 			return "";
@@ -2169,8 +3618,8 @@ var Style = class {
 	}
 };
 initStyle(Style, styleProperties);
-hooks$1.tap("injectNewStyleProperties", (newStyleProperties) => {
-	if (isArray(newStyleProperties)) {
+import_index_cjs$14.tap("injectNewStyleProperties", (newStyleProperties) => {
+	if ((0, import_index_cjs$14.isArray)(newStyleProperties)) {
 		initStyle(Style, newStyleProperties);
 	} else {
 		if (typeof newStyleProperties !== "string") return;
@@ -2217,24 +3666,25 @@ function following(el, root) {
 
 //#endregion
 //#region src/dom/element.ts
+var import_index_cjs$13 = __toESM(require_index_cjs(), 1);
 var TaroElement = class TaroElement extends TaroNode {
 	ctx;
 	tagName;
 	props = {};
 	style;
-	dataset = EMPTY_OBJ;
+	dataset = import_index_cjs$13.EMPTY_OBJ;
 	innerHTML;
 	constructor() {
 		super();
 		this.nodeType = NodeType.ELEMENT_NODE;
 		this.style = new Style(this);
-		hooks$1.call("patchElement", this);
+		import_index_cjs$13.call("patchElement", this);
 	}
 	_stopPropagation(event) {
 		let target = this;
 		while (target = target.parentNode) {
 			const listeners = target.__handlers[event.type];
-			if (!isArray(listeners)) {
+			if (!(0, import_index_cjs$13.isArray)(listeners)) {
 				continue;
 			}
 			for (let i = listeners.length; i--;) {
@@ -2289,7 +3739,7 @@ var TaroElement = class TaroElement extends TaroNode {
 		super.textContent = text;
 	}
 	hasAttribute(qualifiedName) {
-		return !isUndefined(this.props[qualifiedName]);
+		return !(0, import_index_cjs$13.isUndefined)(this.props[qualifiedName]);
 	}
 	hasAttributes() {
 		return this.attributes.length > 0;
@@ -2306,7 +3756,7 @@ var TaroElement = class TaroElement extends TaroNode {
 		this.setAttribute(FOCUS, false);
 	}
 	setAttribute(qualifiedName, value) {
-		process.env.NODE_ENV !== "production" && warn(isString(value) && value.length > PROPERTY_THRESHOLD, `元素 ${this.nodeName} 的 ${qualifiedName} 属性值数据量过大，可能会影响渲染性能。考虑降低图片转为 base64 的阈值或在 CSS 中使用 base64。`);
+		process.env.NODE_ENV !== "production" && (0, import_index_cjs$13.warn)((0, import_index_cjs$13.isString)(value) && value.length > PROPERTY_THRESHOLD, `元素 ${this.nodeName} 的 ${qualifiedName} 属性值数据量过大，可能会影响渲染性能。考虑降低图片转为 base64 的阈值或在 CSS 中使用 base64。`);
 		const isPureView = this.nodeName === VIEW && !isHasExtractProp(this) && !this.isAnyEventBinded();
 		if (qualifiedName !== STYLE) {
 			MutationObserver$1.record({
@@ -2331,10 +3781,10 @@ var TaroElement = class TaroElement extends TaroNode {
 			default:
 				this.props[qualifiedName] = value;
 				if (qualifiedName.startsWith("data-")) {
-					if (this.dataset === EMPTY_OBJ) {
+					if (this.dataset === import_index_cjs$13.EMPTY_OBJ) {
 						this.dataset = Object.create(null);
 					}
-					this.dataset[toCamelCase(qualifiedName.replace(/^data-/, ""))] = value;
+					this.dataset[(0, import_index_cjs$13.toCamelCase)(qualifiedName.replace(/^data-/, ""))] = value;
 				}
 				break;
 		}
@@ -2347,26 +3797,26 @@ var TaroElement = class TaroElement extends TaroNode {
 		const catchViewAlias = componentsAlias$2[CATCH_VIEW]._num;
 		const _path = this._path;
 		qualifiedName = shortcutAttr(qualifiedName);
-		const qualifiedNameInCamelCase = toCamelCase(qualifiedName);
+		const qualifiedNameInCamelCase = (0, import_index_cjs$13.toCamelCase)(qualifiedName);
 		const payload = {
 			path: `${_path}.${qualifiedNameInCamelCase}`,
-			value: isFunction(value) ? () => value : value
+			value: (0, import_index_cjs$13.isFunction)(value) ? () => value : value
 		};
-		hooks$1.call("modifySetAttrPayload", this, qualifiedName, payload, componentsAlias$2);
+		import_index_cjs$13.call("modifySetAttrPayload", this, qualifiedName, payload, componentsAlias$2);
 		if (_alias) {
 			const qualifiedNameAlias = _alias[qualifiedNameInCamelCase] || qualifiedName;
-			payload.path = `${_path}.${toCamelCase(qualifiedNameAlias)}`;
+			payload.path = `${_path}.${(0, import_index_cjs$13.toCamelCase)(qualifiedNameAlias)}`;
 		}
 		this.enqueueUpdate(payload);
 		if (this.nodeName === VIEW) {
 			if (qualifiedNameInCamelCase === CATCHMOVE) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs$13.NodeName}`,
 					value: value ? catchViewAlias : this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : staticViewAlias
 				});
 			} else if (isPureView && isHasExtractProp(this)) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs$13.NodeName}`,
 					value: staticViewAlias
 				});
 			}
@@ -2383,7 +3833,7 @@ var TaroElement = class TaroElement extends TaroNode {
 		if (qualifiedName === STYLE) {
 			this.style.cssText = "";
 		} else {
-			const isInterrupt = hooks$1.call("onRemoveAttribute", this, qualifiedName);
+			const isInterrupt = import_index_cjs$13.call("onRemoveAttribute", this, qualifiedName);
 			if (isInterrupt) {
 				return;
 			}
@@ -2401,26 +3851,26 @@ var TaroElement = class TaroElement extends TaroNode {
 		const clickViewAlias = componentsAlias$2[CLICK_VIEW]._num;
 		const _path = this._path;
 		qualifiedName = shortcutAttr(qualifiedName);
-		const qualifiedNameInCamelCase = toCamelCase(qualifiedName);
+		const qualifiedNameInCamelCase = (0, import_index_cjs$13.toCamelCase)(qualifiedName);
 		const payload = {
 			path: `${_path}.${qualifiedNameInCamelCase}`,
 			value: ""
 		};
-		hooks$1.call("modifyRmAttrPayload", this, qualifiedName, payload, componentsAlias$2);
+		import_index_cjs$13.call("modifyRmAttrPayload", this, qualifiedName, payload, componentsAlias$2);
 		if (_alias) {
 			const qualifiedNameAlias = _alias[qualifiedNameInCamelCase] || qualifiedName;
-			payload.path = `${_path}.${toCamelCase(qualifiedNameAlias)}`;
+			payload.path = `${_path}.${(0, import_index_cjs$13.toCamelCase)(qualifiedNameAlias)}`;
 		}
 		this.enqueueUpdate(payload);
 		if (this.nodeName === VIEW) {
 			if (qualifiedNameInCamelCase === CATCHMOVE) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs$13.NodeName}`,
 					value: this.isOnlyClickBinded() && !isHasExtractProp(this) ? clickViewAlias : this.isAnyEventBinded() ? viewAlias : isHasExtractProp(this) ? staticViewAlias : pureViewAlias
 				});
 			} else if (isStaticView && !isHasExtractProp(this)) {
 				this.enqueueUpdate({
-					path: `${_path}.${Shortcuts.NodeName}`,
+					path: `${_path}.${import_index_cjs$13.NodeName}`,
 					value: pureViewAlias
 				});
 			}
@@ -2445,7 +3895,7 @@ var TaroElement = class TaroElement extends TaroNode {
 	dispatchEvent(event) {
 		const cancelable = event.cancelable;
 		const listeners = this.__handlers[event.type];
-		if (!isArray(listeners)) {
+		if (!(0, import_index_cjs$13.isArray)(listeners)) {
 			return false;
 		}
 		for (let i = listeners.length; i--;) {
@@ -2454,14 +3904,14 @@ var TaroElement = class TaroElement extends TaroNode {
 			if (listener._stop) {
 				listener._stop = false;
 			} else {
-				hooks$1.call("modifyDispatchEvent", event, this);
+				import_index_cjs$13.call("modifyDispatchEvent", event, this);
 				result = listener.call(this, event);
 			}
 			if ((result === false || event._end) && cancelable) {
 				event.defaultPrevented = true;
 			}
-			if (!isUndefined(result) && event.mpEvent) {
-				const res = hooks$1.call("modifyTaroEventReturn", this, event, result);
+			if (!(0, import_index_cjs$13.isUndefined)(result) && event.mpEvent) {
+				const res = import_index_cjs$13.call("modifyTaroEventReturn", this, event, result);
 				if (res) {
 					event.mpEvent[EVENT_CALLBACK_RESULT] = result;
 				}
@@ -2477,18 +3927,18 @@ var TaroElement = class TaroElement extends TaroNode {
 	}
 	addEventListener(type, handler, options$1) {
 		const name = this.nodeName;
-		const SPECIAL_NODES$1 = hooks$1.call("getSpecialNodes");
+		const SPECIAL_NODES$1 = import_index_cjs$13.call("getSpecialNodes");
 		let sideEffect = true;
-		if (isObject(options$1) && options$1.sideEffect === false) {
+		if ((0, import_index_cjs$13.isObject)(options$1) && options$1.sideEffect === false) {
 			sideEffect = false;
 			delete options$1.sideEffect;
 		}
-		hooks$1.call("modifyAddEventListener", this, sideEffect, getComponentsAlias);
+		import_index_cjs$13.call("modifyAddEventListener", this, sideEffect, getComponentsAlias);
 		if (sideEffect !== false && !this.isAnyEventBinded() && SPECIAL_NODES$1.indexOf(name) > -1) {
 			const componentsAlias$2 = getComponentsAlias();
 			const alias = componentsAlias$2[name]._num;
 			this.enqueueUpdate({
-				path: `${this._path}.${Shortcuts.NodeName}`,
+				path: `${this._path}.${import_index_cjs$13.NodeName}`,
 				value: alias
 			});
 		}
@@ -2497,14 +3947,14 @@ var TaroElement = class TaroElement extends TaroNode {
 	removeEventListener(type, handler, sideEffect = true) {
 		super.removeEventListener(type, handler);
 		const name = this.nodeName;
-		const SPECIAL_NODES$1 = hooks$1.call("getSpecialNodes");
-		hooks$1.call("modifyRemoveEventListener", this, sideEffect, getComponentsAlias);
+		const SPECIAL_NODES$1 = import_index_cjs$13.call("getSpecialNodes");
+		import_index_cjs$13.call("modifyRemoveEventListener", this, sideEffect, getComponentsAlias);
 		if (sideEffect !== false && !this.isAnyEventBinded() && SPECIAL_NODES$1.indexOf(name) > -1) {
 			const componentsAlias$2 = getComponentsAlias();
 			const value = isHasExtractProp(this) ? `static-${name}` : `pure-${name}`;
 			const valueAlias = componentsAlias$2[value]._num;
 			this.enqueueUpdate({
-				path: `${this._path}.${Shortcuts.NodeName}`,
+				path: `${this._path}.${import_index_cjs$13.NodeName}`,
 				value: valueAlias
 			});
 		}
@@ -3059,6 +4509,7 @@ function getOnesWeight(selectors) {
 
 //#endregion
 //#region src/dom-external/inner-html/tags.ts
+var import_index_cjs$12 = __toESM(require_index_cjs(), 1);
 function makeMap(str, expectsLowerCase) {
 	const map = Object.create(null);
 	const list = str.split(",");
@@ -3071,13 +4522,14 @@ const specialMiniElements = {
 	img: "image",
 	iframe: "web-view"
 };
-const internalCompsList = Object.keys(internalComponents).map((i) => i.toLowerCase()).join(",");
+const internalCompsList = Object.keys(import_index_cjs$12.internalComponents).map((i) => i.toLowerCase()).join(",");
 const isMiniElements = makeMap(internalCompsList, true);
 const isInlineElements = makeMap("a,i,abbr,iframe,select,acronym,slot,small,span,bdi,kbd,strong,big,map,sub,sup,br,mark,mark,meter,template,canvas,textarea,cite,object,time,code,output,u,data,picture,tt,datalist,var,dfn,del,q,em,s,embed,samp,b", true);
 const isBlockElements = makeMap("address,fieldset,li,article,figcaption,main,aside,figure,nav,blockquote,footer,ol,details,form,p,dialog,h1,h2,h3,h4,h5,h6,pre,dd,header,section,div,hgroup,table,dl,hr,ul,dt", true);
 
 //#endregion
 //#region src/dom-external/inner-html/parser.ts
+var import_index_cjs$11 = __toESM(require_index_cjs(), 1);
 const closingTagAncestorBreakers = {
 	li: [
 		"ul",
@@ -3143,7 +4595,7 @@ function format(children, document$1, styleOptions, parent) {
 	}).map((child) => {
 		if (child.type === "text") {
 			let text = document$1.createTextNode(child.content);
-			if (isFunction(options.html.transformText)) {
+			if ((0, import_index_cjs$11.isFunction)(options.html.transformText)) {
 				text = options.html.transformText(text, child);
 			}
 			parent?.appendChild(text);
@@ -3174,7 +4626,7 @@ function format(children, document$1, styleOptions, parent) {
 			styleTagParser,
 			descendantList: list
 		}, el);
-		if (isFunction(options.html.transformElement)) {
+		if ((0, import_index_cjs$11.isFunction)(options.html.transformElement)) {
 			return options.html.transformElement(el, child);
 		}
 		return el;
@@ -3441,7 +4893,8 @@ function contains(node) {
 
 //#endregion
 //#region src/dom-external/index.ts
-if (process.env.TARO_PLATFORM !== PLATFORM_TYPE.WEB && process.env.TARO_PLATFORM !== PLATFORM_TYPE.HARMONY) {
+var import_index_cjs$10 = __toESM(require_index_cjs(), 1);
+if (process.env.TARO_PLATFORM !== import_index_cjs$10.WEB && process.env.TARO_PLATFORM !== import_index_cjs$10.HARMONY) {
 	if (ENABLE_INNER_HTML) {
 		TaroNode.extend("innerHTML", {
 			set(html) {
@@ -3473,6 +4926,7 @@ if (process.env.TARO_PLATFORM !== PLATFORM_TYPE.WEB && process.env.TARO_PLATFORM
 
 //#endregion
 //#region src/dom/event.ts
+var import_index_cjs$9 = __toESM(require_index_cjs(), 1);
 var TaroEvent = class {
 	cacheTarget;
 	cacheCurrentTarget;
@@ -3507,8 +4961,8 @@ var TaroEvent = class {
 			const currentEle = env_default.document.getElementById(target.dataset?.sid || target.id || null);
 			const element = env_default.document.getElementById(target.targetDataset?.sid || target.dataset?.sid || target.id || null);
 			target.dataset = {
-				...currentEle !== null ? currentEle.dataset : EMPTY_OBJ,
-				...element !== null ? element.dataset : EMPTY_OBJ
+				...currentEle !== null ? currentEle.dataset : import_index_cjs$9.EMPTY_OBJ,
+				...element !== null ? element.dataset : import_index_cjs$9.EMPTY_OBJ
 			};
 			for (const key in this.mpEvent?.detail) {
 				target[key] = this.mpEvent.detail[key];
@@ -3567,7 +5021,7 @@ function createEvent(event, node) {
 const eventsBatch = {};
 function getEventCBResult(event) {
 	const result = event[EVENT_CALLBACK_RESULT];
-	if (!isUndefined(result)) {
+	if (!(0, import_index_cjs$9.isUndefined)(result)) {
 		delete event[EVENT_CALLBACK_RESULT];
 	}
 	return result;
@@ -3576,21 +5030,21 @@ function eventHandler(event) {
 	event.type === undefined && Object.defineProperty(event, "type", { value: event._type });
 	event.detail === undefined && Object.defineProperty(event, "detail", { value: event._detail || { ...event } });
 	event.currentTarget = event.currentTarget || event.target || { ...event };
-	hooks$1.call("modifyMpEventImpl", event);
+	import_index_cjs$9.call("modifyMpEventImpl", event);
 	const currentTarget = event.currentTarget;
 	const id = currentTarget.dataset?.sid || currentTarget.id || event.detail?.id || "";
 	const node = env_default.document.getElementById(id);
 	if (node) {
 		const dispatch = () => {
 			const e = createEvent(event, node);
-			hooks$1.call("modifyTaroEvent", e, node);
-			hooks$1.call("dispatchTaroEvent", e, node);
-			hooks$1.call("dispatchTaroEventFinish", e, node);
+			import_index_cjs$9.call("modifyTaroEvent", e, node);
+			import_index_cjs$9.call("dispatchTaroEvent", e, node);
+			import_index_cjs$9.call("dispatchTaroEventFinish", e, node);
 		};
-		if (hooks$1.isExist("batchedEventUpdates")) {
+		if (import_index_cjs$9.isExist("batchedEventUpdates")) {
 			const type = event.type;
-			if (!hooks$1.call("isBubbleEvents", type) || !isParentBinded(node, type) || type === TOUCHMOVE && !!node.props.catchMove) {
-				hooks$1.call("batchedEventUpdates", () => {
+			if (!import_index_cjs$9.call("isBubbleEvents", type) || !isParentBinded(node, type) || type === TOUCHMOVE && !!node.props.catchMove) {
+				import_index_cjs$9.call("batchedEventUpdates", () => {
 					if (eventsBatch[type]) {
 						eventsBatch[type].forEach((fn) => fn());
 						delete eventsBatch[type];
@@ -3675,6 +5129,7 @@ const perf = new Performance();
 
 //#endregion
 //#region src/dom/root.ts
+var import_index_cjs$8 = __toESM(require_index_cjs(), 1);
 function findCustomWrapper(root, dataPathArr) {
 	const list = dataPathArr.slice(1);
 	let currentData = root;
@@ -3683,10 +5138,10 @@ function findCustomWrapper(root, dataPathArr) {
 	list.some((item, i) => {
 		const key = item.replace(/^\[(.+)\]$/, "$1").replace(/\bcn\b/g, "childNodes");
 		currentData = currentData[key];
-		if (isArray(currentData)) {
+		if ((0, import_index_cjs$8.isArray)(currentData)) {
 			currentData = currentData.filter((el) => !isComment(el));
 		}
-		if (isUndefined(currentData)) return true;
+		if ((0, import_index_cjs$8.isUndefined)(currentData)) return true;
 		if (currentData.nodeName === CUSTOM_WRAPPER) {
 			const res = customWrapperCache.get(currentData.sid);
 			if (res) {
@@ -3729,7 +5184,7 @@ var TaroRootElement = class extends TaroElement {
 	}
 	performUpdate(initRender = false, prerender) {
 		this.pendingUpdate = true;
-		const ctx = hooks$1.call("proxyToRaw", this.ctx);
+		const ctx = import_index_cjs$8.call("proxyToRaw", this.ctx);
 		this.scheduleTask(() => {
 			const setDataMark = `${SET_DATA} 开始时间戳 ${Date.now()}`;
 			perf.start(setDataMark);
@@ -3737,7 +5192,7 @@ var TaroRootElement = class extends TaroElement {
 			const resetPaths = new Set(initRender ? ["root.cn.[0]", "root.cn[0]"] : []);
 			while (this.updatePayloads.length > 0) {
 				const { path, value } = this.updatePayloads.shift();
-				if (path.endsWith(Shortcuts.Childnodes)) {
+				if (path.endsWith(import_index_cjs$8.Childnodes)) {
 					resetPaths.add(path);
 				}
 				data[path] = value;
@@ -3749,11 +5204,11 @@ var TaroRootElement = class extends TaroElement {
 					}
 				});
 				const value = data[path];
-				if (isFunction(value)) {
+				if ((0, import_index_cjs$8.isFunction)(value)) {
 					data[path] = value();
 				}
 			}
-			if (isFunction(prerender)) return prerender(data);
+			if ((0, import_index_cjs$8.isFunction)(prerender)) return prerender(data);
 			this.pendingUpdate = false;
 			let normalUpdate = {};
 			const customWrapperMap = new Map();
@@ -3819,6 +5274,7 @@ var TaroRootElement = class extends TaroElement {
 
 //#endregion
 //#region src/dom/text.ts
+var import_index_cjs$7 = __toESM(require_index_cjs(), 1);
 var TaroText = class extends TaroNode {
 	_value;
 	nodeType = NodeType.TEXT_NODE;
@@ -3835,7 +5291,7 @@ var TaroText = class extends TaroNode {
 		});
 		this._value = text;
 		this.enqueueUpdate({
-			path: `${this._path}.${Shortcuts.Text}`,
+			path: `${this._path}.${import_index_cjs$7.Text}`,
 			value: text
 		});
 	}
@@ -3924,6 +5380,7 @@ var TransferElement = class extends TaroElement {
 
 //#endregion
 //#region src/dom/document.ts
+var import_index_cjs$6 = __toESM(require_index_cjs(), 1);
 var TaroDocument = class extends TaroElement {
 	documentElement;
 	head;
@@ -3942,7 +5399,7 @@ var TaroDocument = class extends TaroElement {
 			case nodeName === ROOT_STR:
 				element = new TaroRootElement();
 				return element;
-			case controlledComponent.has(nodeName):
+			case import_index_cjs$6.has(nodeName):
 				element = new FormElement();
 				break;
 			case nodeName === A:
@@ -3950,7 +5407,7 @@ var TaroDocument = class extends TaroElement {
 				break;
 			case nodeName === "page-meta":
 			case nodeName === "navigation-bar":
-				element = new TransferElement(toCamelCase(nodeName));
+				element = new TransferElement((0, import_index_cjs$6.toCamelCase)(nodeName));
 				break;
 			default:
 				element = new TaroElement();
@@ -3968,7 +5425,7 @@ var TaroDocument = class extends TaroElement {
 	}
 	getElementById(id) {
 		const el = eventSource.get(id);
-		return isUndefined(el) ? null : el;
+		return (0, import_index_cjs$6.isUndefined)(el) ? null : el;
 	}
 	querySelector(query) {
 		if (/^#/.test(query)) {
@@ -4030,10 +5487,11 @@ var SVGElement = class extends TaroElement {};
 
 //#endregion
 //#region src/dsl/common.ts
+var import_index_cjs$5 = __toESM(require_index_cjs(), 1);
 const instances = new Map();
 const pageId = incrementId();
 function injectPageInstance(inst, id) {
-	hooks$1.call("mergePageInstance", instances.get(id), inst);
+	import_index_cjs$5.call("mergePageInstance", instances.get(id), inst);
 	instances.set(id, inst);
 }
 function getPageInstance(id) {
@@ -4047,12 +5505,12 @@ function safeExecute(path, lifecycle, ...args) {
 	if (instance == null) {
 		return;
 	}
-	const func = hooks$1.call("getLifecycle", instance, lifecycle);
-	if (isArray(func)) {
+	const func = import_index_cjs$5.call("getLifecycle", instance, lifecycle);
+	if ((0, import_index_cjs$5.isArray)(func)) {
 		const res = func.map((fn) => fn.apply(instance, args));
 		return res[0];
 	}
-	if (!isFunction(func)) {
+	if (!(0, import_index_cjs$5.isFunction)(func)) {
 		return;
 	}
 	return func.apply(instance, args);
@@ -4085,7 +5543,7 @@ function getOnHideEventKey(path) {
 }
 function createPageConfig(component, pageName, data, pageConfig) {
 	const id = pageName ?? `taro_page_${pageId()}`;
-	const [ONLOAD, ONUNLOAD, ONREADY, ONSHOW, ONHIDE, LIFECYCLES, SIDE_EFFECT_LIFECYCLES] = hooks$1.call("getMiniLifecycleImpl").page;
+	const [ONLOAD, ONUNLOAD, ONREADY, ONSHOW, ONHIDE, LIFECYCLES, SIDE_EFFECT_LIFECYCLES] = import_index_cjs$5.call("getMiniLifecycleImpl").page;
 	let pageElement = null;
 	let unmounting = false;
 	let prepareMountList = [];
@@ -4099,7 +5557,7 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			onShow: getOnShowEventKey(id),
 			onHide: getOnHideEventKey(id)
 		};
-		if (!isUndefined(page.exitState)) {
+		if (!(0, import_index_cjs$5.isUndefined)(page.exitState)) {
 			Current.router.exitState = page.exitState;
 		}
 	}
@@ -4128,14 +5586,14 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			const mount = () => {
 				Current.app.mount(component, $taroPath, () => {
 					pageElement = env_default.document.getElementById($taroPath);
-					ensure(pageElement !== null, "没有找到页面实例。");
+					(0, import_index_cjs$5.ensure)(pageElement !== null, "没有找到页面实例。");
 					safeExecute($taroPath, ON_LOAD, this.$taroParams);
 					loadResolver();
 					if (process.env.TARO_PLATFORM !== "web") {
 						pageElement.ctx = this;
 						pageElement.performUpdate(true, cb);
 					} else {
-						isFunction(cb) && cb();
+						(0, import_index_cjs$5.isFunction)(cb) && cb();
 					}
 				});
 			};
@@ -4197,7 +5655,7 @@ function createPageConfig(component, pageName, data, pageConfig) {
 	};
 	if (process.env.TARO_PLATFORM === "web") {
 		config.getOpenerEventChannel = () => {
-			return EventChannel.pageChannel;
+			return import_index_cjs$5.pageChannel;
 		};
 	}
 	LIFECYCLES.forEach((lifecycle) => {
@@ -4231,16 +5689,16 @@ function createPageConfig(component, pageName, data, pageConfig) {
 		}
 	});
 	config.eh = eventHandler;
-	if (!isUndefined(data)) {
+	if (!(0, import_index_cjs$5.isUndefined)(data)) {
 		config.data = data;
 	}
-	hooks$1.call("modifyPageObject", config);
+	import_index_cjs$5.call("modifyPageObject", config);
 	return config;
 }
 function createComponentConfig(component, componentName, data) {
 	const id = componentName ?? `taro_component_${pageId()}`;
 	let componentElement = null;
-	const [ATTACHED, DETACHED] = hooks$1.call("getMiniLifecycleImpl").component;
+	const [ATTACHED, DETACHED] = import_index_cjs$5.call("getMiniLifecycleImpl").component;
 	const config = {
 		[ATTACHED]() {
 			perf.start(PAGE_INIT);
@@ -4248,7 +5706,7 @@ function createComponentConfig(component, componentName, data) {
 			const path = getPath(id, { id: this.pageIdCache });
 			Current.app.mount(component, path, () => {
 				componentElement = env_default.document.getElementById(path);
-				ensure(componentElement !== null, "没有找到组件实例。");
+				(0, import_index_cjs$5.ensure)(componentElement !== null, "没有找到组件实例。");
 				this.$taroInstances = instances.get(path);
 				safeExecute(path, ON_LOAD);
 				if (process.env.TARO_PLATFORM !== "web") {
@@ -4268,7 +5726,7 @@ function createComponentConfig(component, componentName, data) {
 		},
 		methods: { eh: eventHandler }
 	};
-	if (!isUndefined(data)) {
+	if (!(0, import_index_cjs$5.isUndefined)(data)) {
 		config.data = data;
 	}
 	[
@@ -4276,17 +5734,17 @@ function createComponentConfig(component, componentName, data) {
 		EXTERNAL_CLASSES,
 		BEHAVIORS
 	].forEach((key) => {
-		config[key] = component[key] ?? EMPTY_OBJ;
+		config[key] = component[key] ?? import_index_cjs$5.EMPTY_OBJ;
 	});
 	return config;
 }
 function createRecursiveComponentConfig(componentName) {
 	const isCustomWrapper = componentName === CUSTOM_WRAPPER;
-	const [ATTACHED, DETACHED] = hooks$1.call("getMiniLifecycleImpl").component;
+	const [ATTACHED, DETACHED] = import_index_cjs$5.call("getMiniLifecycleImpl").component;
 	const lifeCycles = isCustomWrapper ? {
 		[ATTACHED]() {
 			const componentId = this.data.i?.sid || this.props.i?.sid;
-			if (isString(componentId)) {
+			if ((0, import_index_cjs$5.isString)(componentId)) {
 				customWrapperCache.set(componentId, this);
 				const el = env_default.document.getElementById(componentId);
 				if (el) {
@@ -4296,7 +5754,7 @@ function createRecursiveComponentConfig(componentName) {
 		},
 		[DETACHED]() {
 			const componentId = this.data.i?.sid || this.props.i?.sid;
-			if (isString(componentId)) {
+			if ((0, import_index_cjs$5.isString)(componentId)) {
 				customWrapperCache.delete(componentId);
 				const el = env_default.document.getElementById(componentId);
 				if (el) {
@@ -4304,16 +5762,16 @@ function createRecursiveComponentConfig(componentName) {
 				}
 			}
 		}
-	} : EMPTY_OBJ;
+	} : import_index_cjs$5.EMPTY_OBJ;
 	const extraOptions = {};
 	if (process.env.TARO_ENV === "jd") {
 		extraOptions.addGlobalClass = true;
 	}
-	return hooks$1.call("modifyRecursiveComponentConfig", {
+	return import_index_cjs$5.call("modifyRecursiveComponentConfig", {
 		properties: {
 			i: {
 				type: Object,
-				value: { [Shortcuts.NodeName]: getComponentsAlias$1(internalComponents)[VIEW]._num }
+				value: { [import_index_cjs$5.NodeName]: (0, import_index_cjs$5.getComponentsAlias)(import_index_cjs$5.internalComponents)[VIEW]._num }
 			},
 			l: {
 				type: String,
@@ -4369,15 +5827,16 @@ const nextTick = (cb, ctx) => {
 
 //#endregion
 //#region src/polyfill/array.ts
+var import_index_cjs$4 = __toESM(require_index_cjs(), 1);
 function handleArrayFindPolyfill() {
-	if (!isFunction(Array.prototype.find)) {
+	if (!(0, import_index_cjs$4.isFunction)(Array.prototype.find)) {
 		Object.defineProperty(Array.prototype, "find", { value(predicate) {
 			if (this == null) {
 				throw new TypeError("\"this\" is null or not defined");
 			}
 			const o = Object(this);
 			const len = o.length >>> 0;
-			if (!isFunction(predicate)) {
+			if (!(0, import_index_cjs$4.isFunction)(predicate)) {
 				throw new TypeError("predicate must be a function");
 			}
 			const thisArg = arguments[1];
@@ -4394,7 +5853,7 @@ function handleArrayFindPolyfill() {
 	}
 }
 function handleArrayIncludesPolyfill() {
-	if (!isFunction(Array.prototype.includes)) {
+	if (!(0, import_index_cjs$4.isFunction)(Array.prototype.includes)) {
 		Object.defineProperty(Array.prototype, "includes", { value(searchElement, fromIndex) {
 			if (this == null) {
 				throw new TypeError("\"this\" is null or not defined");
@@ -4419,6 +5878,7 @@ function handleArrayIncludesPolyfill() {
 
 //#endregion
 //#region src/polyfill/intersection-observer.ts
+var import_index_cjs$3 = __toESM(require_index_cjs(), 1);
 function handleIntersectionObserverPolyfill() {
 	if ("IntersectionObserver" in window && "IntersectionObserverEntry" in window && "intersectionRatio" in window.IntersectionObserverEntry.prototype) {
 		if (!("isIntersecting" in window.IntersectionObserverEntry.prototype)) {
@@ -4472,7 +5932,7 @@ function handleIntersectionObserverObjectPolyfill() {
 	* @constructor
 	*/
 	function IntersectionObserver(callback, options$1 = {}) {
-		if (!isFunction(callback)) {
+		if (!(0, import_index_cjs$3.isFunction)(callback)) {
 			throw new Error("callback must be a function");
 		}
 		if (options$1.root && options$1.root.nodeType != 1) {
@@ -4565,7 +6025,7 @@ function handleIntersectionObserverObjectPolyfill() {
 		let threshold = opt_threshold || [0];
 		if (!Array.isArray(threshold)) threshold = [threshold];
 		return threshold.sort().filter((t, i, a) => {
-			if (!isNumber(t) || isNaN(t) || t < 0 || t > 1) {
+			if (!(0, import_index_cjs$3.isNumber)(t) || isNaN(t) || t < 0 || t > 1) {
 				throw new Error("threshold must be a number between 0 and 1 inclusively");
 			}
 			return t !== a[i - 1];
@@ -4833,9 +6293,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	*     phase. Note: this only works in modern browsers.
 	*/
 	function addEvent(node, event, fn, opt_useCapture) {
-		if (isFunction(node.addEventListener)) {
+		if ((0, import_index_cjs$3.isFunction)(node.addEventListener)) {
 			node.addEventListener(event, fn, opt_useCapture || false);
-		} else if (isFunction(node.attachEvent)) {
+		} else if ((0, import_index_cjs$3.isFunction)(node.attachEvent)) {
 			node.attachEvent("on" + event, fn);
 		}
 	}
@@ -4848,9 +6308,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	*     flag set to true, it should be set to true here in order to remove it.
 	*/
 	function removeEvent(node, event, fn, opt_useCapture) {
-		if (isFunction(node.removeEventListener)) {
+		if ((0, import_index_cjs$3.isFunction)(node.removeEventListener)) {
 			node.removeEventListener(event, fn, opt_useCapture || false);
-		} else if (isFunction(node.detatchEvent)) {
+		} else if ((0, import_index_cjs$3.isFunction)(node.detatchEvent)) {
 			node.detatchEvent("on" + event, fn);
 		}
 	}
@@ -4952,8 +6412,9 @@ function handleIntersectionObserverObjectPolyfill() {
 
 //#endregion
 //#region src/polyfill/object.ts
+var import_index_cjs$2 = __toESM(require_index_cjs(), 1);
 function handleObjectAssignPolyfill() {
-	if (!isFunction(Object.assign)) {
+	if (!(0, import_index_cjs$2.isFunction)(Object.assign)) {
 		Object.assign = function(target) {
 			if (target == null) {
 				throw new TypeError("Cannot convert undefined or null to object");
@@ -4974,7 +6435,7 @@ function handleObjectAssignPolyfill() {
 	}
 }
 function handleObjectEntriesPolyfill() {
-	if (!isFunction(Object.entries)) {
+	if (!(0, import_index_cjs$2.isFunction)(Object.entries)) {
 		Object.entries = function(obj) {
 			if (obj == null) {
 				throw new TypeError("Cannot convert undefined or null to object");
@@ -4992,13 +6453,13 @@ function handleObjectEntriesPolyfill() {
 	}
 }
 function handleObjectDefinePropertyPolyfill() {
-	if (!isFunction(Object.defineProperties)) {
+	if (!(0, import_index_cjs$2.isFunction)(Object.defineProperties)) {
 		Object.defineProperties = function(obj, properties) {
 			function convertToDescriptor(desc) {
 				function hasProperty(obj$1, prop) {
 					return Object.prototype.hasOwnProperty.call(obj$1, prop);
 				}
-				if (!isObject(desc)) {
+				if (!(0, import_index_cjs$2.isObject)(desc)) {
 					throw new TypeError("bad desc");
 				}
 				const d = {};
@@ -5010,14 +6471,14 @@ function handleObjectDefinePropertyPolyfill() {
 				if (hasProperty(desc, "writable")) d.writable = !!desc.writable;
 				if (hasProperty(desc, "get")) {
 					const g = desc.get;
-					if (!isFunction(g) && !isUndefined(g)) {
+					if (!(0, import_index_cjs$2.isFunction)(g) && !(0, import_index_cjs$2.isUndefined)(g)) {
 						throw new TypeError("bad get");
 					}
 					d.get = g;
 				}
 				if (hasProperty(desc, "set")) {
 					const s = desc.set;
-					if (!isFunction(s) && !isUndefined(s)) {
+					if (!(0, import_index_cjs$2.isFunction)(s) && !(0, import_index_cjs$2.isUndefined)(s)) {
 						throw new TypeError("bad set");
 					}
 					d.set = s;
@@ -5027,7 +6488,7 @@ function handleObjectDefinePropertyPolyfill() {
 				}
 				return d;
 			}
-			if (!isObject(obj)) throw new TypeError("bad obj");
+			if (!(0, import_index_cjs$2.isObject)(obj)) throw new TypeError("bad obj");
 			properties = Object(properties);
 			const keys = Object.keys(properties);
 			const descs = [];
@@ -5044,6 +6505,7 @@ function handleObjectDefinePropertyPolyfill() {
 
 //#endregion
 //#region src/polyfill/index.ts
+var import_index_cjs$1 = __toESM(require_index_cjs(), 1);
 function handlePolyfill() {
 	if (process.env.SUPPORT_TARO_POLYFILL === "enabled" || process.env.SUPPORT_TARO_POLYFILL === "Object" || process.env.SUPPORT_TARO_POLYFILL === "Object.assign") {
 		handleObjectAssignPolyfill();
@@ -5060,7 +6522,7 @@ function handlePolyfill() {
 	if (process.env.SUPPORT_TARO_POLYFILL === "enabled" || process.env.SUPPORT_TARO_POLYFILL === "Array" || process.env.SUPPORT_TARO_POLYFILL === "Array.includes") {
 		handleArrayIncludesPolyfill();
 	}
-	if (process.env.TARO_PLATFORM === "web" && isObject(window)) {
+	if (process.env.TARO_PLATFORM === "web" && (0, import_index_cjs$1.isObject)(window)) {
 		if (process.env.SUPPORT_TARO_POLYFILL === "enabled" || process.env.SUPPORT_TARO_POLYFILL === "IntersectionObserver") {
 			handleIntersectionObserverPolyfill();
 		}
@@ -5071,5 +6533,11 @@ if (process.env.SUPPORT_TARO_POLYFILL !== "disabled" && process.env.TARO_PLATFOR
 }
 
 //#endregion
+//#region src/index.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
+
+//#endregion
+var Events = import_index_cjs$25.Events;
+var hooks = import_index_cjs.hooks;
 export { A, APP, BEHAVIORS, BODY, CATCHMOVE, CATCH_VIEW, CHANGE, CLASS, CLICK_VIEW, COMMENT, COMPILE_MODE, CONFIRM, CONTAINER, CONTEXT_ACTIONS, CURRENT_TARGET, CUSTOM_WRAPPER, Current, DATASET, DATE, DOCUMENT_ELEMENT_NAME, DOCUMENT_FRAGMENT, EVENT_CALLBACK_RESULT, EXTERNAL_CLASSES, Events, FOCUS, FormElement, HEAD, HOOKS_APP_ID, HTML, History, ID, INPUT, KEY_CODE, Location, MutationObserver$1 as MutationObserver, OBJECT, ON_HIDE, ON_LOAD, ON_READY, ON_SHOW, OPTIONS, PAGE_INIT, PROPERTY_THRESHOLD, PROPS, PURE_VIEW, ROOT_STR, SET_DATA, SET_TIMEOUT, STATIC_VIEW, STYLE, SVGElement, Style, TARGET, TARO_RUNTIME, TIME_STAMP, TOUCHMOVE, TYPE, TaroElement, TaroEvent, TaroNode, TaroRootElement, TaroText, UID, TaroURLProvider as URL, URLSearchParams, VALUE, VIEW, addLeadingSlash, _caf as cancelAnimationFrame, convertNumber2PX, createComponentConfig, createEvent, createPageConfig, createRecursiveComponentConfig, customWrapperCache, debounce, taroDocumentProvider as document, env_default as env, eventCenter, eventHandler, eventSource, extend, getComponentsAlias, taroGetComputedStyleProvider as getComputedStyle, getCurrentInstance, getCurrentPage, getHomePage, getOnHideEventKey, getOnReadyEventKey, getOnShowEventKey, getPageInstance, getPath, handlePolyfill, hasBasename, taroHistoryProvider as history, hooks, hydrate, incrementId, injectPageInstance, isComment, isElement, isHasExtractProp, isParentBinded, isText, taroLocationProvider as location, nav as navigator, nextTick, now, options, parseUrl, perf, removePageInstance, _raf as requestAnimationFrame, safeExecute, shortcutAttr, stringify, stripBasename, stripSuffix, stripTrailing, throttle, taroWindowProvider as window };
 //# sourceMappingURL=runtime.esm.js.map

@@ -1,8 +1,10 @@
-import { isFunction, isObject, isUndefined } from "@tarojs/shared";
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 
 //#region src/polyfill/object.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 function handleObjectAssignPolyfill() {
-	if (!isFunction(Object.assign)) {
+	if (!(0, import_index_cjs.isFunction)(Object.assign)) {
 		Object.assign = function(target) {
 			if (target == null) {
 				throw new TypeError("Cannot convert undefined or null to object");
@@ -23,7 +25,7 @@ function handleObjectAssignPolyfill() {
 	}
 }
 function handleObjectEntriesPolyfill() {
-	if (!isFunction(Object.entries)) {
+	if (!(0, import_index_cjs.isFunction)(Object.entries)) {
 		Object.entries = function(obj) {
 			if (obj == null) {
 				throw new TypeError("Cannot convert undefined or null to object");
@@ -41,13 +43,13 @@ function handleObjectEntriesPolyfill() {
 	}
 }
 function handleObjectDefinePropertyPolyfill() {
-	if (!isFunction(Object.defineProperties)) {
+	if (!(0, import_index_cjs.isFunction)(Object.defineProperties)) {
 		Object.defineProperties = function(obj, properties) {
 			function convertToDescriptor(desc) {
 				function hasProperty(obj$1, prop) {
 					return Object.prototype.hasOwnProperty.call(obj$1, prop);
 				}
-				if (!isObject(desc)) {
+				if (!(0, import_index_cjs.isObject)(desc)) {
 					throw new TypeError("bad desc");
 				}
 				const d = {};
@@ -59,14 +61,14 @@ function handleObjectDefinePropertyPolyfill() {
 				if (hasProperty(desc, "writable")) d.writable = !!desc.writable;
 				if (hasProperty(desc, "get")) {
 					const g = desc.get;
-					if (!isFunction(g) && !isUndefined(g)) {
+					if (!(0, import_index_cjs.isFunction)(g) && !(0, import_index_cjs.isUndefined)(g)) {
 						throw new TypeError("bad get");
 					}
 					d.get = g;
 				}
 				if (hasProperty(desc, "set")) {
 					const s = desc.set;
-					if (!isFunction(s) && !isUndefined(s)) {
+					if (!(0, import_index_cjs.isFunction)(s) && !(0, import_index_cjs.isUndefined)(s)) {
 						throw new TypeError("bad set");
 					}
 					d.set = s;
@@ -76,7 +78,7 @@ function handleObjectDefinePropertyPolyfill() {
 				}
 				return d;
 			}
-			if (!isObject(obj)) throw new TypeError("bad obj");
+			if (!(0, import_index_cjs.isObject)(obj)) throw new TypeError("bad obj");
 			properties = Object(properties);
 			const keys = Object.keys(properties);
 			const descs = [];

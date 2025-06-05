@@ -1,16 +1,18 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { DOCUMENT_FRAGMENT } from "../constants/index.js";
 import { MutationRecordType } from "../dom-external/mutation-observer/record.js";
 import { MutationObserver } from "../dom-external/mutation-observer/index.js";
 import { NodeType } from "./node_types.js";
-import { env_default } from "../env.js";
+import env_default from "../env.js";
 import { extend, incrementId, isComment } from "../utils/index.js";
 import { eventSource } from "./event-source.js";
 import { hydrate } from "../hydrate.js";
 import { TaroEventTarget } from "./event-target.js";
-import { Shortcuts, ensure, hooks } from "@tarojs/shared";
 
 //#region src/dom/node.ts
-const CHILDNODES = Shortcuts.Childnodes;
+var import_index_cjs = __toESM(require_index_cjs(), 1);
+const CHILDNODES = import_index_cjs.Childnodes;
 const nodeId = incrementId();
 var TaroNode = class TaroNode extends TaroEventTarget {
 	uid;
@@ -52,7 +54,7 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 	}
 	findIndex(refChild) {
 		const index = this.childNodes.indexOf(refChild);
-		ensure(index !== -1, "The node to be replaced is not a child of this node.");
+		(0, import_index_cjs.ensure)(index !== -1, "The node to be replaced is not a child of this node.");
 		return index;
 	}
 	get _path() {
@@ -60,7 +62,7 @@ var TaroNode = class TaroNode extends TaroEventTarget {
 		if (parentNode) {
 			const list = parentNode.childNodes.filter((node) => !isComment(node));
 			const indexOfNode = list.indexOf(this);
-			const index = hooks.call("getPathIndex", indexOfNode);
+			const index = import_index_cjs.call("getPathIndex", indexOfNode);
 			return `${parentNode._path}.${CHILDNODES}.${index}`;
 		}
 		return "";

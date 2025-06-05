@@ -1,11 +1,13 @@
+import { __toESM } from "../../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { options } from "../../options.js";
 import { Scaner } from "./scaner.js";
 import { unquote } from "./utils.js";
 import { StyleTagParser } from "./style.js";
 import { isBlockElements, isInlineElements, isMiniElements, specialMiniElements } from "./tags.js";
-import { isFunction } from "@tarojs/shared";
 
 //#region src/dom-external/inner-html/parser.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 const closingTagAncestorBreakers = {
 	li: [
 		"ul",
@@ -71,7 +73,7 @@ function format(children, document, styleOptions, parent) {
 	}).map((child) => {
 		if (child.type === "text") {
 			let text = document.createTextNode(child.content);
-			if (isFunction(options.html.transformText)) {
+			if ((0, import_index_cjs.isFunction)(options.html.transformText)) {
 				text = options.html.transformText(text, child);
 			}
 			parent?.appendChild(text);
@@ -102,7 +104,7 @@ function format(children, document, styleOptions, parent) {
 			styleTagParser,
 			descendantList: list
 		}, el);
-		if (isFunction(options.html.transformElement)) {
+		if ((0, import_index_cjs.isFunction)(options.html.transformElement)) {
 			return options.html.transformElement(el, child);
 		}
 		return el;

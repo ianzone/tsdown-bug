@@ -1,10 +1,12 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CLASS, COMMENT, ID, ROOT_STR, STYLE, UID } from "../constants/index.js";
 import { NodeType } from "../dom/node_types.js";
 import { debounce, throttle } from "./lodash.js";
 import { addLeadingSlash, getCurrentPage, getHomePage, hasBasename, stripBasename, stripSuffix, stripTrailing } from "./router.js";
-import { Shortcuts, getComponentsAlias, internalComponents, isFunction } from "@tarojs/shared";
 
 //#region src/utils/index.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 const incrementId = () => {
 	const chatCodes = [];
 	for (let i = 65; i <= 90; i++) {
@@ -64,15 +66,15 @@ function isParentBinded(node, type) {
 }
 function shortcutAttr(key) {
 	switch (key) {
-		case STYLE: return Shortcuts.Style;
+		case STYLE: return import_index_cjs.Style;
 		case ID: return UID;
-		case CLASS: return Shortcuts.Class;
+		case CLASS: return import_index_cjs.Class;
 		default: return key;
 	}
 }
 const customWrapperCache = new Map();
 function extend(ctor, methodName, options) {
-	if (isFunction(options)) {
+	if ((0, import_index_cjs.isFunction)(options)) {
 		options = { value: options };
 	}
 	Object.defineProperty(ctor.prototype, methodName, {
@@ -82,9 +84,9 @@ function extend(ctor, methodName, options) {
 	});
 }
 let componentsAlias;
-function getComponentsAlias$1() {
+function getComponentsAlias() {
 	if (!componentsAlias) {
-		componentsAlias = getComponentsAlias(internalComponents);
+		componentsAlias = (0, import_index_cjs.getComponentsAlias)(import_index_cjs.internalComponents);
 	}
 	return componentsAlias;
 }
@@ -93,5 +95,5 @@ function convertNumber2PX(value) {
 }
 
 //#endregion
-export { convertNumber2PX, customWrapperCache, extend, getComponentsAlias$1 as getComponentsAlias, incrementId, isComment, isElement, isHasExtractProp, isParentBinded, isText, shortcutAttr };
+export { convertNumber2PX, customWrapperCache, extend, getComponentsAlias, incrementId, isComment, isElement, isHasExtractProp, isParentBinded, isText, shortcutAttr };
 //# sourceMappingURL=index.js.map

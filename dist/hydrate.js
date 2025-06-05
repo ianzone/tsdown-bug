@@ -1,8 +1,10 @@
+import { __toESM } from "./_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "./node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CATCHMOVE, CATCH_VIEW, CLASS, CLICK_VIEW, COMPILE_MODE, ID, PURE_VIEW, STYLE, VIEW } from "./constants/index.js";
 import { getComponentsAlias, isComment, isHasExtractProp, isText } from "./utils/index.js";
-import { Shortcuts, hooks, toCamelCase } from "@tarojs/shared";
 
 //#region src/hydrate.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 let SPECIAL_NODES;
 let componentsAlias;
 /**
@@ -13,18 +15,18 @@ let componentsAlias;
 */
 function hydrate(node) {
 	componentsAlias ||= getComponentsAlias();
-	SPECIAL_NODES ||= hooks.call("getSpecialNodes");
+	SPECIAL_NODES ||= import_index_cjs.call("getSpecialNodes");
 	const nodeName = node.nodeName;
 	let compileModeName = null;
 	if (isText(node)) {
 		return {
 			sid: node.sid,
-			[Shortcuts.Text]: node.nodeValue,
-			[Shortcuts.NodeName]: componentsAlias[nodeName]?._num || "8"
+			[import_index_cjs.Text]: node.nodeValue,
+			[import_index_cjs.NodeName]: componentsAlias[nodeName]?._num || "8"
 		};
 	}
 	const data = {
-		[Shortcuts.NodeName]: nodeName,
+		[import_index_cjs.NodeName]: nodeName,
 		sid: node.sid
 	};
 	if (node.uid !== node.sid) {
@@ -32,41 +34,41 @@ function hydrate(node) {
 	}
 	if (SPECIAL_NODES.indexOf(nodeName) > -1) {
 		if (!node.isAnyEventBinded()) {
-			data[Shortcuts.NodeName] = `static-${nodeName}`;
+			data[import_index_cjs.NodeName] = `static-${nodeName}`;
 			if (nodeName === VIEW && !isHasExtractProp(node)) {
-				data[Shortcuts.NodeName] = PURE_VIEW;
+				data[import_index_cjs.NodeName] = PURE_VIEW;
 			}
 		}
 		if (nodeName === VIEW && node.isOnlyClickBinded() && !isHasExtractProp(node)) {
-			data[Shortcuts.NodeName] = CLICK_VIEW;
+			data[import_index_cjs.NodeName] = CLICK_VIEW;
 		}
 	}
 	const { props } = node;
 	for (const prop in props) {
-		const propInCamelCase = toCamelCase(prop);
+		const propInCamelCase = (0, import_index_cjs.toCamelCase)(prop);
 		if (!prop.startsWith("data-") && prop !== CLASS && prop !== STYLE && prop !== ID && propInCamelCase !== CATCHMOVE && propInCamelCase !== COMPILE_MODE) {
 			data[propInCamelCase] = props[prop];
 		}
 		if (process.env.TARO_ENV !== "swan" && nodeName === VIEW && propInCamelCase === CATCHMOVE && props[prop] !== false) {
-			data[Shortcuts.NodeName] = CATCH_VIEW;
+			data[import_index_cjs.NodeName] = CATCH_VIEW;
 		}
 		if (propInCamelCase === COMPILE_MODE) {
 			compileModeName = props[prop];
 		}
 	}
-	data[Shortcuts.Childnodes] = node.childNodes.filter((node$1) => !isComment(node$1)).map(hydrate);
+	data[import_index_cjs.Childnodes] = node.childNodes.filter((node$1) => !isComment(node$1)).map(hydrate);
 	if (node.className !== "") {
-		data[Shortcuts.Class] = node.className;
+		data[import_index_cjs.Class] = node.className;
 	}
 	const cssText = node.cssText;
 	if (cssText !== "" && nodeName !== "swiper-item") {
-		data[Shortcuts.Style] = cssText;
+		data[import_index_cjs.Style] = cssText;
 	}
-	hooks.call("modifyHydrateData", data, node);
-	const nn = data[Shortcuts.NodeName];
+	import_index_cjs.call("modifyHydrateData", data, node);
+	const nn = data[import_index_cjs.NodeName];
 	const componentAlias = componentsAlias[nn];
 	if (componentAlias) {
-		data[Shortcuts.NodeName] = componentAlias._num;
+		data[import_index_cjs.NodeName] = componentAlias._num;
 		for (const prop in data) {
 			if (prop in componentAlias) {
 				data[componentAlias[prop]] = data[prop];
@@ -75,9 +77,9 @@ function hydrate(node) {
 		}
 	}
 	if (compileModeName !== null) {
-		data[Shortcuts.NodeName] = compileModeName;
+		data[import_index_cjs.NodeName] = compileModeName;
 	}
-	const resData = hooks.call("transferHydrateData", data, node, componentAlias);
+	const resData = import_index_cjs.call("transferHydrateData", data, node, componentAlias);
 	return resData || data;
 }
 

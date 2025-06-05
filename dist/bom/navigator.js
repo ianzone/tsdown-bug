@@ -1,4 +1,4 @@
-import { env_default } from "../env.js";
+import env_default from "../env.js";
 
 //#region src/bom/navigator.ts
 const machine = "Macintosh";

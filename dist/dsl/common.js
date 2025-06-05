@@ -1,6 +1,8 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { BEHAVIORS, CONTEXT_ACTIONS, CUSTOM_WRAPPER, EXTERNAL_CLASSES, ON_HIDE, ON_LOAD, ON_READY, ON_SHOW, OPTIONS, PAGE_INIT, VIEW } from "../constants/index.js";
 import { eventCenter } from "../emitter/emitter.js";
-import { env_default } from "../env.js";
+import env_default from "../env.js";
 import { Current } from "../current.js";
 import { _raf } from "../bom/raf.js";
 import { taroWindowProvider } from "../bom/window.js";
@@ -8,13 +10,13 @@ import { addLeadingSlash } from "../utils/router.js";
 import { customWrapperCache, incrementId } from "../utils/index.js";
 import { eventHandler } from "../dom/event.js";
 import { perf } from "../perf.js";
-import { EMPTY_OBJ, EventChannel, Shortcuts, ensure, getComponentsAlias, hooks, internalComponents, isArray, isFunction, isString, isUndefined } from "@tarojs/shared";
 
 //#region src/dsl/common.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 const instances = new Map();
 const pageId = incrementId();
 function injectPageInstance(inst, id) {
-	hooks.call("mergePageInstance", instances.get(id), inst);
+	import_index_cjs.call("mergePageInstance", instances.get(id), inst);
 	instances.set(id, inst);
 }
 function getPageInstance(id) {
@@ -28,12 +30,12 @@ function safeExecute(path, lifecycle, ...args) {
 	if (instance == null) {
 		return;
 	}
-	const func = hooks.call("getLifecycle", instance, lifecycle);
-	if (isArray(func)) {
+	const func = import_index_cjs.call("getLifecycle", instance, lifecycle);
+	if ((0, import_index_cjs.isArray)(func)) {
 		const res = func.map((fn) => fn.apply(instance, args));
 		return res[0];
 	}
-	if (!isFunction(func)) {
+	if (!(0, import_index_cjs.isFunction)(func)) {
 		return;
 	}
 	return func.apply(instance, args);
@@ -66,7 +68,7 @@ function getOnHideEventKey(path) {
 }
 function createPageConfig(component, pageName, data, pageConfig) {
 	const id = pageName ?? `taro_page_${pageId()}`;
-	const [ONLOAD, ONUNLOAD, ONREADY, ONSHOW, ONHIDE, LIFECYCLES, SIDE_EFFECT_LIFECYCLES] = hooks.call("getMiniLifecycleImpl").page;
+	const [ONLOAD, ONUNLOAD, ONREADY, ONSHOW, ONHIDE, LIFECYCLES, SIDE_EFFECT_LIFECYCLES] = import_index_cjs.call("getMiniLifecycleImpl").page;
 	let pageElement = null;
 	let unmounting = false;
 	let prepareMountList = [];
@@ -80,7 +82,7 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			onShow: getOnShowEventKey(id),
 			onHide: getOnHideEventKey(id)
 		};
-		if (!isUndefined(page.exitState)) {
+		if (!(0, import_index_cjs.isUndefined)(page.exitState)) {
 			Current.router.exitState = page.exitState;
 		}
 	}
@@ -109,14 +111,14 @@ function createPageConfig(component, pageName, data, pageConfig) {
 			const mount = () => {
 				Current.app.mount(component, $taroPath, () => {
 					pageElement = env_default.document.getElementById($taroPath);
-					ensure(pageElement !== null, "没有找到页面实例。");
+					(0, import_index_cjs.ensure)(pageElement !== null, "没有找到页面实例。");
 					safeExecute($taroPath, ON_LOAD, this.$taroParams);
 					loadResolver();
 					if (process.env.TARO_PLATFORM !== "web") {
 						pageElement.ctx = this;
 						pageElement.performUpdate(true, cb);
 					} else {
-						isFunction(cb) && cb();
+						(0, import_index_cjs.isFunction)(cb) && cb();
 					}
 				});
 			};
@@ -178,7 +180,7 @@ function createPageConfig(component, pageName, data, pageConfig) {
 	};
 	if (process.env.TARO_PLATFORM === "web") {
 		config.getOpenerEventChannel = () => {
-			return EventChannel.pageChannel;
+			return import_index_cjs.pageChannel;
 		};
 	}
 	LIFECYCLES.forEach((lifecycle) => {
@@ -212,16 +214,16 @@ function createPageConfig(component, pageName, data, pageConfig) {
 		}
 	});
 	config.eh = eventHandler;
-	if (!isUndefined(data)) {
+	if (!(0, import_index_cjs.isUndefined)(data)) {
 		config.data = data;
 	}
-	hooks.call("modifyPageObject", config);
+	import_index_cjs.call("modifyPageObject", config);
 	return config;
 }
 function createComponentConfig(component, componentName, data) {
 	const id = componentName ?? `taro_component_${pageId()}`;
 	let componentElement = null;
-	const [ATTACHED, DETACHED] = hooks.call("getMiniLifecycleImpl").component;
+	const [ATTACHED, DETACHED] = import_index_cjs.call("getMiniLifecycleImpl").component;
 	const config = {
 		[ATTACHED]() {
 			perf.start(PAGE_INIT);
@@ -229,7 +231,7 @@ function createComponentConfig(component, componentName, data) {
 			const path = getPath(id, { id: this.pageIdCache });
 			Current.app.mount(component, path, () => {
 				componentElement = env_default.document.getElementById(path);
-				ensure(componentElement !== null, "没有找到组件实例。");
+				(0, import_index_cjs.ensure)(componentElement !== null, "没有找到组件实例。");
 				this.$taroInstances = instances.get(path);
 				safeExecute(path, ON_LOAD);
 				if (process.env.TARO_PLATFORM !== "web") {
@@ -249,7 +251,7 @@ function createComponentConfig(component, componentName, data) {
 		},
 		methods: { eh: eventHandler }
 	};
-	if (!isUndefined(data)) {
+	if (!(0, import_index_cjs.isUndefined)(data)) {
 		config.data = data;
 	}
 	[
@@ -257,17 +259,17 @@ function createComponentConfig(component, componentName, data) {
 		EXTERNAL_CLASSES,
 		BEHAVIORS
 	].forEach((key) => {
-		config[key] = component[key] ?? EMPTY_OBJ;
+		config[key] = component[key] ?? import_index_cjs.EMPTY_OBJ;
 	});
 	return config;
 }
 function createRecursiveComponentConfig(componentName) {
 	const isCustomWrapper = componentName === CUSTOM_WRAPPER;
-	const [ATTACHED, DETACHED] = hooks.call("getMiniLifecycleImpl").component;
+	const [ATTACHED, DETACHED] = import_index_cjs.call("getMiniLifecycleImpl").component;
 	const lifeCycles = isCustomWrapper ? {
 		[ATTACHED]() {
 			const componentId = this.data.i?.sid || this.props.i?.sid;
-			if (isString(componentId)) {
+			if ((0, import_index_cjs.isString)(componentId)) {
 				customWrapperCache.set(componentId, this);
 				const el = env_default.document.getElementById(componentId);
 				if (el) {
@@ -277,7 +279,7 @@ function createRecursiveComponentConfig(componentName) {
 		},
 		[DETACHED]() {
 			const componentId = this.data.i?.sid || this.props.i?.sid;
-			if (isString(componentId)) {
+			if ((0, import_index_cjs.isString)(componentId)) {
 				customWrapperCache.delete(componentId);
 				const el = env_default.document.getElementById(componentId);
 				if (el) {
@@ -285,16 +287,16 @@ function createRecursiveComponentConfig(componentName) {
 				}
 			}
 		}
-	} : EMPTY_OBJ;
+	} : import_index_cjs.EMPTY_OBJ;
 	const extraOptions = {};
 	if (process.env.TARO_ENV === "jd") {
 		extraOptions.addGlobalClass = true;
 	}
-	return hooks.call("modifyRecursiveComponentConfig", {
+	return import_index_cjs.call("modifyRecursiveComponentConfig", {
 		properties: {
 			i: {
 				type: Object,
-				value: { [Shortcuts.NodeName]: getComponentsAlias(internalComponents)[VIEW]._num }
+				value: { [import_index_cjs.NodeName]: (0, import_index_cjs.getComponentsAlias)(import_index_cjs.internalComponents)[VIEW]._num }
 			},
 			l: {
 				type: String,

@@ -1,8 +1,10 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { throttle } from "../utils/lodash.js";
 import "../utils/index.js";
-import { isFunction, isNumber } from "@tarojs/shared";
 
 //#region src/polyfill/intersection-observer.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 function handleIntersectionObserverPolyfill() {
 	if ("IntersectionObserver" in window && "IntersectionObserverEntry" in window && "intersectionRatio" in window.IntersectionObserverEntry.prototype) {
 		if (!("isIntersecting" in window.IntersectionObserverEntry.prototype)) {
@@ -56,7 +58,7 @@ function handleIntersectionObserverObjectPolyfill() {
 	* @constructor
 	*/
 	function IntersectionObserver(callback, options = {}) {
-		if (!isFunction(callback)) {
+		if (!(0, import_index_cjs.isFunction)(callback)) {
 			throw new Error("callback must be a function");
 		}
 		if (options.root && options.root.nodeType != 1) {
@@ -149,7 +151,7 @@ function handleIntersectionObserverObjectPolyfill() {
 		let threshold = opt_threshold || [0];
 		if (!Array.isArray(threshold)) threshold = [threshold];
 		return threshold.sort().filter((t, i, a) => {
-			if (!isNumber(t) || isNaN(t) || t < 0 || t > 1) {
+			if (!(0, import_index_cjs.isNumber)(t) || isNaN(t) || t < 0 || t > 1) {
 				throw new Error("threshold must be a number between 0 and 1 inclusively");
 			}
 			return t !== a[i - 1];
@@ -417,9 +419,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	*     phase. Note: this only works in modern browsers.
 	*/
 	function addEvent(node, event, fn, opt_useCapture) {
-		if (isFunction(node.addEventListener)) {
+		if ((0, import_index_cjs.isFunction)(node.addEventListener)) {
 			node.addEventListener(event, fn, opt_useCapture || false);
-		} else if (isFunction(node.attachEvent)) {
+		} else if ((0, import_index_cjs.isFunction)(node.attachEvent)) {
 			node.attachEvent("on" + event, fn);
 		}
 	}
@@ -432,9 +434,9 @@ function handleIntersectionObserverObjectPolyfill() {
 	*     flag set to true, it should be set to true here in order to remove it.
 	*/
 	function removeEvent(node, event, fn, opt_useCapture) {
-		if (isFunction(node.removeEventListener)) {
+		if ((0, import_index_cjs.isFunction)(node.removeEventListener)) {
 			node.removeEventListener(event, fn, opt_useCapture || false);
-		} else if (isFunction(node.detatchEvent)) {
+		} else if ((0, import_index_cjs.isFunction)(node.detatchEvent)) {
 			node.detatchEvent("on" + event, fn);
 		}
 	}

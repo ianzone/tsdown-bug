@@ -1,9 +1,11 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { CONFIRM, CURRENT_TARGET, EVENT_CALLBACK_RESULT, INPUT, KEY_CODE, TARGET, TIME_STAMP, TOUCHMOVE, TYPE } from "../constants/index.js";
-import { env_default } from "../env.js";
+import env_default from "../env.js";
 import { isParentBinded } from "../utils/index.js";
-import { EMPTY_OBJ, hooks, isUndefined } from "@tarojs/shared";
 
 //#region src/dom/event.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 var TaroEvent = class {
 	cacheTarget;
 	cacheCurrentTarget;
@@ -38,8 +40,8 @@ var TaroEvent = class {
 			const currentEle = env_default.document.getElementById(target.dataset?.sid || target.id || null);
 			const element = env_default.document.getElementById(target.targetDataset?.sid || target.dataset?.sid || target.id || null);
 			target.dataset = {
-				...currentEle !== null ? currentEle.dataset : EMPTY_OBJ,
-				...element !== null ? element.dataset : EMPTY_OBJ
+				...currentEle !== null ? currentEle.dataset : import_index_cjs.EMPTY_OBJ,
+				...element !== null ? element.dataset : import_index_cjs.EMPTY_OBJ
 			};
 			for (const key in this.mpEvent?.detail) {
 				target[key] = this.mpEvent.detail[key];
@@ -98,7 +100,7 @@ function createEvent(event, node) {
 const eventsBatch = {};
 function getEventCBResult(event) {
 	const result = event[EVENT_CALLBACK_RESULT];
-	if (!isUndefined(result)) {
+	if (!(0, import_index_cjs.isUndefined)(result)) {
 		delete event[EVENT_CALLBACK_RESULT];
 	}
 	return result;
@@ -107,21 +109,21 @@ function eventHandler(event) {
 	event.type === undefined && Object.defineProperty(event, "type", { value: event._type });
 	event.detail === undefined && Object.defineProperty(event, "detail", { value: event._detail || { ...event } });
 	event.currentTarget = event.currentTarget || event.target || { ...event };
-	hooks.call("modifyMpEventImpl", event);
+	import_index_cjs.call("modifyMpEventImpl", event);
 	const currentTarget = event.currentTarget;
 	const id = currentTarget.dataset?.sid || currentTarget.id || event.detail?.id || "";
 	const node = env_default.document.getElementById(id);
 	if (node) {
 		const dispatch = () => {
 			const e = createEvent(event, node);
-			hooks.call("modifyTaroEvent", e, node);
-			hooks.call("dispatchTaroEvent", e, node);
-			hooks.call("dispatchTaroEventFinish", e, node);
+			import_index_cjs.call("modifyTaroEvent", e, node);
+			import_index_cjs.call("dispatchTaroEvent", e, node);
+			import_index_cjs.call("dispatchTaroEventFinish", e, node);
 		};
-		if (hooks.isExist("batchedEventUpdates")) {
+		if (import_index_cjs.isExist("batchedEventUpdates")) {
 			const type = event.type;
-			if (!hooks.call("isBubbleEvents", type) || !isParentBinded(node, type) || type === TOUCHMOVE && !!node.props.catchMove) {
-				hooks.call("batchedEventUpdates", () => {
+			if (!import_index_cjs.call("isBubbleEvents", type) || !isParentBinded(node, type) || type === TOUCHMOVE && !!node.props.catchMove) {
+				import_index_cjs.call("batchedEventUpdates", () => {
 					if (eventsBatch[type]) {
 						eventsBatch[type].forEach((fn) => fn());
 						delete eventsBatch[type];

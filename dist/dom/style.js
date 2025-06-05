@@ -1,10 +1,12 @@
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
 import { PROPERTY_THRESHOLD } from "../constants/index.js";
 import { MutationRecordType } from "../dom-external/mutation-observer/record.js";
 import { MutationObserver } from "../dom-external/mutation-observer/index.js";
 import { styleProperties } from "./style_properties.js";
-import { Shortcuts, hooks, isArray, isNull, isString, isUndefined, toCamelCase, toDashed, warn } from "@tarojs/shared";
 
 //#region src/dom/style.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 function recordCss(obj) {
 	MutationObserver.record({
 		type: MutationRecordType.ATTRIBUTES,
@@ -17,17 +19,17 @@ function enqueueUpdate(obj) {
 	const element = obj._element;
 	if (element._root) {
 		element.enqueueUpdate({
-			path: `${element._path}.${Shortcuts.Style}`,
+			path: `${element._path}.${import_index_cjs.Style}`,
 			value: obj.cssText
 		});
 	}
 }
 function setStyle(newVal, styleKey) {
-	process.env.NODE_ENV !== "production" && warn(isString(newVal) && newVal.length > PROPERTY_THRESHOLD, `Style 属性 ${styleKey} 的值数据量过大，可能会影响渲染性能，考虑使用 CSS 类或其它方案替代。`);
+	process.env.NODE_ENV !== "production" && (0, import_index_cjs.warn)((0, import_index_cjs.isString)(newVal) && newVal.length > PROPERTY_THRESHOLD, `Style 属性 ${styleKey} 的值数据量过大，可能会影响渲染性能，考虑使用 CSS 类或其它方案替代。`);
 	const old = this[styleKey];
 	if (old === newVal) return;
 	!this._pending && recordCss(this);
-	if (isNull(newVal) || isUndefined(newVal) || newVal === "") {
+	if ((0, import_index_cjs.isNull)(newVal) || (0, import_index_cjs.isUndefined)(newVal) || newVal === "") {
 		this._usedStyleProp.delete(styleKey);
 		delete this._value[styleKey];
 	} else {
@@ -44,7 +46,7 @@ function initStyle(ctor, styleProperties$1) {
 		properties[styleKey] = {
 			get() {
 				const val = this._value[styleKey];
-				return isNull(val) || isUndefined(val) ? "" : val;
+				return (0, import_index_cjs.isNull)(val) || (0, import_index_cjs.isUndefined)(val) ? "" : val;
 			},
 			set(newVal) {
 				setStyle.call(this, newVal, styleKey);
@@ -83,8 +85,8 @@ var Style = class {
 		const texts = [];
 		this._usedStyleProp.forEach((key) => {
 			const val = this[key];
-			if (isNull(val) || isUndefined(val)) return;
-			let styleName = isCssVariable(key) ? key : toDashed(key);
+			if ((0, import_index_cjs.isNull)(val) || (0, import_index_cjs.isUndefined)(val)) return;
+			let styleName = isCssVariable(key) ? key : (0, import_index_cjs.toDashed)(key);
 			if (styleName.indexOf("webkit") === 0 || styleName.indexOf("Webkit") === 0) {
 				styleName = `-${styleName}`;
 			}
@@ -98,7 +100,7 @@ var Style = class {
 		this._usedStyleProp.forEach((prop) => {
 			this.removeProperty(prop);
 		});
-		if (str === "" || isUndefined(str) || isNull(str)) {
+		if (str === "" || (0, import_index_cjs.isUndefined)(str) || (0, import_index_cjs.isNull)(str)) {
 			this._pending = false;
 			enqueueUpdate(this);
 			return;
@@ -111,7 +113,7 @@ var Style = class {
 			}
 			const [propName, ...valList] = rule.split(":");
 			const val = valList.join(":");
-			if (isUndefined(val)) {
+			if ((0, import_index_cjs.isUndefined)(val)) {
 				continue;
 			}
 			this.setProperty(propName.trim(), val.trim());
@@ -123,16 +125,16 @@ var Style = class {
 		if (propertyName[0] === "-") {
 			this.setCssVariables(propertyName);
 		} else {
-			propertyName = toCamelCase(propertyName);
+			propertyName = (0, import_index_cjs.toCamelCase)(propertyName);
 		}
-		if (isNull(value) || isUndefined(value)) {
+		if ((0, import_index_cjs.isNull)(value) || (0, import_index_cjs.isUndefined)(value)) {
 			this.removeProperty(propertyName);
 		} else {
 			this[propertyName] = value;
 		}
 	}
 	removeProperty(propertyName) {
-		propertyName = toCamelCase(propertyName);
+		propertyName = (0, import_index_cjs.toCamelCase)(propertyName);
 		if (!this._usedStyleProp.has(propertyName)) {
 			return "";
 		}
@@ -141,7 +143,7 @@ var Style = class {
 		return value;
 	}
 	getPropertyValue(propertyName) {
-		propertyName = toCamelCase(propertyName);
+		propertyName = (0, import_index_cjs.toCamelCase)(propertyName);
 		const value = this[propertyName];
 		if (!value) {
 			return "";
@@ -150,8 +152,8 @@ var Style = class {
 	}
 };
 initStyle(Style, styleProperties);
-hooks.tap("injectNewStyleProperties", (newStyleProperties) => {
-	if (isArray(newStyleProperties)) {
+import_index_cjs.tap("injectNewStyleProperties", (newStyleProperties) => {
+	if ((0, import_index_cjs.isArray)(newStyleProperties)) {
 		initStyle(Style, newStyleProperties);
 	} else {
 		if (typeof newStyleProperties !== "string") return;

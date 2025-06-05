@@ -1,7 +1,9 @@
-import { env_default } from "../env.js";
-import { isArray } from "@tarojs/shared";
+import { __toESM } from "../_virtual/rolldown_runtime.js";
+import { require_index_cjs } from "../node_modules/.pnpm/@tarojs_shared@4.1.2/node_modules/@tarojs/shared/dist/index.cjs.js";
+import env_default from "../env.js";
 
 //#region src/bom/URLSearchParams.ts
+var import_index_cjs = __toESM(require_index_cjs(), 1);
 const findReg = /[!'()~]|%20|%00/g;
 const plusReg = /\+/g;
 const replaceCharMap = {
@@ -17,7 +19,7 @@ function replacer(match) {
 	return replaceCharMap[match];
 }
 function appendTo(dict, name, value) {
-	const res = isArray(value) ? value.join(",") : value;
+	const res = (0, import_index_cjs.isArray)(value) ? value.join(",") : value;
 	if (name in dict) dict[name].push(res);
 	else dict[name] = [res];
 }
@@ -55,7 +57,7 @@ const URLSearchParams = process.env.TARO_PLATFORM === "web" ? env_default.window
 				}
 			}
 		} else {
-			if (isArray(query)) {
+			if ((0, import_index_cjs.isArray)(query)) {
 				for (let i = 0, length = query.length; i < length; i++) {
 					const value = query[i];
 					appendTo(dict, value[0], value[1]);
